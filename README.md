@@ -12,15 +12,24 @@ Built using C#.NET 4.8 and SQL Server 2019, it follows the MVVM (Model-View-View
 The application includes key modules for production line management and factory asset maintenance:
 
 🛠 Production Line Management
+
 ✅ Order Allocation – Assigns orders based on machine capacity.
+
 ✅ Rubber Processing – Supports grading, mixing, slitting, and curing of rubber blocks.
+
 ✅ Formula Guidance – Provides precise formulas for producing specific rubber products.
+
 ✅ Weekly Schedule Display – Helps in planning and optimizing production.
 
+
 🏭 Machine & Vehicle Management
+
 ✅ Factory Machine Management – Tracks and manages all factory machines.
+
 ✅ Vehicle & Forklift Maintenance – Handles maintenance schedules and reminders.
+
 ✅ Machine Maintenance Alerts – Sends reminders for upcoming machine servicing.
+
 
 🛠 Tech Stack
 Language: C#.NET 4.8
