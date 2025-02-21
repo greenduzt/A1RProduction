@@ -17,11 +17,9 @@ The application includes multiple essential modules:
 
 ✅ Stock Management – Maintain inventory levels efficiently.
 
-✅ Online Ordering – Allow customers to place orders online.
+✅ Process Online Ordering – Process online orders placed by customers.
 
 ✅ Machine Work Orders & Maintenance – Manage machine tasks and maintenance.
-
-✅ Customer Management – Store and manage customer records.
 
 ✅ Machine Maintenance – Schedule and track machine servicing.
 
