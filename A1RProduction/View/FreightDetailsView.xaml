@@ -1,0 +1,29 @@
+﻿<Window x:Class="A1QSystem.View.FreightDetailsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add a new freight" Height="460" Width="383" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/A1QSystem;component/A1Qsmall.ico">
+    <Grid>
+
+        <TextBlock Grid.Row="0"  Text="Enter details to add a new freight" TextWrapping="Wrap" FontSize="12" TextAlignment="Left" Background="#FFC33333" FontWeight="Bold" Margin="0,0,0,323" Padding="14,7,0,0" FontFamily="Verdana" >
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="White"/>
+            </TextBlock.Foreground>
+        </TextBlock>
+
+        <Rectangle Fill="#FFF4F4F5" Height="372" Margin="0,50,0,0" Stroke="AliceBlue" VerticalAlignment="Top"/>
+        <Label Content="Freight Name" HorizontalAlignment="Left" Height="33" Margin="10,74,0,0" VerticalAlignment="Top" Width="115" FontFamily="Verdana"/>
+        <Label Content="Freight Price        $" HorizontalAlignment="Left" Height="33" Margin="10,130,0,0" VerticalAlignment="Top" Width="128" FontFamily="Verdana"/>
+        <Label Content="Freight Description" HorizontalAlignment="Left" Height="33" Margin="10,229,0,0" VerticalAlignment="Top" Width="123" FontFamily="Verdana"/>
+        <TextBox Name="txtAddFreightName" HorizontalAlignment="Left" Height="33" Margin="138,74,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="213" TextChanged="txtAddFreightName_TextChanged" FontFamily="Verdana" Padding="0,7,0,0" />
+        <TextBox x:Name="txtAddFreightPrice" HorizontalAlignment="Left" Height="33" Margin="138,127,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="213" TextChanged="txtAddFreightPrice_TextChanged" FontFamily="Verdana"  Padding="0,7,0,0" />
+        <TextBox x:Name="txtAddFreightDescription" HorizontalAlignment="Left" Height="114" Margin="138,234,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="213" TextChanged="txtAddFreightDescription_TextChanged" FontFamily="Verdana"/>
+        <Button x:Name="btnAddFreigth" Content="ADD" HorizontalAlignment="Left" Height="25" Margin="222,367,0,0" VerticalAlignment="Top" Width="62" Click="btnAddFreigth_Click" FontFamily="Calibri" FontSize="14" FontWeight="Bold"/>
+        <Button x:Name="btnCancelFreight" Content="CANCEL" HorizontalAlignment="Left" Height="25" Margin="289,367,0,0" VerticalAlignment="Top" Width="62" Click="btnCancelFreight_Click" FontFamily="Calibri" FontSize="14" FontWeight="Bold"/>
+        <Label Name="lblAddFreightNameError"  HorizontalAlignment="Left" Height="16" Margin="138,107,0,0" VerticalAlignment="Top" Width="213" FontSize="10" Foreground="Red" Padding="0" FontFamily="Verdana" FontWeight="Bold"/>
+        <Label Name="lblAddFreightPriceError"  HorizontalAlignment="Left" Height="16" Margin="138,162,0,0" VerticalAlignment="Top" Width="213" FontSize="10" Foreground="Red" Padding="0" FontFamily="Verdana" FontWeight="Bold"/>
+        <Label x:Name="lblAddFreightDesError"  HorizontalAlignment="Left" Height="16" Margin="130,349,0,0" VerticalAlignment="Top" Width="213" FontSize="10" Foreground="Red" Padding="0"/>
+        <Label Content="Unit" HorizontalAlignment="Left" Height="33" Margin="10,180,0,0" VerticalAlignment="Top" Width="115" FontFamily="Verdana"/>
+        <TextBox x:Name="txtFreightUnit" HorizontalAlignment="Left" Height="33" Margin="138,180,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="213" Text="PALLET" FontFamily="Verdana" Padding="0,7,0,0" />
+
+    </Grid>
+</Window>

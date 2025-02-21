@@ -1,0 +1,299 @@
+﻿<shell:ViewBase x:Class="A1QSystem.View.Production.DayShiftView"
+                x:TypeArguments="vw:MachineViewModel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:shell="clr-namespace:A1QSystem.Core"
+             xmlns:vw="clr-namespace:A1QSystem.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1200">
+
+    <UserControl.Resources>
+       
+        <Storyboard x:Key="backMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="backMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="exitMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitMainMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitMainMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="exitMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitMainMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitMainMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="BackQuoteTextBlock">
+            <BeginStoryboard x:Name="backMouseEnter" Storyboard="{StaticResource backMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="BackQuoteTextBlock">
+            <BeginStoryboard x:Name="backMouseLeve" Storyboard="{StaticResource backMouseLeve}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ExitMainMenuTextBlock">
+            <BeginStoryboard x:Name="exitMouseEnter" Storyboard="{StaticResource exitMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ExitMainMenuTextBlock">
+            <BeginStoryboard x:Name="exitMouseLeve" Storyboard="{StaticResource exitMouseLeve}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="53*"/>
+            <ColumnDefinition Width="52*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="157*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="145*"/>
+
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="143*"/>
+            <RowDefinition Height="46*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="63*"/>
+
+
+        </Grid.RowDefinitions>
+        <!--User login-->
+        <!--End of User login-->
+        <Label Content="Day Shift" Height="20" VerticalAlignment="Bottom" Grid.Column="0" Padding="8,0,0,0" Grid.Row="2" Margin="10,0,0,0" />
+        <DataGrid x:Name="dgDayShift" BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+                  ItemsSource="{Binding DayShiftData, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="3" Margin="10,0,4,0">
+
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn Header="Item Code"
+                                           x:Name="ProductCode"                                          
+                                           SelectedValueBinding="{Binding ProductCode}"                                            
+                                           DisplayMemberPath="ProductCode"
+                                           SelectedValuePath="ProductCode"   
+                                          
+                                           Width="200">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Products,ElementName=dgDayShift}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Products,ElementName=dgDayShift}" />
+                            <Setter Property="SelectedValue" Value="{Binding ProductCode}" />
+                            <Setter Property="IsEditable" Value="True" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="Item Name" Width="*"  Binding="{Binding ProductName, Mode=TwoWay}" />
+                <DataGridTextColumn x:Name="gridDayMixesCompleted" Header="Mixes Completed" Width="120"  Binding="{Binding Mixes, Mode=TwoWay}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- Datagrid for Dayshift people -->
+        <DataGrid x:Name="dgDayShiftPeople" BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+        	ItemsSource="{Binding DayShiftPeopleData, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="3" Margin="7,0,11,79">
+
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn Header="Name"
+        			x:Name="DayshiftName"                                          
+        			SelectedValueBinding="{Binding EmpName}"                                            
+        			DisplayMemberPath="EmpName"
+        			SelectedValuePath="EmpName" 
+        			Width="*">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Employees, ElementName=dgDayShiftPeople}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Employees, ElementName=dgDayShiftPeople}" />
+                            <Setter Property="SelectedValue" Value="{Binding EmpName}" />
+                            <Setter Property="IsEditable" Value="True" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn x:Name="gridDayMixesCompleted1" Header="Mixes Completed" Width="120"  Binding="{Binding EmpMixes, Mode=TwoWay}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--Day Shift people-->
+
+
+        <!--End of Day Shift people-->
+        <TextBlock Grid.Column="1" Grid.Row="3" Margin="201,111,34,4" TextAlignment="Right">
+            <Run Text="Total day shift mixes completed: "/>
+            <Run Text="{Binding TotalExpense}"/>
+        </TextBlock>
+        <!-- EVENING SHIFt-->
+
+        <Label Content="Evening Shift" Height="20" VerticalAlignment="Bottom" Grid.Column="0" Padding="10,0,0,0" Grid.Row="4" />
+        <DataGrid x:Name="dgEveningShift" BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+                  ItemsSource="{Binding EveningShiftData, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="5" Margin="10,0,4,0">
+
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn Header="Item Code"
+                                           x:Name="ProductNameEve"                                          
+                                           SelectedValueBinding="{Binding ProductCode}"                                            
+                                           DisplayMemberPath="ProductCode"
+                                           SelectedValuePath="ProductCode"                                                  
+                                           Width="*">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Products,ElementName=dgDayShift}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Products,ElementName=dgDayShift}" />
+                            <Setter Property="SelectedValue" Value="{Binding ProductCode}" />
+                            <Setter Property="IsEditable" Value="True" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="Item Name" Width="*"  Binding="{Binding ProductName, Mode=TwoWay}" />
+                <DataGridTextColumn x:Name="gridEveningMixesCompleted" Header="Mixes Completed" Width="120"  Binding="{Binding Mixes, Mode=TwoWay}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--Evening Shift people-->
+        <!--End of Evening Shift people-->
+        <TextBlock Grid.Column="1" Grid.Row="5" Margin="0,39,10,4" TextAlignment="Right">
+            <Run Text="Total evening shift mixes completed: "/>
+            <Run Text="{Binding EveningShiftMixes}"/>
+        </TextBlock>
+        <!--END OF EVENING SHIFT-->
+        <!-- NIGHT SHIFT -->
+        <Label Content="Night Shift" Height="20" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="6" Padding="10,0,0,0" Margin="10,0,0,0" />
+
+        <DataGrid x:Name="dgNightShift" BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+                  ItemsSource="{Binding NightShiftData, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="7" Margin="10,0,4,0">
+
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn Header="Item Code"
+                                           x:Name="ProductNameNight"                                          
+                                           SelectedValueBinding="{Binding ProductCode}"                                            
+                                           DisplayMemberPath="ProductCode"
+                                           SelectedValuePath="ProductCode"                                                  
+                                           Width="*">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Products,ElementName=dgDayShift}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Products,ElementName=dgDayShift}" />
+                            <Setter Property="SelectedValue" Value="{Binding ProductCode}" />
+                            <Setter Property="IsEditable" Value="True" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="Item Name" Width="*"  Binding="{Binding ProductName, Mode=TwoWay}" />
+                <DataGridTextColumn x:Name="gridNightMixesCompleted" Header="Mixes Completed" Width="120"  Binding="{Binding Mixes, Mode=TwoWay}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--Day Shift people-->
+        <!--End of Day Shift people-->
+        <TextBlock Grid.Column="1" Grid.Row="7" Margin="14,108,25,10" TextAlignment="Right">
+             <Run Text="Total night shift mixes completed: "/>
+            <Run Text="{Binding NightShiftMixes}"/>
+        </TextBlock>
+
+        <!-- END OF NIGHT SHIFT -->
+        <!-- TOTAL MIXES -->
+        <TextBlock Grid.Column="1" Grid.Row="8" Margin="14,14,51,10" TextAlignment="Center" FontSize="16" FontWeight="Bold">
+            <Run Text="Total mixes completed: "/>
+            <Run Text="{Binding TotalMixes}"/>
+        </TextBlock>
+        <!-- END OF TOTAL MIXES -->
+
+        <!--Date-->
+        <TextBlock Text="{Binding ProductionDate,StringFormat={}{0:dd/MM/yyyy}}" TextAlignment="Right"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Width="105" IsEnabled="False" Margin="0,0,11,1" FontWeight="Bold" FontSize="16" Height="23" VerticalAlignment="Bottom" />
+        <TextBlock Text="Production Date :" TextAlignment="Right"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Height="21" Margin="0,0,122,1" VerticalAlignment="Bottom" Width="135"/>
+        <!--End of Date-->
+        <Button Name="btnAddProduction" Command="{Binding AddProdCommand}" Content="ADD" Margin="0,0,5,5"  HorizontalAlignment="Right" Width="60" Height="20" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="9" />
+        <!--Title-->
+        <TextBlock Text="Production - " FontWeight="Bold" Grid.Row="1" FontSize="18" Margin="13,0,478,0" Padding="3,0,0,0"/>
+        <TextBlock Name="lblMachineName" Text="{Binding MachineName}" FontWeight="Bold" Grid.Row="1" FontSize="18" Margin="128,0,0,0" Padding="3,0,0,0"/>
+        <!--End of Title-->
+        <Label Content="A1R Operating System V1.4 2015" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,0,5" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Background="#FF6A6868" />
+
+        <!--Production ID-->
+        <TextBlock Text="{Binding ProductionID}" TextAlignment="Right"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Width="106" Height="23" VerticalAlignment="Bottom" IsEnabled="False" Margin="0,0,11,25" FontWeight="Bold" FontSize="16" />
+        <TextBlock Text="Production ID :" TextAlignment="Right"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Height="23" Margin="0,0,122,23" VerticalAlignment="Bottom" Width="135"/>
+        <TextBlock x:Name="BackQuoteTextBlock" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" Margin="0,0,111,32" Width="104" VerticalAlignment="Bottom" FontSize="16" Text="Go Back" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="10">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding CommandsBack}" MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="ExitMainMenuTextBlock" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" Margin="0,0,11,32" VerticalAlignment="Bottom" Width="100" FontSize="16" Text="Exit" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="ExitMainMenuTextBlock_MouseLeftButtonDown" Grid.Column="1" Grid.Row="10">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+
+        <!--End of Production ID-->
+
+    </Grid>
+</shell:ViewBase>

@@ -1,0 +1,312 @@
+﻿<UserControl x:Class="A1QSystem.View.Machine.MachinesMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="1050" d:DesignHeight="800">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="HomeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HomeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="AdminDashboardMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="AdminDashboardMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+
+        <Storyboard x:Key="MaintenanceMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MaintenanceTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MaintenanceTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MaintenanceMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MaintenanceTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MaintenanceTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ScheduleMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ScheduleWorkOrderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ScheduleWorkOrderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ScheduleMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ScheduleWorkOrderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ScheduleWorkOrderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="UpdateMachineMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="UpdateMachineTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="UpdateMachineTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="UpdateMachineMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="UpdateMachineTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="UpdateMachineTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="NewProviderMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewProviderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewProviderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="NewProviderMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewProviderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewProviderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseEnter" Storyboard="{StaticResource HomeMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseLeave" Storyboard="{StaticResource HomeMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="AdminDashboardTextBlock">
+            <BeginStoryboard x:Name="AdminDashboardMouseEnter" Storyboard="{StaticResource AdminDashboardMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="AdminDashboardTextBlock">
+            <BeginStoryboard x:Name="AdminDashboardMouseLeave" Storyboard="{StaticResource AdminDashboardMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="MaintenanceTextBlock">
+            <BeginStoryboard x:Name="MaintenanceMouseEnter" Storyboard="{StaticResource MaintenanceMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="MaintenanceTextBlock">
+            <BeginStoryboard x:Name="MaintenanceMouseLeave" Storyboard="{StaticResource MaintenanceMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ScheduleWorkOrderTextBlock">
+            <BeginStoryboard x:Name="ScheduleMouseEnter" Storyboard="{StaticResource ScheduleMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ScheduleWorkOrderTextBlock">
+            <BeginStoryboard x:Name="ScheduleMouseLeave" Storyboard="{StaticResource ScheduleMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="UpdateMachineTextBlock">
+            <BeginStoryboard x:Name="UpdateMachineMouseEnter" Storyboard="{StaticResource UpdateMachineMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="UpdateMachineTextBlock">
+            <BeginStoryboard x:Name="UpdateMachineMouseLeave" Storyboard="{StaticResource UpdateMachineMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="NewProviderTextBlock">
+            <BeginStoryboard x:Name="NewProviderMouseEnter" Storyboard="{StaticResource NewProviderMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="NewProviderTextBlock">
+            <BeginStoryboard x:Name="NewProviderMouseLeave" Storyboard="{StaticResource NewProviderMouseLeave}"/>
+        </EventTrigger>
+
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="197*"/>
+            <ColumnDefinition Width="197*"/>
+            <ColumnDefinition Width="197*"/>
+            <ColumnDefinition Width="197*"/>
+            <ColumnDefinition Width="197*"/>
+            <ColumnDefinition Width="68*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Machines" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Arial" Height="32" VerticalAlignment="Top" Grid.ColumnSpan="6"/>
+        <Grid Margin="8,7,0,0" Height="26" VerticalAlignment="Top" Grid.ColumnSpan="6">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="83" FontSize="12" Text="DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="0,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="408,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="77" FontSize="13" Text="MACHINES" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="22" VerticalAlignment="Top" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="429,0,0,0" />
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="93,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="AdminDashboardTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="130" FontSize="12" Text="ADMIN DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="123,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding AdminDashboardCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="268,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="MaintenanceTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="100" FontSize="12" Text="MAINTENANCE" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="296,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding MaintenanceCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+        <Label Content="{Binding Version}" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,0,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" Grid.ColumnSpan="6" />
+
+        <TextBlock TextAlignment="Center" Margin="0,104,31,0" VerticalAlignment="Top" Text="Schedule  Machine Work Orders" TextWrapping="Wrap" FontSize="16"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Height="128" Width="130" Background="WhiteSmoke" Padding="0,31,0,0" />
+        <TextBlock x:Name="ScheduleWorkOrderTextBlock" TextAlignment="Center" Style="{StaticResource HoverEffect}" Margin="0,104,31,0" VerticalAlignment="Top" Text="Schedule  Machine Work Orders" TextWrapping="Wrap" FontSize="16" Height="128" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="130" Padding="0,31,0,0">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding ScheduleMachineWorkOrderCommand}" MouseAction="LeftClick"  />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock TextAlignment="Center" Margin="0,104,31,0" VerticalAlignment="Top" Text="Add New Machine" TextWrapping="Wrap" FontSize="16"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Height="128" Width="130" Background="WhiteSmoke" Padding="0,45,0,0" Grid.Column="1" />
+        <TextBlock x:Name="AddNewVehicleTextBlock" TextAlignment="Center" Style="{StaticResource HoverEffect}" Margin="0,104,31,0" VerticalAlignment="Top" Text="Add New Machine" TextWrapping="Wrap" FontSize="16" Height="128" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="130" Padding="0,45,0,0" Grid.Column="1">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding AddNewMachineCommand}" MouseAction="LeftClick"  />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock TextAlignment="Center" Margin="0,104,31,0" VerticalAlignment="Top" Text="Update Machine" TextWrapping="Wrap" FontSize="16"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Height="128" Width="130" Background="WhiteSmoke" Padding="0,45,0,0" Grid.Column="2" />
+        <TextBlock x:Name="UpdateMachineTextBlock" TextAlignment="Center" Style="{StaticResource HoverEffect}" Margin="0,104,31,0" VerticalAlignment="Top" Text="Update Machine" TextWrapping="Wrap" FontSize="16" Height="128" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="130" Padding="0,45,0,0" Grid.Column="2">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding UpdateMachineCommand}" MouseAction="LeftClick"  />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock TextAlignment="Center" Margin="0,278,31,0" VerticalAlignment="Top" Text="Add New  Provider" TextWrapping="Wrap" FontSize="16"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Height="128" Width="130" Background="WhiteSmoke" Padding="0,37,0,0" />
+        <TextBlock x:Name="NewProviderTextBlock" TextAlignment="Center" Style="{StaticResource HoverEffect}" Margin="0,278,31,0" VerticalAlignment="Top" Text="Add New  Provider" TextWrapping="Wrap" FontSize="16" Height="128" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="130" Padding="0,37,0,0">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding NewProviderCommand}" MouseAction="LeftClick"  />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <!--<TextBlock TextAlignment="Center" Margin="0,104,31,0" VerticalAlignment="Top" Text="New Machine Work Order" TextWrapping="Wrap" FontSize="16"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Height="128" Width="130" Background="WhiteSmoke" Padding="0,35,0,0" />
+        <TextBlock x:Name="NewMachineWorkOrderTextBlock" TextAlignment="Center" Style="{StaticResource HoverEffect}" Margin="0,104,31,0" VerticalAlignment="Top" Text="New Machine Work Order" TextWrapping="Wrap" FontSize="16" Height="128" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="130" Padding="0,35,0,0">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding NewMachineWorkOrderCommand}" MouseAction="LeftClick"  />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>-->
+
+    </Grid>
+</UserControl>

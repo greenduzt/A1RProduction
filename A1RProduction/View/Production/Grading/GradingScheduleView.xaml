@@ -1,0 +1,994 @@
+﻿<UserControl x:Class="A1QSystem.View.Production.Grading.GradingScheduleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="1050" d:DesignHeight="800">
+    <UserControl.Resources>
+        <!--<Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander x:Name="exp" Margin="0,0,0,5" Padding="0,10,0,10" IsExpanded="True" Background="#FFECDDAD" Foreground="Black" FontWeight="Bold" Grid.Column="0" >
+                            <Expander.Header>
+                                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+                                    <TextBlock VerticalAlignment="Top" Width="530">
+                                        <TextBlock TextAlignment="Center"  Width="530" FontFamily="Verdana" FontSize="24" TextWrapping="Wrap">
+                                            <Run Text="{Binding Items[0].ShiftName}" />
+                                            <Run Text="Shift" />                                           
+                                        </TextBlock>                                       
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander.Header>
+                            <ItemsPresenter />
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+
+        <Style x:Key="RowStyle" TargetType="DataGridRow">
+            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="selectRowDetails"/>
+            <Setter Property="Background" Value="white" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Foreground" Value="#404040" />
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+        <Storyboard x:Key="homeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="homeMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="WorkStationsMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="WorkStationsTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="WorkStationsTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="WorkStationsMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="WorkStationsTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="WorkStationsTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="homeMouseEnter" Storyboard="{StaticResource homeMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="homeMouseLeve" Storyboard="{StaticResource homeMouseLeve}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="WorkStationsTextBlock">
+            <BeginStoryboard x:Name="WorkStationsMouseEnter" Storyboard="{StaticResource WorkStationsMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="WorkStationsTextBlock">
+            <BeginStoryboard x:Name="WorkStationsMouseLeve" Storyboard="{StaticResource WorkStationsMouseLeve}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid>
+        <Grid Margin="0,65,3,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="311">
+            <Label Content="" HorizontalAlignment="Left" BorderThickness="1"  Height="14" Margin="55,6,0,0" Background="#cc3700" VerticalAlignment="Top" Width="14"/>
+            <Label Content="" HorizontalAlignment="Left" Height="14" Margin="198,7,0,0" Background="#33cc33" VerticalAlignment="Top" Width="14"/>
+            <Label Content="Urgent" HorizontalAlignment="Left" Height="27" FontSize="10" Margin="66,0,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="46" RenderTransformOrigin="0.505,0.481"/>
+            <Label Content="Graded" HorizontalAlignment="Left" Height="22" FontSize="10" Margin="209,1,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="53" RenderTransformOrigin="0.505,0.481"/>
+            <Label Content="" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Height="14" Margin="258,6,0,0" Background="#ffffff" VerticalAlignment="Top" Width="14"/>
+            <Label Content="Normal" HorizontalAlignment="Left" Height="22" FontSize="10" Margin="268,0,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="48" RenderTransformOrigin="0.505,0.481"/>
+            <Label Content="" HorizontalAlignment="Left" BorderThickness="1"  Height="14" Margin="109,6,0,0" Background="#175a44" VerticalAlignment="Top" Width="14"/>
+            <Label Content="Urgent Graded" HorizontalAlignment="Left" Height="27" FontSize="10" Margin="118,1,0,-1" VerticalAlignment="Top" FontWeight="Bold" Width="79" RenderTransformOrigin="0.505,0.481"/>
+        </Grid>
+        <TextBlock Background="#FF938F8F" Foreground="White" Margin="0,33,0,0" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" FontSize="30" FontFamily="Arial" Height="37" VerticalAlignment="Top"><Run Text=""/></TextBlock>
+        <TextBlock  Foreground="white" Margin="222,-82,222,0" TextWrapping="Wrap" Text="GRADING ORDERS" TextAlignment="Center" FontWeight="Bold" FontSize="60" FontFamily="Arial" Height="61" VerticalAlignment="Top"/>
+        <Label Content="{Binding Version}" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,-1,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" />
+
+        <Grid Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260*"/>
+                <ColumnDefinition Width="260*"/>
+                <ColumnDefinition Width="260*"/>
+                <ColumnDefinition Width="260*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.ColumnSpan="3" Margin="22,71,167,0" Orientation="Horizontal" Height="30" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Center" Width="599" RenderTransformOrigin="0.5,0.5" >
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.116"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <TextBlock Text="Monday" HorizontalAlignment="Left" Height="30"  Width="95" Foreground="White" FontWeight="ExtraBold" Background="#FA5B5B" TextAlignment="Center" Margin="3,0,0,0"  Padding="5" VerticalAlignment="Top" FontSize="15" />
+                <TextBlock Text="Tuesday" HorizontalAlignment="Left" Height="30"  Width="95" Foreground="White" FontWeight="ExtraBold" Background="#FA9E5B" TextAlignment="Center" Margin="5,0,0,0" Padding="5" VerticalAlignment="Top" FontSize="15" />
+                <TextBlock Text="Wednesday" HorizontalAlignment="Left" Height="30"  Width="95" Foreground="White" FontWeight="ExtraBold" Background="#FAD85B" TextAlignment="Center" Margin="5,0,0,0" Padding="5" VerticalAlignment="Top" FontSize="15" />
+                <TextBlock Text="Thursday" HorizontalAlignment="Left" Height="30"  Width="95" Foreground="White" FontWeight="ExtraBold" Background="#62e53e" TextAlignment="Center" Margin="5,0,0,0" Padding="5" VerticalAlignment="Top" FontSize="15" />
+                <TextBlock Text="Friday" HorizontalAlignment="Left" Height="30"  Width="95" Foreground="White" FontWeight="ExtraBold" Background="#b1c2fd" TextAlignment="Center" Margin="5,0,0,0" Padding="5" VerticalAlignment="Top" FontSize="15" />
+                <TextBlock Text="Saturday" HorizontalAlignment="Left" Height="30"  Width="95" Foreground="White" FontWeight="ExtraBold" Background="#4B7A8E" TextAlignment="Center" Margin="5,0,0,0" Padding="5" VerticalAlignment="Top" FontSize="15" />
+            </StackPanel>
+
+            <!--DAY 1-->
+            <Grid Visibility="{Binding ControlVisibility}" Margin="0,100,0,653" Grid.ColumnSpan="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="260*"/>
+                    <ColumnDefinition Width="260*"/>
+                    <ColumnDefinition Width="260*"/>
+                    <ColumnDefinition Width="260*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{Binding Day1}" Margin="0,1,0,0" VerticalAlignment="Top" Grid.Column="0" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="23" Visibility="{Binding Day1Show}" Background="{Binding Day1BackCol}" Foreground="black"  Padding="0,0,0,0" />
+                <TextBlock Text="{Binding Day2}" Margin="0,1,0,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="23" Grid.Column="1" Visibility="{Binding Day2Show}"  Background="{Binding Day2BackCol}"  Foreground="black"  Padding="0,0,0,0" />
+                <TextBlock Text="{Binding Day3}" Margin="0,1,0,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="25" Grid.Column="2" Visibility="{Binding Day3Show}"   Background="{Binding Day3BackCol}"  Foreground="black" Padding="0,0,0,0" />
+                <TextBlock Text="{Binding Day4}" Margin="0,1,0,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="25" Grid.Column="3" Visibility="{Binding Day4Show}"  Background="{Binding Day4BackCol}"  Foreground="black" Padding="0,0,0,0" />
+
+                <TextBlock Text="{Binding Day1and2}" Margin="0,1,0,0" VerticalAlignment="Top" Grid.Column="0" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="25" Visibility="{Binding Day1and2Show}"  Background="{Binding Day1and2BackCol}" Foreground="black" Grid.ColumnSpan="2" Padding="0,0,0,0" />
+                <TextBlock Text="{Binding Day2and3}" Margin="0,1,0,0" VerticalAlignment="Top" Grid.Column="1" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="25" Visibility="{Binding Day2and3Show}"  Background="{Binding Day2and3BackCol}" Foreground="black" Grid.ColumnSpan="2"  Padding="0,0,0,0" />
+                <TextBlock Text="{Binding Day3and4}" Margin="0,1,0,0" VerticalAlignment="Top" Grid.Column="2" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="25" Visibility="{Binding Day3and4Show}"  Background="{Binding Day3and4BackCol}" Foreground="black" Grid.ColumnSpan="2"  Padding="0,0,0,0" />
+                <TextBlock Text="{Binding Day1and2and3}" Margin="0,1,0,0" VerticalAlignment="Top" Grid.Column="0" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="23" Visibility="{Binding Day1and2and3Show}"  Background="{Binding Day1and2and3BackCol}" Foreground="black" Grid.ColumnSpan="3" Padding="0,0,0,0" />
+                <TextBlock Text="{Binding Day2and3and4}" Margin="0,1,0,0" VerticalAlignment="Top" Grid.Column="1" TextAlignment="Center" FontFamily="Arial" FontSize="22" FontWeight="Bold" Height="25" Visibility="{Binding Day2and3and4Show}"  Background="{Binding Day2and3and4BackCol}" Foreground="black" Grid.ColumnSpan="3" Padding="0,0,0,0" />
+
+                <TextBlock Text="{Binding Grid1Shift}" Margin="0,24,0,0" VerticalAlignment="Top" Grid.Column="0" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" Height="22" Visibility="{Binding Grid1ShiftShow}"   Background="{Binding Grid1ShiftBackColor}" Foreground="black"  Padding="0,1,0,0" />
+                <TextBlock Text="{Binding Grid2Shift}" Margin="0,24,0,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" Height="22" Visibility="{Binding Grid2ShiftShow}"  Background="{Binding Grid2ShiftBackColor}" Foreground="black" Grid.Column="1"  Padding="0,1,0,0" />
+                <TextBlock Text="{Binding Grid3Shift}" Margin="0,24,0,0" VerticalAlignment="Top" Grid.Column="2" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" Height="22" Visibility="{Binding Grid3ShiftShow}"  Background="{Binding Grid3ShiftBackColor}" Foreground="black"  Padding="0,1,0,0" />
+                <TextBlock Text="{Binding Grid4Shift}" Margin="0,24,0,0" VerticalAlignment="Top" Grid.Column="3" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" Height="22" Visibility="{Binding Grid4ShiftShow}"   Background="{Binding Grid4ShiftBackColor}" Foreground="black"  Padding="0,1,0,0" />
+
+            </Grid>
+            <DataGrid x:Name="dgData" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16" Background="{Binding DG1BackGround}" BorderThickness="0"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding OrderProduction1}" Margin="0,170,1,31" RowStyle="{StaticResource RowStyle}"  Visibility="{ Binding ControlVisibility}" >
+
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5,5,5,2" Background="{Binding ItemBackgroundColour}">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Order No" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SalesOrderId}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0"  TextAlignment="Left" FontWeight="Bold" FontSize="14" />
+
+                            <!--<TextBlock Grid.Row="1" Grid.Column="0" Text="Sales Order" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding SalesOrderVisibility}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SalesOrder}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding SalesOrderVisibility}" />-->
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Mixing Date" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding IsReqDateVisible}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MixingDate, StringFormat='{}{0:ddd, MMM d, yyyy}'}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding IsReqDateVisible}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Mixing Shift" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" TextAlignment="Left" TextWrapping="Wrap"  FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding MixingShift}" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" TextWrapping="Wrap" FontWeight="Bold" FontSize="14"  />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Notes" Margin="0,0,8,5" TextAlignment="Left" FontSize="14" FontWeight="Bold" Visibility="{Binding IsNotesVisible}"  />
+                            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Notes}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" FontSize="14" FontWeight="Bold" TextWrapping="Wrap" Visibility="{Binding IsNotesVisible}" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Formula Option" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding FormulaOptionVisibility}" />
+
+                            <ListBox ItemsSource="{Binding FormulaOptions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="{Binding FormulaOptionVisibility}" FontSize="14" Background="{Binding ItemBackgroundColour}" Foreground="#404040" BorderThickness="0" >
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <HierarchicalDataTemplate>
+                                        <RadioButton  IsChecked="{Binding Checked,Mode=TwoWay}" GroupName="{Binding GroupID}" Foreground="#404040" Command="{Binding DataContext.OptionClickedCommand,RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" IsEnabled="{Binding IsEnabled,Mode=TwoWay}" >
+                                            <RadioButton.Content>
+                                                <TextBlock Text="{Binding RawProduct.Description}" TextWrapping="Wrap" Width="220"/>
+                                            </RadioButton.Content>
+                                        </RadioButton>
+                                    </HierarchicalDataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="0"  Grid.Column="0" Height="32" ToolTip="Click to View Formula" FontSize="17" Command="{Binding ViewCommand}" Content="VIEW" Foreground="#FF575555"  />
+                                <Button Grid.Row="0"  Grid.Column="1" Height="32" ToolTip="Click to Print Formula" FontSize="17" Command="{Binding PrintCommand}"  Foreground="#FF575555" >
+                                    <TextBlock>
+                                              <Run Text=" PRINT" /><Run Text=" " /><Run Text="{Binding PrintCounter}" Foreground="Red" FontSize="12"  />
+                                    </TextBlock>
+                                </Button>
+                            </Grid>
+                            <!--<Button Grid.Row="5"  Grid.Column="2" Height="32" ToolTip="Click this button if you have completed one block/log" FontSize="17" Command="{Binding CompletedCommand}" Content="COMPLETED" Foreground="#FF575555" >
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Loaded" >
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="#FFDDDDDD"  To="Red" AutoReverse="True" 
+                                RepeatBehavior="{Binding RepeatAnimation}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>-->
+                            <TextBlock Grid.Row="6" Grid.ColumnSpan="3" Text="" Margin="0,2,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Background="{Binding RowBackgroundColour,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+
+                <!--RAW PRODUCT CODE-->
+                <DataGrid.Columns>
+                    <!--DESCRIPTION-->
+                    <DataGridTextColumn Binding="{Binding RawProduct.Description,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="Padding" Value="0,4,0,3" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--QTY TO MAKE-->
+                    <DataGridTextColumn Header=" QTY" Binding="{Binding BlockLogQty}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Padding" Value="0,4,2,0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--TYPE-->
+                    <DataGridTextColumn Header="Type" Binding="{Binding RawProduct.RawProductType}" Width="75">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Padding" Value="0,4,2,0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--DAY 2-->
+            <!--<TabControl x:Name="TabDay2" Height="26" Margin="606,40,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabSelectedIndex2}" HorizontalAlignment="Left" Width="600">
+                    <TabItem Header="All Shifts" Margin="-2,-1,2,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Day Shift" Margin="-1,-1,1,-2" Width="95">
+                        <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                    </TabItem>
+                    <TabItem Header="Afternoon Shift" Margin="0,-1,0,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Night Shift" Margin="1,-1,-1,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>-->
+            <DataGrid x:Name="dgData2" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16" 
+                      Background="{Binding DG2BackGround}" BorderThickness="0" Visibility="{Binding ControlVisibility}"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding OrderProduction2}" Margin="0,170,1,31" RowStyle="{StaticResource RowStyle}" Grid.Column="1">
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5,5,5,2" Background="{Binding ItemBackgroundColour}">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Order No" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SalesOrderId}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0"  TextAlignment="Left" FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Mixing Date" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding IsReqDateVisible}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MixingDate, StringFormat='{}{0:ddd, MMM d, yyyy}'}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding IsReqDateVisible}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Mixing Shift" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" TextAlignment="Left" TextWrapping="Wrap"  FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding MixingShift}" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" TextWrapping="Wrap" FontWeight="Bold" FontSize="14"  />
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Notes" Margin="0,0,8,5" TextAlignment="Left" FontSize="14" FontWeight="Bold" Visibility="{Binding IsNotesVisible}"  />
+                            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Notes}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" FontSize="14" FontWeight="Bold" TextWrapping="Wrap" Visibility="{Binding IsNotesVisible}" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Formula Option" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding FormulaOptionVisibility}" />
+
+                            <ListBox ItemsSource="{Binding FormulaOptions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="{Binding FormulaOptionVisibility}" FontSize="14" Background="{Binding ItemBackgroundColour}" Foreground="#404040" BorderThickness="0" >
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <HierarchicalDataTemplate>
+                                        <RadioButton  IsChecked="{Binding Checked,Mode=TwoWay}" GroupName="{Binding GroupID}" Foreground="#404040" Command="{Binding DataContext.OptionClickedCommand,RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" IsEnabled="{Binding IsEnabled,Mode=TwoWay}" >
+                                            <RadioButton.Content>
+                                                <TextBlock Text="{Binding RawProduct.Description}" TextWrapping="Wrap" Width="220"/>
+                                            </RadioButton.Content>
+                                        </RadioButton>
+                                    </HierarchicalDataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="0"  Grid.Column="0" Height="32" ToolTip="Click to View Formula" FontSize="17" Command="{Binding ViewCommand}" Content="VIEW" Foreground="#FF575555"  />
+                                <Button Grid.Row="0"  Grid.Column="1" Height="32" ToolTip="Click to Print Formula" FontSize="17" Command="{Binding PrintCommand}"  Foreground="#FF575555" >
+                                    <TextBlock>
+                                              <Run Text=" PRINT" /><Run Text=" " /><Run Text="{Binding PrintCounter}" Foreground="Red" FontSize="12"  />
+                                    </TextBlock>
+                                </Button>
+                            </Grid>
+                            <!--<Button Grid.Row="5"  Grid.Column="2" Height="32" ToolTip="Click this button if you have completed one block/log" FontSize="17" Command="{Binding CompletedCommand}" Content="COMPLETED" Foreground="#FF575555" >
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Loaded" >
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="#FFDDDDDD"  To="Red" AutoReverse="True" 
+                                RepeatBehavior="{Binding RepeatAnimation}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>-->
+                            <TextBlock Grid.Row="6" Grid.ColumnSpan="3" Text="" Margin="0,2,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Background="{Binding RowBackgroundColour,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+
+                <!--RAW PRODUCT CODE-->
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn Binding="{Binding RawProduct.RawProductCode}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="Code" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="Padding" Value="1,4,3,3" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+
+                    <!--DESCRIPTION-->
+                    <DataGridTextColumn Binding="{Binding RawProduct.Description}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="Padding" Value="0,4,0,3" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--QTY TO MAKE-->
+                    <DataGridTextColumn Header=" QTY" Binding="{Binding BlockLogQty}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Padding" Value="0,4,2,0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--TYPE-->
+                    <DataGridTextColumn Header="Type" Binding="{Binding RawProduct.RawProductType}" Width="75">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Padding" Value="0,4,2,0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--DAY 3-->
+
+            <!--<TabControl x:Name="TabDay3" Height="26" Margin="1207,40,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabSelectedIndex3}" HorizontalAlignment="Left" Width="600">
+                    <TabItem Header="All Shifts" Margin="-2,-1,2,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Day Shift" Margin="-1,-1,1,-2" Width="95">
+                        <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                    </TabItem>
+                    <TabItem Header="Afternoon Shift" Margin="0,-1,0,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Night Shift" Margin="1,-1,-1,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>-->
+            <DataGrid x:Name="dgData3" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16" Background="{Binding DG3BackGround}" BorderThickness="0"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding OrderProduction3}" Visibility="{Binding ControlVisibility}"
+                      Margin="0,170,1,31" RowStyle="{StaticResource RowStyle}" Grid.Column="2">
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5,5,5,2" Background="{Binding ItemBackgroundColour}">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Order No" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SalesOrderId}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0"  TextAlignment="Left" FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Mixing Date" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding IsReqDateVisible}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MixingDate, StringFormat='{}{0:ddd, MMM d, yyyy}'}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding IsReqDateVisible}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Mixing Shift" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" TextAlignment="Left" TextWrapping="Wrap"  FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding MixingShift}" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" TextWrapping="Wrap" FontWeight="Bold" FontSize="14"  />
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Notes" Margin="0,0,8,5" TextAlignment="Left" FontSize="14" FontWeight="Bold" Visibility="{Binding IsNotesVisible}"  />
+                            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Notes}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" FontSize="14" FontWeight="Bold" TextWrapping="Wrap" Visibility="{Binding IsNotesVisible}" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Formula Option" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding FormulaOptionVisibility}" />
+
+                            <ListBox ItemsSource="{Binding FormulaOptions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="{Binding FormulaOptionVisibility}" FontSize="14" Background="{Binding ItemBackgroundColour}" Foreground="#404040" BorderThickness="0" >
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <HierarchicalDataTemplate>
+                                        <RadioButton  IsChecked="{Binding Checked,Mode=TwoWay}" GroupName="{Binding GroupID}" Foreground="#404040" Command="{Binding DataContext.OptionClickedCommand,RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" IsEnabled="{Binding IsEnabled,Mode=TwoWay}" >
+                                            <RadioButton.Content>
+                                                <TextBlock Text="{Binding RawProduct.Description}" TextWrapping="Wrap" Width="220"/>
+                                            </RadioButton.Content>
+                                        </RadioButton>
+                                    </HierarchicalDataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="0"  Grid.Column="0" Height="32" ToolTip="Click to View Formula" FontSize="17" Command="{Binding ViewCommand}" Content="VIEW" Foreground="#FF575555"  />
+                                <Button Grid.Row="0"  Grid.Column="1" Height="32" ToolTip="Click to Print Formula" FontSize="17" Command="{Binding PrintCommand}"  Foreground="#FF575555" >
+                                    <TextBlock>
+                                              <Run Text=" PRINT" /><Run Text=" " /><Run Text="{Binding PrintCounter}" Foreground="Red" FontSize="12"  />
+                                    </TextBlock>
+                                </Button>
+                            </Grid>
+                            <!--<Button Grid.Row="5"  Grid.Column="2" Height="32" ToolTip="Click this button if you have completed one block/log" FontSize="17" Command="{Binding CompletedCommand}" Content="COMPLETED" Foreground="#FF575555" >
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Loaded" >
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="#FFDDDDDD"  To="Red" AutoReverse="True" 
+                                RepeatBehavior="{Binding RepeatAnimation}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>-->
+                            <TextBlock Grid.Row="6" Grid.ColumnSpan="3" Text="" Margin="0,2,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Background="{Binding RowBackgroundColour,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+
+                <!--RAW PRODUCT CODE-->
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn Binding="{Binding RawProduct.RawProductCode}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="Code" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="Padding" Value="1,4,3,3" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+
+                    <!--DESCRIPTION-->
+                    <DataGridTextColumn Binding="{Binding RawProduct.Description}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="Padding" Value="0,4,0,3" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--QTY TO MAKE-->
+                    <DataGridTextColumn Header=" QTY" Binding="{Binding BlockLogQty}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Padding" Value="0,4,2,0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--TYPE-->
+                    <DataGridTextColumn Header="Type" Binding="{Binding RawProduct.RawProductType}" Width="75">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Padding" Value="0,4,2,0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--DAY 4-->
+
+            <!--<TabControl x:Name="TabDay4" Height="26" Margin="1809,40,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabSelectedIndex4}" HorizontalAlignment="Left" Width="600">
+                    <TabItem Header="All Shifts" Margin="-2,-1,2,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Day Shift" Margin="-1,-1,1,-2" Width="95">
+                        <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                    </TabItem>
+                    <TabItem Header="Afternoon Shift" Margin="0,-1,0,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Night Shift" Margin="1,-1,-1,-2" Width="95">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>-->
+            <DataGrid x:Name="dgData4" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16" Background="{Binding DG4BackGround}" BorderThickness="0"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding OrderProduction4}" Visibility="{Binding ControlVisibility}"
+                      Margin="0,170,0,31" RowStyle="{StaticResource RowStyle}" Grid.Column="3">
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5,5,5,2" Background="{Binding ItemBackgroundColour}">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Order No" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SalesOrderId}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0"  TextAlignment="Left" FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Mixing Date" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding IsReqDateVisible}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MixingDate, StringFormat='{}{0:ddd, MMM d, yyyy}'}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding IsReqDateVisible}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Mixing Shift" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" TextAlignment="Left" TextWrapping="Wrap"  FontWeight="Bold" FontSize="14" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding MixingShift}" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" TextWrapping="Wrap" FontWeight="Bold" FontSize="14"  />
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Notes" Margin="0,0,8,5" TextAlignment="Left" FontSize="14" FontWeight="Bold" Visibility="{Binding IsNotesVisible}"  />
+                            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Notes}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" FontSize="14" FontWeight="Bold" TextWrapping="Wrap" Visibility="{Binding IsNotesVisible}" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Formula Option" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="14" Visibility="{Binding FormulaOptionVisibility}" />
+
+                            <ListBox ItemsSource="{Binding FormulaOptions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="{Binding FormulaOptionVisibility}" FontSize="14" Background="{Binding ItemBackgroundColour}" Foreground="#404040" BorderThickness="0" >
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <HierarchicalDataTemplate>
+                                        <RadioButton  IsChecked="{Binding Checked,Mode=TwoWay}" GroupName="{Binding GroupID}" Foreground="#404040" Command="{Binding DataContext.OptionClickedCommand,RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" IsEnabled="{Binding IsEnabled,Mode=TwoWay}" >
+                                            <RadioButton.Content>
+                                                <TextBlock Text="{Binding RawProduct.Description}" TextWrapping="Wrap" Width="220"/>
+                                            </RadioButton.Content>
+                                        </RadioButton>
+                                    </HierarchicalDataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="0"  Grid.Column="0" Height="32" ToolTip="Click to View Formula" FontSize="17" Command="{Binding ViewCommand}" Content="VIEW" Foreground="#FF575555"  />
+                                <Button Grid.Row="0"  Grid.Column="1" Height="32" ToolTip="Click to Print Formula" FontSize="17" Command="{Binding PrintCommand}"  Foreground="#FF575555" >
+                                    <TextBlock>
+                                              <Run Text=" PRINT" /><Run Text=" " /><Run Text="{Binding PrintCounter}" Foreground="Red" FontSize="12"  />
+                                    </TextBlock>
+                                </Button>
+                            </Grid>
+                            <!--<Button Grid.Row="5"  Grid.Column="2" Height="32" ToolTip="Click this button if you have completed one block/log" FontSize="17" Command="{Binding CompletedCommand}" Content="COMPLETED" Foreground="#FF575555" >
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Loaded" >
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="#FFDDDDDD"  To="Red" AutoReverse="True" 
+                                RepeatBehavior="{Binding RepeatAnimation}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>-->
+                            <TextBlock Grid.Row="6" Grid.ColumnSpan="3" Text="" Margin="0,2,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Background="{Binding RowBackgroundColour,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+
+                <!--RAW PRODUCT CODE-->
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn Binding="{Binding RawProduct.RawProductCode}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="Code" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="Padding" Value="1,4,3,3" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+
+                    <!--DESCRIPTION-->
+                    <DataGridTextColumn Binding="{Binding RawProduct.Description}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="Padding" Value="0,4,0,3" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--QTY TO MAKE-->
+                    <DataGridTextColumn Header=" QTY" Binding="{Binding BlockLogQty}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Padding" Value="0,4,2,0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--TYPE-->
+                    <DataGridTextColumn Header="Type" Binding="{Binding RawProduct.RawProductType}" Width="75">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Padding" Value="0,4,2,0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TabControl x:Name="TabDay1Machine" Height="26" Margin="0,147,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabMachineSelectedIndex1}" FontSize="11" FontWeight="Bold" Visibility="{Binding ControlVisibility}">
+                <TabItem Grid.Column="0" Header="All MILLS" Margin="0,0,0,0"  Foreground="#FF5F5B5B" TabIndex="0" Height="26" FontSize="14" >
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Grid.Column="1" Header="BLUE MILL" Margin="0"  Foreground="#FF5F5B5B" TabIndex="1" Height="26" FontSize="14">
+
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Grid.Column="2" Header="RED MILL" Margin="0,0,-26,0" MinWidth="63" Width="Auto" Foreground="#FF5F5B5B" TabIndex="2" Height="26" FontSize="14">
+                    <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                </TabItem>
+            </TabControl>
+            <TabControl x:Name="TabDay2Machine" Height="26" Margin="0,147,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabMachineSelectedIndex2}" FontSize="11" FontWeight="Bold" Grid.Column="1" Visibility="{Binding ControlVisibility}">
+                <TabItem Grid.Column="0" Header="All MILLS" Margin="0,0,0,0"  Foreground="#FF5F5B5B" TabIndex="0" Height="26" FontSize="14" >
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Grid.Column="1" Header="BLUE MILL" Margin="0"  Foreground="#FF5F5B5B" TabIndex="1" Height="26" FontSize="14">
+
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Grid.Column="2" Header="RED MILL" Margin="0,0,-26,0" MinWidth="63" Width="Auto" Foreground="#FF5F5B5B" TabIndex="2" Height="26" FontSize="14">
+                    <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                </TabItem>
+            </TabControl>
+            <TabControl x:Name="TabDay3Machine" Height="26" Margin="0,147,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabMachineSelectedIndex3}" FontSize="11" FontWeight="Bold" Grid.Column="2" Visibility="{Binding ControlVisibility}">
+                <TabItem Grid.Column="0" Header="All MILLS" Margin="0,0,0,0"  Foreground="#FF5F5B5B" TabIndex="0" Height="26" FontSize="14" >
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Grid.Column="1" Header="BLUE MILL" Margin="0"  Foreground="#FF5F5B5B" TabIndex="1" Height="26" FontSize="14">
+
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Grid.Column="2" Header="RED MILL" Margin="0,0,-26,0" MinWidth="63" Width="Auto" Foreground="#FF5F5B5B" TabIndex="2" Height="26" FontSize="14">
+                    <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                </TabItem>
+            </TabControl>
+            <TabControl x:Name="TabDay4Machine" Height="26" Margin="0,147,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabMachineSelectedIndex4}" FontSize="11" FontWeight="Bold" Grid.Column="3" Visibility="{Binding ControlVisibility}">
+                <TabItem Grid.Column="0" Header="All MILLS" Margin="0,0,0,0"  Foreground="#FF5F5B5B" TabIndex="0" Height="26" FontSize="14" >
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Grid.Column="1" Header="BLUE MILL" Margin="0"  Foreground="#FF5F5B5B" TabIndex="1" Height="26" FontSize="14">
+
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Grid.Column="2" Header="RED MILL" Margin="0,0,-26,0" MinWidth="63" Width="Auto" Foreground="#FF5F5B5B" TabIndex="2" Height="26" FontSize="14">
+                    <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                </TabItem>
+            </TabControl>
+
+            <TextBlock Text="{Binding DailyDate}" Margin="0,101,0,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="40" FontWeight="Bold" Height="46" Visibility="{Binding DailyDataGridVisibility}"   Background="{Binding Grid4ShiftBackColor}" Foreground="black"  Padding="0,1,0,0" Grid.ColumnSpan="4" />
+
+            <DataGrid x:Name="DailyDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16" 
+                       BorderThickness="0" VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding DailyOrderProduction}" 
+                      Margin="30,170,30,31" RowStyle="{StaticResource RowStyle}"  Visibility="{Binding DailyDataGridVisibility}" Grid.ColumnSpan="4" HeadersVisibility="None" >
+
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5,5,5,2" Background="{Binding ItemBackgroundColour}">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Order No" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="20" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SalesOrderId}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0"  TextAlignment="Left" FontWeight="Bold" FontSize="20" />
+                    
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Mixing Date" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="20" Visibility="{Binding IsReqDateVisible}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MixingDate, StringFormat=\{0:ddd\, MMM d\, yyyy\}}" Grid.ColumnSpan="2" Margin="0,0,10,8" Padding="3,0,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="20" Visibility="{Binding IsReqDateVisible}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Mixing Shift" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" TextAlignment="Left" TextWrapping="Wrap"  FontWeight="Bold" FontSize="20" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding MixingShift}" Visibility="{Binding IsReqDateVisible}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" TextWrapping="Wrap" FontWeight="Bold" FontSize="20"  />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Notes" Margin="0,0,8,5" TextAlignment="Left" FontSize="20" FontWeight="Bold" Visibility="{Binding IsNotesVisible}"  />
+                            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Notes}" Margin="0,0,8,5" Padding="3,0,0,0" TextAlignment="Left" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" Visibility="{Binding IsNotesVisible}" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Formula Option" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="20" Visibility="{Binding FormulaOptionVisibility}" />
+
+                            <TextBlock Grid.Row="0" Grid.RowSpan="3"  Grid.Column="2" Text="{Binding GradeString}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,5" TextAlignment="Left" FontWeight="Bold" FontSize="26" />
+
+                            <ListBox ItemsSource="{Binding FormulaOptions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="{Binding FormulaOptionVisibility}" FontSize="20" Background="{Binding ItemBackgroundColour}" Foreground="#404040" BorderThickness="0" >
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <HierarchicalDataTemplate>
+                                        <RadioButton  IsChecked="{Binding Checked, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" GroupName="{Binding GroupID}" Foreground="#404040" Command="{Binding DataContext.OptionClickedCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" IsEnabled="{Binding IsEnabled, Mode=TwoWay}" >
+                                            <TextBlock Text="{Binding RawProduct.Description,UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="auto"/>
+                                        </RadioButton>
+                                    </HierarchicalDataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <Button Grid.Row="0"  Grid.Column="3" Height="40" Width=" 250" HorizontalAlignment="Right" ToolTip="Click to View Formula" FontSize="20" Command="{Binding ViewCommand}" Content="VIEW FORMULA" Foreground="#FF575555" Margin="2" />
+                            <Button Grid.Row="1"  Grid.Column="3" Height="40" Width=" 250" HorizontalAlignment="Right" ToolTip="Click to Print Formula" FontSize="20" Command="{Binding PrintCommand}"  Foreground="#FF575555" Margin="2">
+                                <TextBlock><Run Text=" PRINT" /><Run Text=" " /><Run Text="{Binding PrintCounter}" Foreground="Red" FontSize="12"  /></TextBlock>
+                            </Button>
+                            <Button Grid.Row="2"  Grid.Column="3" Height="40" Width=" 250" HorizontalAlignment="Right" ToolTip="Click this button if you have completed one block/log" FontSize="20" 
+                                    Command="{Binding CompletedCommand}" Content="COMPLETE" Foreground="#FF575555" Margin="2"  >
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded" >
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" From="#FFDDDDDD"  To="Red" AutoReverse="True" 
+            										RepeatBehavior="{Binding RepeatAnimation}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <TextBlock Grid.Row="6" Grid.ColumnSpan="4" Text="" Margin="0,2,0,0" TextAlignment="Left" FontWeight="Bold" FontSize="14" Background="{Binding RowBackgroundColour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+
+                <!--RAW PRODUCT CODE-->
+                <DataGrid.Columns>
+                    <!--DESCRIPTION-->
+                    <DataGridTextColumn Binding="{Binding RawProduct.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" FontSize="42">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="Description" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="Padding" Value="0,4,0,3" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Margin="8,7,147,0" Height="26" VerticalAlignment="Top">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="80" FontSize="12" Text="DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="0,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="87,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="131" FontSize="13" Text="GRADING ORDERS" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="22" VerticalAlignment="Top" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="246,0,0,0" />
+
+            <TextBlock x:Name="WorkStationsTextBlock" Style="{StaticResource HoverEffect}" FontSize="12" Text="WORKSTATIONS" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" Margin="113,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding WorkStationsCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="224,1,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+        </Grid>
+        <Button Content="ADD TO GRADED STOCK" Command="{Binding GradedStockCommand}" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="173" Margin="4,75,0,0" FontWeight="Bold" FontSize="14" />
+        <Button Content="PREVIOUS" Visibility="{Binding ControlVisibility}" Command="{Binding PrevCommand}" HorizontalAlignment="Left" Height="27" Margin="4,38,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold" FontSize="14" IsEnabled="{Binding PrevEnabled}"  />
+        <Button Content="NEXT" Visibility="{Binding ControlVisibility}" Command="{Binding NextCommand}" Height="27" Margin="0,38,4,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" FontWeight="Bold" FontSize="14"  IsEnabled="{Binding NextEnabled}" />
+        <Button Content="ADD TO SHRED STOCK" Command="{Binding RegrindStockCommand}" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="160" Margin="179,75,0,0" FontWeight="Bold" FontSize="14" />
+        <Button Content="PRINT GRADING PENDING LIST" Command="{Binding PrintGradingPendingCommand}" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="215" Margin="340,75,0,0" FontWeight="Bold" FontSize="14" />
+        <Button Content="VIEW WEEKLY SCHEDULE" Command="{Binding ViewMixingScheduleCommand}" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="174" Margin="557,75,0,0" FontWeight="Bold" FontSize="14" />
+        <Button Content="DAILY" Command="{Binding DailyOrdersCommand}" CommandParameter="daily" ToolTip="View daily orders" HorizontalAlignment="Left" Height="27" Margin="97,38,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold" FontSize="14" />
+        <Button Content="WEEKLY" Command="{Binding WeeklyOrdersCommand}" CommandParameter="weekly" ToolTip="View weekly orders" HorizontalAlignment="Left" Height="27" Margin="190,38,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold" FontSize="14" />
+        <!--<Border x:Name="childWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" RenderTransformOrigin="0.5,0.5" Margin="0,-94,0,0" >
+            <ContentControl Content="{Binding XmlContent}"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Border>-->
+    </Grid>
+
+</UserControl>

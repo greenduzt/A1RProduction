@@ -1,0 +1,534 @@
+﻿<UserControl x:Class="A1QSystem.View.WorkOrders.VehicleWorkOrdersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="1050" d:DesignHeight="800">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="HomeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HomeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="White" />
+            <!--<Setter Property="IsEnabled" Value="{Binding IsProcessing}" />-->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D1D1D1"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseEnter" Storyboard="{StaticResource HomeMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseLeave" Storyboard="{StaticResource HomeMouseLeave}"/>
+        </EventTrigger>
+
+        <!--<EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="WorkOrdersTextBlock">
+            <BeginStoryboard x:Name="WorkOrdersMouseEnter" Storyboard="{StaticResource WorkOrdersMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="WorkOrdersTextBlock">
+            <BeginStoryboard x:Name="WorkOrdersMouseLeave" Storyboard="{StaticResource WorkOrdersMouseLeave}"/>
+        </EventTrigger>-->
+    </UserControl.Triggers>
+    <Grid>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Vehicle Work Orders" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Arial" Height="32" VerticalAlignment="Top"/>
+        <Grid Margin="8,7,8,0" Height="26" VerticalAlignment="Top">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="88" FontSize="12" Text="DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="0,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="104,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="164" FontSize="13" Text="VEHICLE WORK ORDERS" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="22" VerticalAlignment="Top" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="127,2,0,0" />
+            <!--<TextBlock x:Name="WorkOrdersTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="100" FontSize="12" Text="WORK ORDERS" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="126,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding WorkOrdersCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>-->
+        </Grid>
+        <Border BorderBrush="#FFC5D0EE" Margin="5,146,5,34"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" >
+
+            <DataGrid x:Name="dgQuoteDetails_Copy1"  BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+        		ItemsSource="{Binding VehicleWorkOrder, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" RowHeight="30" Padding="0,0,7,0"
+        		AutoGenerateColumns="False" Margin="0,0,0,0" Background="#e1e9f7" CanUserAddRows="False"   TabIndex="1" SelectionChanged="dgQuoteDetails_Copy1_SelectionChanged"  >
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+                </DataGrid.Resources>
+
+                <DataGrid.RowStyle>
+                    <StaticResource ResourceKey="RowStyle"/>
+                </DataGrid.RowStyle>
+
+                <!--<DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgQuoteDetails_Copy1}" />
+                </DataGrid.InputBindings>-->
+
+                <DataGrid.Columns>
+
+                    <!--Work Order No-->
+                    <DataGridTextColumn Header="WO No" Binding="{Binding VehicleWorkOrderID}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Work Order Type-->
+                    <DataGridTextColumn Header="WO Type" Binding="{Binding WorkOrderType}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Urgency-->
+                    <DataGridTextColumn Header="Urgency" Binding="{Binding UrgencyStr}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                <Setter Property="Background" Value="{Binding UrgencyBackgroundCol}"/>
+                                <Setter Property="Foreground" Value="{Binding UrgencyForeGroundCol}"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <!--Location-->
+                    <!--
+                    <DataGridTextColumn Header="Location" Binding="{Binding Vehicle.StockLocation.StockName}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="1" />
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+
+                    <!--Vehicle ID-->
+                    <DataGridTextColumn Header="Code" Binding="{Binding Vehicle.VehicleCode}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Serial Number-->
+                    <DataGridTextColumn Header="Serial Number" Binding="{Binding Vehicle.SerialNumber}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Vehicle Brand-->
+                    <DataGridTextColumn Header="Vehicle Name" Binding="{Binding Vehicle.VehicleBrand}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Vehicle Description-->
+                    <DataGridTextColumn Header="Description" Binding="{Binding Vehicle.VehicleDescription}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Next Service Date-->
+                    <DataGridTextColumn Header="Service Date" Binding="{Binding NextServiceDate, StringFormat=dd/MM/yyyy}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextAlignment"  Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Days Left-->
+                    <DataGridTextColumn Header="Days Left" Binding="{Binding DaysToComplete}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextAlignment"  Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                <Setter Property="Background" Value="{Binding DaysToCompleteBackgroundCol}"/>
+                                <Setter Property="Foreground" Value="{Binding DaysToCompleteForeGroundCol}"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <!--View-->
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="VIEW" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" HorizontalContentAlignment="Left" Margin="0,0,0,0" Command="{Binding DataContext.ViewDescriptionCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" ToolTip="View descriptions">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="#2E8856"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="FontSize" Value="12"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <!--<Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#808080"/>
+                                                </Trigger>
+                                            </Style.Triggers>-->
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Triggers>
+                                        <EventTrigger RoutedEvent="Button.Loaded" >
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="#2E8856"  To="#FFC33333" AutoReverse="True" 
+                                RepeatBehavior="{Binding ViewRepeatAnimation}" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--View-->
+                    <!--<DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="REPAIR/PART" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Height="30" HorizontalContentAlignment="Left" Margin="0,0,0,0" Command="{Binding DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" ToolTip="Add repair or part">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="#2E8856"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="FontSize" Value="12"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#808080"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+                    <!--Print-->
+                    <!--<DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="PRINT" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="30" HorizontalContentAlignment="Left" Margin="0,0,0,0" Command="{Binding DataContext.PrintCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" ToolTip="Print work order">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="#2E8856"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="FontSize" Value="12"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#808080"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+                    <!--Complete-->
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="COMPLETE" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" HorizontalContentAlignment="Left" Margin="0,0,0,0" Command="{Binding DataContext.CompleteWorkOrderCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" ToolTip="Complete work order" IsEnabled="{Binding CompleteBtnEnabled}">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="{Binding CompleteBackCol,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="FontSize" Value="12"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <!--<Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#808080"/>
+                                                </Trigger>
+                                            </Style.Triggers>-->
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Triggers>
+                                        <EventTrigger RoutedEvent="Button.Loaded" >
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="{Binding CompleteBackCol}"  To="#FFC33333" AutoReverse="True" 
+                                RepeatBehavior="{Binding RepeatAnimation}" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Label Content="{Binding Version}" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,-1,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" />
+        <TextBlock Height="55" Margin="344,78,344,0" TextWrapping="Wrap" Text="{Binding DisplayDate}" FontSize="26" FontWeight="Black" TextAlignment="Center" Padding="8" VerticalAlignment="Top"/>
+
+        <Button Content="PREVIOUS DATE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Height="50" HorizontalContentAlignment="Left" Margin="5,76,0,0" Command="{Binding PrevDateCommand}" ToolTip="Get previous date work orders">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#2E8856"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#808080"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="NEXT DATE" HorizontalAlignment="Right" VerticalAlignment="Top" Width="160" Height="50" HorizontalContentAlignment="Left" Margin="0,76,5,0" Command="{Binding NextDateCommand}"  ToolTip="Get next date work orders">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#2E8856"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#808080"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="PRINT WORK ORDERS" HorizontalAlignment="Left" Width="157" HorizontalContentAlignment="Left"  Margin="170,91,0,0" Command="{Binding PrintVehicleOrdersCommand}" 
+        	ToolTip="Print vehicle work orders" Height="35" VerticalAlignment="Top" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <!--<Border x:Name="childWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" RenderTransformOrigin="0.5,0.5" Margin="0,-58,-1,0" >
+            <ContentControl Content="{Binding XmlContent}"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Border>-->
+    </Grid>
+</UserControl>

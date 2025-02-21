@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="A1QSystem.View.WorkOrders.WorkOrdersMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="1050" d:DesignHeight="800">
+    <UserControl.Resources>
+        <Storyboard x:Key="HomeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HomeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="VehicleWorkOrderMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="VehicleWorkOrderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="VehicleWorkOrderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="VehicleWorkOrderMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="VehicleWorkOrderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="VehicleWorkOrderTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseEnter" Storyboard="{StaticResource HomeMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseLeave" Storyboard="{StaticResource HomeMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="VehicleWorkOrderTextBlock">
+            <BeginStoryboard x:Name="VehicleWorkOrderMouseEnter" Storyboard="{StaticResource VehicleWorkOrderMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="VehicleWorkOrderTextBlock">
+            <BeginStoryboard x:Name="VehicleWorkOrderMouseLeave" Storyboard="{StaticResource VehicleWorkOrderMouseLeave}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="8,7,0,0" Height="26" VerticalAlignment="Top" Grid.ColumnSpan="6">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="55" FontSize="12" Text="HOME" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="0,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="62,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="112" FontSize="13" Text="WORK ORDERS" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="22" VerticalAlignment="Top" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="81,0,0,0" />
+        </Grid>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Work Orders Types" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Arial" Height="32" VerticalAlignment="Top" Grid.ColumnSpan="6"/>
+        <TextBlock TextAlignment="Center" Margin="0,134,38,0" VerticalAlignment="Top" Text="Vehicle Work Orders" TextWrapping="Wrap" FontSize="16"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Height="128" Width="130" Background="WhiteSmoke" Padding="0,40,0,0" />
+
+        <TextBlock x:Name="VehicleWorkOrderTextBlock" TextAlignment="Center" Style="{StaticResource HoverEffect}" Margin="0,134,38,0" VerticalAlignment="Top" Text="Vehicle Work Orders" TextWrapping="Wrap" FontSize="16" Height="128" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="130" Padding="0,40,0,0">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding VehicleWorkOrderCommand}" MouseAction="LeftClick"  />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Label Content="{Binding Version}" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,-1,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" Grid.ColumnSpan="6" />
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,217 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Core="clr-namespace:A1QSystem.Core" x:Class="A1QSystem.View.VehicleWorkOrders.VehicleMaintenanceDescriptionsView" 
+             xmlns:vc="clr-namespace:A1QSystem.Core" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="900" MaxWidth="900">
+
+    <UserControl.Resources>
+        <vc:IgnoreNewItemPlaceHolderConverter x:Key="ignoreNewItemPlaceHolderConverter"/>
+        <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="White" />
+            <!--<Setter Property="IsEnabled" Value="{Binding IsProcessing}" />-->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D1D1D1"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,10,0,0" TextWrapping="Wrap" Text="Vehicle Maintenance Descriptions" TextAlignment="Center" FontWeight="Bold" FontSize="14" FontFamily="Verdana" Height="26" VerticalAlignment="Top" />
+
+        <Border BorderBrush="#FFC5D0EE" Margin="10,126,10,41"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" >
+
+            <DataGrid x:Name="dgQuoteDetails"  BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" SelectedItem="{Binding SelectedItem,Converter={StaticResource ignoreNewItemPlaceHolderConverter}}"
+				ItemsSource="{Binding VehicleMaintenanceInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+				AutoGenerateColumns="False" Grid.Column="0" Margin="2,2,2,2" Grid.ColumnSpan="2" Background="#e1e9f7" CanUserAddRows="False"   TabIndex="14"  >
+
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+                    <Core:BindingProxy x:Key="proxy" Data="{Binding}"/>
+                </DataGrid.Resources>
+
+                <DataGrid.RowStyle>
+                    <StaticResource ResourceKey="RowStyle"/>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn Header="Active" Binding="{Binding Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+                    <!--Code-->
+                    <DataGridTextColumn Header="Code" Binding="{Binding SequenceStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="IsEnabled" Value="False" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Description-->
+                    <DataGridTextColumn Header="Work Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Grid Margin="13,90,296,679">
+
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Maintenance Frequency" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="177" FontFamily="Arial" Margin="2,2,0,0" />
+            <RadioButton Content="6 months" x:Name="rdbSInspection1_Copy" GroupName="DateRepeat" IsChecked="{Binding SixMonthChecked}" Height="15" Margin="294,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="73"   />
+            <RadioButton Content="2 years" x:Name="rdbSInspection1_Copy1" GroupName="DateRepeat" IsChecked="{Binding TwoYearsChecked}" Height="15" Margin="515,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="73" Visibility="{Binding RadioVisibility}"  />
+            <RadioButton Content="1 year" x:Name="rdbSInspection1_Copy4" GroupName="DateRepeat" IsChecked="{Binding OneYearChecked}" Height="15" Margin="409,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="73" Visibility="{Binding RadioVisibility}" />
+            <RadioButton Content="1 month" x:Name="rdbSInspection1_Copy7" GroupName="DateRepeat" IsChecked="{Binding OneMonthChecked}" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="83" Margin="182,6,0,0"  />
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Vehicle Type" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="177" FontFamily="Arial" Margin="2,-23,0,0" />
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Vehicle Location" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="177" FontFamily="Arial" Margin="2,-46,0,0" />
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="{Binding Location}" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="177" FontFamily="Arial" Margin="184,-46,0,0" />
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="{Binding VehicleType}" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="177" FontFamily="Arial" Margin="184,-23,0,0" />
+
+        </Grid>
+        <Button Content="ADD ITEM" HorizontalAlignment="Right" VerticalAlignment="Top" Width="85" Height="24" HorizontalContentAlignment="Left" Margin="0,97,95,0" Command="{Binding AddItemCommand}" ToolTip="Add new maintenance description" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#2E8856"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#808080"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="DELETE ITEM" HorizontalAlignment="Right" VerticalAlignment="Top" Width="85" Height="24" HorizontalContentAlignment="Left" Margin="0,97,10,0" Command="{Binding DeleteItem}"  ToolTip="Delete selected item from the list">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#2E8856"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#808080"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="CLOSE" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,9,10" Command="{Binding CloseCommand}" 
+        	ToolTip="Close form" Height="25" VerticalAlignment="Bottom" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="UPDATE" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,82,10" Command="{Binding UpdateCommand}" 
+        	ToolTip="Update work descriptions" Height="25" VerticalAlignment="Bottom" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+    </Grid>
+</UserControl>

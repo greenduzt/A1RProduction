@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="A1QSystem.Core.ViewModelBase" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="A1QSystem.View.Orders.OrderProductionView">
+    <Position X="2.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Orders\OrderProductionView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A1QSystem.Core.ChildWindowManager" Collapsed="true">
+    <Position X="2.5" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAgAAAAAAAAQAAAABCAAAAQgAAAAAABAA=</HashCode>
+      <FileName>Core\ChildWindowManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A1QSystem.Model.Comments.Comment" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAIAgAAAAAAAAhAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Comments\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A1QSystem.Model.User" Collapsed="true">
+    <Position X="9" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAgAAAAQAAAAAAAAAAAAACAAAABAAAAAg=</HashCode>
+      <FileName>Model\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A1QSystem.Model.Sales.FullQuoteDetails">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAEAAQIAMAgwAEAQAIQoAkDQAAAUCEkAxAAjAAAIQQ=</HashCode>
+      <FileName>Model\Sales\FullQuoteDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A1QSystem.ViewModel.Sales.QuoteToSaleViewModel">
+    <Position X="5" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AgAAgACgAEAACAAEAACBCAAAQIAAAAhAAQICAAAAAAA=</HashCode>
+      <FileName>ViewModel\Sales\QuoteToSaleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A1QSystem.ViewModel.Sales.EditQuoteDetailsPopUpViewModel" Collapsed="true">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>djVfjUopA9NdhG0eSnl+iE3iqpw7WIC23yYcwVDLxQ0=</HashCode>
+      <FileName>ViewModel\Sales\EditQuoteDetailsPopUpViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

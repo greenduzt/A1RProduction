@@ -1,0 +1,330 @@
+﻿<UserControl x:Class="A1QSystem.View.Machine.MachineWorkOrders.MachineWorkOrderItemsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" MinHeight="600" d:DesignWidth="800" MinWidth="950">
+    <Grid Background="White">
+        <Border BorderBrush="#FFC5D0EE" Margin="5,41,5,0"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Height="51" VerticalAlignment="Top" Background="#FFC6C9CF" >
+            <Grid Margin="-2,8,-2,-6"/>
+        </Border>
+
+        <Border BorderBrush="#FFC5D0EE" Margin="5,162,5,0"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Height="62" VerticalAlignment="Top" Background="#e1e9f7" >
+            <Grid Margin="-2,8,-2,-6">
+                <Button Content="ADD PART" HorizontalAlignment="Right" VerticalAlignment="Top" Width="85" Height="25" HorizontalContentAlignment="Left"  Margin="{Binding AddPartBtnMargin}" Command="{Binding AddToPartCommand}" ToolTip="Add vehicle part to repair item" IsEnabled="{Binding AddPartEnabled}" >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding AddPartButtonBackGround}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF515151"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+
+        <Border BorderBrush="#FFC5D0EE" Margin="5,97,5,0"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Height="62" VerticalAlignment="Top" Background="#e1e9f7" >
+            <Grid Margin="-2,8,-2,-6">
+                <Button Content="ADD REPAIR" HorizontalAlignment="Right" VerticalAlignment="Top" Width="85" Height="25" HorizontalContentAlignment="Left"  Margin="{Binding AddRepairBtnMargin}" Command="{Binding AddToRepairCommand}" ToolTip="Add repair to work item" IsEnabled="{Binding AddRepairEnabled}" >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding AddRepairButtonBackground}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF515151"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,10,0,0" TextWrapping="Wrap" Text="Work Items" TextAlignment="Center" FontWeight="Bold" FontSize="14" FontFamily="Verdana" Height="26" VerticalAlignment="Top" />
+        <!--<Button Content="CLOSE" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="64" Margin="0,0,5,10" Command="{Binding CloseCommand}" />-->
+
+        <Button Content="CLOSE" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,4,7" Command="{Binding CloseCommand}" 
+    		ToolTip="Close form" Height="25" VerticalAlignment="Bottom" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <Border BorderBrush="#FFC5D0EE" Margin="5,229,5,114"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" >
+            <TreeView x:Name="workItemsTree"  Margin="1,1,1,1" ItemsSource="{Binding MachineWorkDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0">
+                <!--<TreeView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Remove"/>
+                    </ContextMenu>
+                </TreeView.ContextMenu>-->
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="True" />
+                        <!--<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />-->
+                        <Setter Property="FontWeight" Value="Normal" />
+                        <Setter Property="FontSize" Value="14" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+
+                    <HierarchicalDataTemplate ItemsSource="{Binding MachineRepairDescription}">
+                        <!--Teams-->
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding MachineMaintenanceInfo.WorkItemVisible}">
+                            <TextBlock Text="{Binding MachineMaintenanceInfo.MachineCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding MachineMaintenanceInfo.MachineDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <!--Repair Items-->
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding MachineParts}">
+                                <StackPanel>
+                                    <TextBlock Visibility="{Binding RepairVisiblity}">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat=" {0} - {1}">
+                                                <Binding Path="StrSequenceNumber"/>
+                                                <Binding Path="RepairDescription"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat=" {0} - {1}">
+                                                    <Binding Path="StrSequenceNumber"/>
+                                                    <Binding Path="PartCode"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                            </HierarchicalDataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Border>
+
+        <!--
+                    <DataGridTextColumn Header="Work Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>-->
+        <Label Content="Machine ID" HorizontalAlignment="Left" Height="30" Margin="10,52,0,0" VerticalAlignment="Top" Width="85" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="96,55,0,0" TextWrapping="Wrap" Text="{Binding MachineWorkOrder.Machine.MachineID}" VerticalAlignment="Top" Width="74" Padding="0,0,0,0" IsReadOnly="True" FontSize="14" />
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="286,55,0,0" TextWrapping="Wrap" Text="{Binding MachineWorkOrder.Machine.MachineName}" VerticalAlignment="Top" Width="374" Padding="0,0,0,0" IsReadOnly="True" FontSize="14" />
+        <Label Content="Machine Name" FontSize="14" HorizontalAlignment="Left" Height="30" Margin="183,52,0,0" VerticalAlignment="Top" Width="108"/>
+        <Label Content="Type" HorizontalAlignment="Left" Height="30" Margin="663,52,0,0" VerticalAlignment="Top" Width="42" FontSize="14" />
+        <TextBox Height="24" Margin="705,55,0,0" TextWrapping="Wrap" Text="{Binding MachineWorkOrder.Machine.MachineType}" VerticalAlignment="Top" Padding="0,0,0,0" IsReadOnly="True" HorizontalAlignment="Left" Width="226" FontSize="14" />
+        <Label Content="Add Repair" HorizontalAlignment="Left" Height="26" Margin="10,99,0,0" VerticalAlignment="Top" Width="148" FontSize="15" FontWeight="Bold" Padding="5,0"/>
+        <Label Content="Select Maintenance Code" HorizontalAlignment="Left" Height="29" Margin="10,125,0,0" VerticalAlignment="Top" Width="173" FontSize="14" Visibility="{Binding RepairVisibility}" />
+        <ComboBox x:Name="cmbItemCodes" 
+    		FontSize="14"
+    		TabIndex="5"  
+    		IsEditable="False"    
+    		Visibility="{Binding RepairVisibility}"
+    		IsEnabled="{Binding WorkItemCodeEnabled}"  
+    		ItemsSource="{Binding MachineWorkDescription, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+    		DisplayMemberPath="MachineMaintenanceInfo.MachineCode"  
+    		SelectedValuePath="MachineMaintenanceInfo.MachineCode"     
+    		SelectedValue="{Binding SelectedItemCode, UpdateSourceTrigger=PropertyChanged}"      
+    		Background="White" Foreground="Black" FontFamily="Verdana" Margin="174,128,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="91" />
+        <Label Content="Repair Description" HorizontalAlignment="Left" Height="29" Margin="{Binding RepairDesMargin}" VerticalAlignment="Top" Width="124" FontSize="14" />
+        <TextBox HorizontalAlignment="Left" Height="24" FontSize="14" Margin="{Binding RepDesTextMargin}" TextWrapping="Wrap" Text="{Binding RepairDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="463"/>
+        <!--<Button Content="ADD REPAIR" HorizontalAlignment="Left" Height="24" Margin="838,127,0,0" VerticalAlignment="Top" Width="76" Command="{Binding AddToRepairCommand}" IsEnabled="{Binding AddRepairEnabled}" />-->
+
+
+        <Label Content="Add Machine Part" HorizontalAlignment="Left" Height="29" Margin="10,165,0,0" VerticalAlignment="Top" Width="148" FontSize="15" FontWeight="Bold" Padding="5,0"/>
+        <ComboBox x:Name="cmbItemCodes_Copy" 
+    		FontSize="14"
+    		TabIndex="5"  
+    		IsEditable="False"      
+    		Visibility="{Binding RepairVisibility}"
+    		ItemsSource="{Binding MachineWorkDescription, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
+    		DisplayMemberPath="MachineMaintenanceInfo.MachineCode"  
+    		SelectedValuePath="MachineMaintenanceInfo.MachineCode"     
+    		SelectedValue="{Binding SelectedItemCodePart, UpdateSourceTrigger=PropertyChanged}"      
+    		Background="White" Foreground="Black" FontFamily="Verdana" Margin="174,195,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="91" />
+        <Label Content="Select Maintenance Code" HorizontalAlignment="Left" Height="29" Margin="10,190,0,0" VerticalAlignment="Top" Width="173" FontSize="14" Visibility="{Binding RepairVisibility}" />
+        <Label Content="Select Repair No" HorizontalAlignment="Left" Height="28" Margin="{Binding RepairNoBinding}" VerticalAlignment="Top" Width="112" FontSize="14" />
+        <ComboBox x:Name="cmbItemCodes_Copy1" 
+    		FontSize="14"
+    		TabIndex="5"  
+    		IsEditable="False"      
+    		ItemsSource="{Binding MachineRepairDescription, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
+    		DisplayMemberPath="StrSequenceNumber"  
+    		SelectedValuePath="StrSequenceNumber"     
+    		SelectedValue="{Binding SelectedRepairNo, UpdateSourceTrigger=PropertyChanged}"      
+    		Background="White" Foreground="Black" FontFamily="Verdana" Margin="{Binding RepairNoTextBinding}" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95" />
+        <Label Content="Part Code" HorizontalAlignment="Left" Height="29" Margin="{Binding PartCodeMargin}" VerticalAlignment="Top" Width="70" FontSize="14" />
+        <TextBox HorizontalAlignment="Left" Height="24" FontSize="14" Margin="{Binding PartCodeMarginText}" TextWrapping="Wrap" Text="{Binding PartCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="285"/>
+        <!--<Button Content="ADD PART" HorizontalAlignment="Left" Height="24" Margin="838,193,0,0" VerticalAlignment="Top" Width="76" Command="{Binding AddToPartCommand}" IsEnabled="{Binding AddPartEnabled}"  />-->
+        <Label Content="M - Maintenance          R - Machine Repair         P - Machine Part" HorizontalAlignment="Left" Margin="4,0,0,0" Width="433" FontSize="12" Height="30" VerticalAlignment="Bottom"/>
+        <!--<Button Content="UPDATE" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="73" Height="25" HorizontalContentAlignment="Left"  Margin="0,0,77,7" Command="{Binding UpdateCommand}" 
+                ToolTip="Update details" Background="#FF787C7A" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#2E8856"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#808080"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>-->
+        <Button Content="UPDATE" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="73" Height="25" HorizontalContentAlignment="Left" Margin="0,0,76,7" Command="{Binding UpdateCommand}"  ToolTip="Update details">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Border BorderBrush="#FFC5D0EE" Margin="5,591,5,37"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Visibility="{Binding SpecialReqVisibility}" >
+            <DataGrid x:Name="dgQuoteDetails_Copy1"  BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" ItemsSource="{Binding MachineSpecialRequiremants, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" RowHeight="30" Padding="0,0,7,0" AutoGenerateColumns="False" Margin="0,0,0,0" Background="#e1e9f7" CanUserAddRows="False"   TabIndex="1" >
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+
+                    <!--Work Order No-->
+                    <DataGridTextColumn Header="No" Binding="{Binding ID}" Width="Auto">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="13" />
+                                <Setter Property="FontWeight" Value="Normal" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="1" />
+                                <Setter Property="TextAlignment" Value="Right" />
+                                <Setter Property="FontSize" Value="13" />
+                                <Setter Property="FontWeight" Value="Normal" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Description-->
+                    <DataGridTextColumn Header="Special Requirements" Binding="{Binding Description}" Width="Auto" MinWidth="900">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="13" />
+                                <Setter Property="FontWeight" Value="Normal" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="1" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="13" />
+                                <Setter Property="FontWeight" Value="Normal" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

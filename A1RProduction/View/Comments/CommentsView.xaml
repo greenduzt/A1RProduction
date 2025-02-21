@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="A1QSystem.View.Comments.CommentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="550" Width="900">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="myTemplate">
+            <StackPanel>
+                <TextBlock  Margin="0,4,0,4">                   
+                    <TextBlock Padding="3" Background="#DADADA" Width="414" FontWeight="Bold">
+                        <TextBlock Text="{Binding FirstName}" /> 
+                        <TextBlock Text="{Binding LastName}" /> - 
+                        <TextBlock Text="{Binding Date}" />                        
+                    </TextBlock><LineBreak/><LineBreak/>                   
+                    <TextBlock Text="{Binding UserComment}" Margin="3,0,0,0" />
+                </TextBlock>
+                <Separator Width="414"/>
+            </StackPanel>
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="499*"/>
+            <RowDefinition Height="51*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Add / View Comments" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Verdana" Height="32" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Quote No" Height="29" Margin="10,95,188,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding QuoteNoString}" Height="29" Margin="104,95,204,0" VerticalAlignment="Top" Background="#FFDAEBF3" />
+
+        <Button x:Name="btnCloseOrderDetails" Command="{Binding CloseCommand}" Content="CLOSE" HorizontalAlignment="Right" Margin="0,0,14,10" Width="62" FontFamily="Calibri" FontSize="14" RenderTransformOrigin="0.419,-0.72" Grid.Row="1" Grid.Column="1" Height="25" VerticalAlignment="Bottom"  />
+        <Button x:Name="btnUpdate" Command="{Binding AddCommand}" Content="ADD" HorizontalAlignment="Right" Margin="0,0,81,10" Width="62" FontFamily="Calibri" FontSize="14" RenderTransformOrigin="0.419,-0.72" Grid.Row="1" Grid.Column="1" Height="25" VerticalAlignment="Bottom"  />
+
+        <TextBox Name="txtAddCusCompName" Text="{Binding NewComment,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Margin="10,174,10,12" TextWrapping="Wrap" MinHeight="313" FontFamily="Verdana" AcceptsReturn="True" Background="#FFDAEBF3" Validation.ValidationAdornerSite="{Binding ElementName=lblCompNameError}" />
+        <Label Name="lblCompNameError" Visibility="Hidden" Content="{Binding ElementName=txtAddCusCompName,Path=(Validation.Errors).CurrentItem.ErrorContent}" Height="26" Margin="10,0" VerticalAlignment="Top" Padding="4,4,0,0" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.612,-2.269" Grid.Row="1" />
+
+        <!--<TextBox Name="txtNewComment" Margin="10,174,10,12" MinHeight="313" TextWrapping="Wrap" FontFamily="Verdana" AcceptsReturn="True" Background="#FFDAEBF3"
+                 Text="{Binding ElementName=txtNewComment,Path=(Validation.Errors).CurrentItem.ErrorContent}" Validation.ValidationAdornerSite="{Binding ElementName=lblPalletError}"  />
+        <AdornerDecorator Margin="12,496,438,0" Height="19" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Label x:Name="lblPalletError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtNewComment}" Padding="4,0,0,0" FontWeight="Bold" Foreground="Red" Grid.Row="1" Grid.Column="2" Height="19" VerticalAlignment="Top" />
+        </AdornerDecorator>-->
+        <ListBox Margin="11,174,14,12" MinHeight="313"  Name="myListBox" ItemsSource="{Binding Comments}" ItemTemplate="{StaticResource myTemplate}" FontFamily="Verdana" Background="#FFDAEBF3" Grid.Column="1" />
+
+        <Label Content="Add Comment" Height="25" Margin="10,147,188,0" VerticalAlignment="Top" FontFamily="Verdana" FontWeight="Bold" />
+        <Label Content="Recent Comments" Height="25" Margin="11,147,187,0" VerticalAlignment="Top" Grid.Column="1" FontFamily="Verdana" FontWeight="Bold" />
+
+    </Grid>
+</UserControl>

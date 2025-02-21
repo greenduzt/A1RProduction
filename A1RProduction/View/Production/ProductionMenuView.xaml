@@ -1,0 +1,292 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	mc:Ignorable="d"
+	x:Class="A1QSystem.View.Production.ProductionMenuView"
+	d:DesignWidth="1050" d:DesignHeight="800">
+    <UserControl.Resources>
+       
+        <Storyboard x:Key="AddWOVehicleMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ViewProdTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ViewProdTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="NewDailyProMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewDailyTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewDailyTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="loginMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ViewProdTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ViewProdTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="registerMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewDailyTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewDailyTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="BackQuoteMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackProdTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackProdTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="BackQuoteMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackProdTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackProdTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ExitMenuMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitProdMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitProdMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ExitMenuMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitProdMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitProdMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        
+        <Storyboard x:Key="homeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="homeMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="prodOverViewEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ProductionOverViewTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ProductionOverViewTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="prodOverViewLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ProductionOverViewTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ProductionOverViewTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+
+        <ImageBrush x:Key="LogOffImageMainMenu" ImageSource="/A1QSystem;component/Images/power_off.png"/>
+        <Style TargetType="{x:Type Button}" x:Key="btnLogOffMenu">
+            <Setter Property="Background" Value="{StaticResource LogOffImageMainMenu}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+        						Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+        						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ViewProdTextBlock">
+            <BeginStoryboard Storyboard="{StaticResource AddWOVehicleMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="NewDailyTextBlock">
+            <BeginStoryboard x:Name="registerVehMouseEnter_BeginStoryboard" Storyboard="{StaticResource NewDailyProMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ViewProdTextBlock">
+            <BeginStoryboard x:Name="loginMouseLeave_BeginStoryboard" Storyboard="{StaticResource loginMouseLeave}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="NewDailyTextBlock">
+            <BeginStoryboard x:Name="registerMouseLeave_BeginStoryboard" Storyboard="{StaticResource registerMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="BackProdTextBlock">
+            <BeginStoryboard x:Name="BackQuoteMouseEnter" Storyboard="{StaticResource BackQuoteMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="BackProdTextBlock">
+            <BeginStoryboard x:Name="BackQuoteMouseLeave" Storyboard="{StaticResource BackQuoteMouseLeave}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ExitProdMenuTextBlock">
+            <BeginStoryboard x:Name="ExitMenuMouseEnter" Storyboard="{StaticResource ExitMenuMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ExitProdMenuTextBlock">
+            <BeginStoryboard x:Name="ExitMenuMouseLeave" Storyboard="{StaticResource ExitMenuMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="homeMouseLeve" Storyboard="{StaticResource homeMouseLeve}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="homeMouseEnter" Storyboard="{StaticResource homeMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ProductionOverViewTextBlock">
+            <BeginStoryboard x:Name="prodOverViewLeve" Storyboard="{StaticResource prodOverViewLeve}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ProductionOverViewTextBlock">
+            <BeginStoryboard x:Name="prodOverViewEnter" Storyboard="{StaticResource prodOverViewEnter}"/>
+        </EventTrigger>
+
+    </UserControl.Triggers>
+    <Grid x:Name="mainMenuLayoutRoot" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock  HorizontalAlignment="Right" Foreground="#FFD6CECE"  Margin="0,137,31,0" VerticalAlignment="Top" Text="New Daily Production" TextWrapping="Wrap" FontSize="16" Height="128" Width="130" Background="WhiteSmoke" Padding="0,44,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+        <TextBlock Visibility="{Binding BtnNewDailyProduction}" x:Name="NewDailyTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Right" Margin="0,137,31,0" VerticalAlignment="Top" Text="New Daily Production" TextWrapping="Wrap" FontSize="16" Height="128" Width="130" Padding="0,44,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding NewDailyProdCommand}" MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Margin="0,137,35,0" Foreground="#FFD6CECE"  VerticalAlignment="Top" FontSize="16" Text="Production Efficiency" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5"  Grid.Column="2" HorizontalAlignment="Right" Height="128" Width="130" Background="WhiteSmoke" Padding="0,44,0,0"/>
+        <TextBlock Visibility="{Binding BtnViewProduction}" x:Name="ViewProdTextBlock"  Style="{StaticResource HoverEffect}" Margin="0,137,35,0" VerticalAlignment="Top" FontSize="16" Text="Production Efficiency" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5"  Grid.Column="2" HorizontalAlignment="Right" Height="128" Width="130" Padding="0,44,0,0">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding CommandViewProductionView}" MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="BackProdTextBlock" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" Margin="0,0,113,33" VerticalAlignment="Bottom" Width="104" FontSize="16" Text="Go Back" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.Column="3">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding CommandsBack}" MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="ExitProdMenuTextBlock" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" Margin="0,0,13,33" VerticalAlignment="Bottom" Width="100" FontSize="16" Text="Exit" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="ExitMainMenuTextBlock_MouseLeftButtonDown" Grid.Column="3">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Grid Grid.ColumnSpan="4" Margin="8,7,8,0" Height="26" VerticalAlignment="Top">
+            <TextBlock x:Name="NewProductionTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="91" FontSize="13" Text="PRODUCTION" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="22" VerticalAlignment="Top" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="81,0,0,0" />
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="55" FontSize="12" Text="HOME" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="0,3,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="62,1,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+        </Grid>
+        <Label Content="A1R Operating System V1.4 2015" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,0,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" Grid.ColumnSpan="4" />
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Production" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Verdana" Grid.ColumnSpan="4" Height="32" VerticalAlignment="Top"/>
+        
+        <TextBlock  HorizontalAlignment="Right" Foreground="#FFD6CECE"  Margin="0,137,34,0" VerticalAlignment="Top" Text="Production Overview" TextWrapping="Wrap" FontSize="16" Height="128" Width="130" Background="WhiteSmoke" Padding="0,44,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+        <TextBlock x:Name="ProductionOverViewTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Right" Margin="0,137,34,0" VerticalAlignment="Top" Text="Production Overview" TextWrapping="Wrap" FontSize="16" Height="128" Width="130" Padding="0,44,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding ProdOverviewCommand}" MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+    </Grid>
+</UserControl>
+

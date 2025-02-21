@@ -1,0 +1,178 @@
+﻿<UserControl x:Class="A1QSystem.View.Machine.AddProviderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:A1QSystem.View.Machine"             
+             mc:Ignorable="d" 
+             d:DesignHeight="330" MinHeight="330" d:DesignWidth="580" MinWidth="580">
+
+
+    <Grid Background="white" Margin="0,0,0,-31">
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,10,0,0" TextWrapping="Wrap" Text="Add/Update Provider" TextAlignment="Center" FontWeight="Bold" FontSize="14" FontFamily="Verdana" Height="26" VerticalAlignment="Top" />
+        <Button Content="CLOSE" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,5,5" Command="{Binding CloseCommand}" 
+            ToolTip="Close form" Height="25" VerticalAlignment="Bottom" TabIndex="8" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Border BorderBrush="#FFC5D0EE"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Background="#e1e9f7" Margin="7,41,7,35" />
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="Provider Name"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Right" Width="129" FontFamily="Arial" Margin="0,79,406,0" />
+        <ComboBox x:Name="cmbCustomers_Copy1" 
+                  Visibility="{Binding ProviderNameListVisibility}"
+        	        TabIndex="1"  
+        	        IsEditable="False"      
+        	        ItemsSource="{Binding MachineProviders, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+        	        DisplayMemberPath="ProviderName"  
+                  SelectedValuePath="ProviderID"     
+        	SelectedValue="{Binding SelectedProvider, UpdateSourceTrigger=PropertyChanged}"      
+        	Background="White" Foreground="Black" FontFamily="Verdana" Margin="202,81,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="317" />
+        <TextBox Height="22" TabIndex="1" Margin="201,81,61,0" TextWrapping="Wrap" Text="{Binding NewProviderName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 VerticalAlignment="Top" Visibility="{Binding ProviderNameVisibility}" />
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="Address"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Right" Width="129" FontFamily="Arial" Margin="0,105,406,0" />
+        <TextBox Height="22" Margin="201,107,61,0" TextWrapping="Wrap" Text="{Binding MachineProvider.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" TabIndex="2" />
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="Suburb"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Right" Width="129" FontFamily="Arial" Margin="0,131,407,0" />
+        <TextBox Height="22" Margin="201,133,61,0" TextWrapping="Wrap" Text="{Binding MachineProvider.Suburb, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" TabIndex="3" />
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="Postcode"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="45,159,0,0" />
+        <TextBox Height="22" Margin="201,159,61,0" TextWrapping="Wrap" Text="{Binding MachineProvider.PostCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" TabIndex="4" />
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="State"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="45,186,0,0" />
+        <ComboBox 
+    		x:Name="cmbDispatchTime_Copy1"
+    		IsEditable="False"   
+    		Background="White" Foreground="Black" FontFamily="Verdana" Margin="201,186,0,0" HorizontalAlignment="Left" Width="106" Height="25" 
+            VerticalAlignment="Top" 
+            SelectedValuePath="Content"
+            TabIndex="5"
+            SelectedValue="{Binding MachineProvider.State}" >
+            <ComboBoxItem Content="Select"/>
+            <ComboBoxItem Content="QLD"/>
+            <ComboBoxItem Content="NSW" />
+            <ComboBoxItem Content="VIC" />
+            <ComboBoxItem Content="SA" />
+            <ComboBoxItem Content="WA" />
+            <ComboBoxItem Content="NT" />
+            <ComboBoxItem Content="TAS" />
+        </ComboBox>
+        <Button Content="{Binding BtnName}" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,77,5" Command="{Binding AddProviderCommand}" 
+            ToolTip="Add provider" Height="25" TabIndex="7" VerticalAlignment="Bottom" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="New Provider" HorizontalAlignment="Right" Width="75" HorizontalContentAlignment="Left"  Margin="0,46,10,0" 
+                Command="{Binding AddNewProviderCommand}" Height="24" VerticalAlignment="Top" Visibility="{Binding ProviderNameListVisibility}" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="10
+                            "/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="X" HorizontalAlignment="Left" Width="16" HorizontalContentAlignment="Left"  Margin="502,83,0,0" Command="{Binding CloseNewProviderCommand}" 
+            ToolTip="Close adding new provider" Height="16" VerticalAlignment="Top"  Visibility="{Binding ProviderNameVisibility}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="9                             "/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="Status"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="45,215,0,0" />
+        <ComboBox 
+            x:Name="cmbDispatchTime_Copy"
+            TabIndex="6"  
+            IsEditable="False"   
+            Background="White" Foreground="Black" FontFamily="Verdana" Margin="201,215,0,0" HorizontalAlignment="Left" Width="106" Height="25" 
+            VerticalAlignment="Top" 
+            SelectedValuePath="Content"
+            SelectedValue="{Binding MachineProvider.Active}" >
+            <ComboBoxItem Content="Select"/>
+            <ComboBoxItem Content="Active"/>
+            <ComboBoxItem Content="Inactive" />
+        </ComboBox>
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="E-Mail"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="45,270,0,0" />
+        <TextBox Height="22" Margin="201,270,61,0" TextWrapping="Wrap" Text="{Binding MachineProvider.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" TabIndex="8" />
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="Phone"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="45,296,0,0" />
+        <TextBox Height="22" Margin="201,296,268,0" TextWrapping="Wrap" Text="{Binding MachineProvider.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" TabIndex="9" />
+        <TextBlock VerticalAlignment="Top" Padding="0,4,2,0" Text="Contact Name"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="45,244,0,0" />
+        <TextBox Height="22" Margin="201,244,61,0" TextWrapping="Wrap" Text="{Binding MachineProvider.ContactName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" TabIndex="7" />
+    </Grid>
+</UserControl>

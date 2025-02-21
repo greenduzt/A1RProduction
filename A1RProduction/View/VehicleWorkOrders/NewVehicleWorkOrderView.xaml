@@ -1,0 +1,204 @@
+﻿<UserControl x:Class="A1QSystem.View.VehicleWorkOrders.NewVehicleWorkOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"          
+             xmlns:Behaviors="clr-namespace:A1QSystem.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" Height="700" d:DesignWidth="900" MaxWidth="900">
+    <UserControl.Resources>
+        <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="White" />
+            <!--<Setter Property="IsEnabled" Value="{Binding IsProcessing}" />-->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D1D1D1"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid Background="White">
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,10,0,0" TextWrapping="Wrap" Text="New Routine Vehicle Work Order" TextAlignment="Center" FontWeight="Bold" FontSize="14" FontFamily="Verdana" Height="26" VerticalAlignment="Top" />
+        <Grid Margin="0,0,10,0" HorizontalAlignment="Right" Width="231" Height="30" VerticalAlignment="Bottom">
+            <Button Content="CLOSE" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,0,5" Command="{Binding CloseCommand}" 
+        		ToolTip="Close form" Height="25" VerticalAlignment="Bottom" >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#FF787C7A"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF515151"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="CLEAR" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,73,5" Command="{Binding ClearCommand}" 
+        		ToolTip="Clear form" Height="25" VerticalAlignment="Bottom" >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#FF787C7A"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF515151"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="CREATE" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,146,5" Command="{Binding CreateWorkOrderCommand}" IsEnabled="{Binding CreateBtnEnabled}" ToolTip="Create work order" Height="25" VerticalAlignment="Bottom" >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#FF787C7A"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF515151"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <!--<Button Content="CREATE"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Command="{Binding CreateWorkOrderCommand}" IsEnabled="{Binding CreateBtnEnabled}" />
+            <Button Content="CLOSE" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="64" Margin="138,0,0,0" Command="{Binding CloseCommand}" />
+            <Button Content="CLEAR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="70,0,0,0" Command="{Binding ClearCommand}" />-->
+        </Grid>
+        <Border BorderBrush="#FFC5D0EE" Margin="10,41,10,0"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Height="40" VerticalAlignment="Top" Background="#e1e9f7" >
+            <Grid Margin="-2,8,-2,-6">
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Search Vehicle"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="108" FontFamily="Arial" Margin="10,0,0,0" />
+                <ComboBox x:Name="cmbCustomers_Copy" 
+                	TabIndex="5"  
+                	IsEditable="False"      
+                	ItemsSource="{Binding Vehicles, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                	DisplayMemberPath="VehicleString"  
+                	SelectedValuePath="ID"     
+                	SelectedValue="{Binding SelectedVehicle, UpdateSourceTrigger=PropertyChanged}"      
+                	Background="White" Foreground="Black" FontFamily="Verdana" Margin="123,0,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="439" />
+
+            </Grid>
+        </Border>
+        <Border BorderBrush="#FFC5D0EE" Margin="10,210,10,41"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" >
+
+            <DataGrid x:Name="dgQuoteDetails"  BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+    		ItemsSource="{Binding VehicleWorkOrder.VehicleMaintenanceInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" GotFocus="DataGrid_CellGotFocus" 
+    		AutoGenerateColumns="False" Grid.Column="0" Margin="2,2,2,2" Grid.ColumnSpan="2" Background="#e1e9f7" CanUserAddRows="False"   TabIndex="14" IsEnabled="{Binding DatagridActive}"  >
+
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+                </DataGrid.Resources>
+
+                <DataGrid.RowStyle>
+                    <StaticResource ResourceKey="RowStyle"/>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+                    <!--Code-->
+                    <DataGridTextColumn Header="Code" Binding="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Description-->
+                    <DataGridTextColumn Header="Work Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Border BorderBrush="#FFC5D0EE" Margin="10,86,10,0"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Height="119" VerticalAlignment="Top" Background="White" >
+            <Grid Margin="-2,3,-2,-2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="87*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="First Service Date"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="165" FontFamily="Arial" Margin="5,77,0,0" />
+                <DatePicker HorizontalAlignment="Left"                  DisplayDateStart="{Binding CurrentDate}" 
+        	SelectedDate="{Binding SelectedDate}"
+        	Margin="187,77,0,0" 
+        	VerticalAlignment="Top" 
+        	TabIndex="7"
+        	Width="102" Height="24" IsEnabled="{Binding MaintenanceSeqEnabled}" />
+
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Maintenance Frequency" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="177" FontFamily="Arial" Margin="5,49,0,0" />
+                <RadioButton Content="6 months" x:Name="rdbSInspection1_Copy" GroupName="DateRepeat" IsChecked="{Binding SixMonthChecked}" Height="15" Margin="299,53,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="73" IsEnabled="{Binding MaintenanceSeqEnabled}" />
+                <RadioButton Content="2 years" x:Name="rdbSInspection1_Copy1" GroupName="DateRepeat" IsChecked="{Binding TwoYearsChecked}" Height="15" Margin="520,53,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="73" IsEnabled="{Binding MaintenanceSeqEnabled}" Visibility="{Binding RadioVisiblity}" />
+                <RadioButton Content="1 year" x:Name="rdbSInspection1_Copy4" GroupName="DateRepeat" IsChecked="{Binding OneYearChecked}" Height="15" Margin="414,53,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="73" IsEnabled="{Binding MaintenanceSeqEnabled}" Visibility="{Binding RadioVisiblity}" />
+                <RadioButton Content="1 month" x:Name="rdbSInspection1_Copy7" GroupName="DateRepeat" IsChecked="{Binding OneMonthChecked}" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="83" Margin="187,53,0,0" IsEnabled="{Binding MaintenanceSeqEnabled}" />
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Vehicle Type" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="177" FontFamily="Arial" Margin="5,25,0,0" />
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="{Binding VehicleType}" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="12" Height="20" FontWeight="Normal" HorizontalAlignment="Left" Width="386" Margin="187,25,0,0" />
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Vehicle Location" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="177" FontFamily="Arial" Margin="5,0,0,0" />
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="{Binding VehicleLocation}" LineHeight="17"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="12" Height="20" FontWeight="Normal" HorizontalAlignment="Left" Width="386" Margin="187,0,0,0" />
+
+            </Grid>
+        </Border>
+
+
+    </Grid>
+</UserControl>

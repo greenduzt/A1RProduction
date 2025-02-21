@@ -1,0 +1,582 @@
+﻿<Window x:Class="A1QSystem.PageSwitcher"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="A1R Operating System" MinHeight="790" MinWidth="1000" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Icon="Images/A1RubberOS.png" WindowStyle="None">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="menuItemBrush" Color="#FF505050" />
+        <Style TargetType="TextBlock" x:Key="WinControls">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="Background" Value="#FFC53131" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ViewProfileControls">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--<Style x:Key="MenuStyles" TargetType="MenuItem">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#FFE9E9F1" />
+                    -->
+        <!--<Setter Property="Foreground" Value="White" />-->
+        <!--
+                </Trigger>
+                <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                    <Setter Property="Background" Value="#FFE9E9F1" />
+                    -->
+        <!--<Setter Property="Foreground" Value="White" />-->
+        <!--
+                </Trigger>
+               
+            </Style.Triggers>            
+        </Style>-->
+
+        <SolidColorBrush x:Key="HighlightedBackgroundBrush" Color="#FF797878" />
+        <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FF918F8F" />
+        <SolidColorBrush x:Key="NormalBorderBrush" Color="#FFFFFFFF" />
+        <SolidColorBrush x:Key="SolidMenuFontBrush" Color="#FFFFFFFF" />
+        <SolidColorBrush x:Key="HighlightedText" Color="#FFFFFFFF" />
+        <Style x:Key="{x:Type Menu}" TargetType="{x:Type Menu}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Foreground" Value="{StaticResource SolidMenuFontBrush}"/>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Menu}">
+                        <Border Background="{StaticResource MenuBackgroundBrush}" BorderBrush="{StaticResource MenuBackgroundBrush}" BorderThickness="1">
+                            <StackPanel ClipToBounds="True" Orientation="Horizontal" IsItemsHost="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="Col0" MinWidth="17" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="MenuTextColumnGroup"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup"/>
+                                    <ColumnDefinition x:Name="Col3" Width="14"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- ContentPresenter to show an Icon if needed -->
+                                <ContentPresenter Grid.Column="0" Margin="4,0,6,0" x:Name="Icon" VerticalAlignment="Center" ContentSource="Icon"/>
+                                <!-- Glyph is a checkmark if needed for a checkable menu -->
+                                <Grid Grid.Column="0" Visibility="Hidden" Margin="4,0,6,0" x:Name="GlyphPanel" VerticalAlignment="Center">
+                                    <Path x:Name="GlyphPanelpath" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" Data="M0,2 L0,4.8 L2.5,7.4 L7.1,2.8 L7.1,0 L2.5,4.6 z" FlowDirection="LeftToRight"/>
+                                </Grid>
+
+                                <!-- Content for the menu text etc -->
+                                <ContentPresenter Grid.Column="1"  Margin="{TemplateBinding Padding}" x:Name="HeaderHost" RecognizesAccessKey="True" ContentSource="Header"/>
+
+                                <!-- Content for the menu IGT -->
+                                <ContentPresenter Grid.Column="2" Margin="8,1,8,1" x:Name="IGTHost" ContentSource="InputGestureText" VerticalAlignment="Center"/>
+
+                                <!-- Arrow drawn path which points to the next level of the menu -->
+                                <Grid Grid.Column="3" Margin="4,0,6,0" x:Name="ArrowPanel" VerticalAlignment="Center">
+                                    <Path x:Name="ArrowPanelPath" HorizontalAlignment="Right" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" Data="M0,0 L0,8 L4,4 z"/>
+                                </Grid>
+
+                                <!-- The Popup is the body of the menu which expands down or across depending on the level of the item -->
+                                <Popup IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                                    <Border x:Name="SubMenuBorder" BorderBrush="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" BorderThickness="1" Padding="0">
+                                        <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True">
+                                            <!-- StackPanel holds children of the menu. This is set by IsItemsHost=True -->
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                        </Grid>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+
+                        <!-- These triggers re-configure the four arrangements of MenuItem to show different levels of menu via Role -->
+                        <ControlTemplate.Triggers>
+                            <!-- Role = TopLevelHeader : this is the root menu item in a menu; the Popup expands down -->
+                            <Trigger Property="Role" Value="TopLevelHeader">
+                                <Setter Property="Padding" Value="6,1,6,1"/>
+                                <Setter Property="Placement" Value="Bottom" TargetName="SubMenuPopup"/>
+                                <Setter Property="MinWidth" Value="0" TargetName="Col0"/>
+                                <Setter Property="Width" Value="Auto" TargetName="Col3"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="GlyphPanel"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="IGTHost"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+                            </Trigger>
+
+                            <!-- Role = TopLevelItem :  this is a child menu item from the top level without any child items-->
+                            <Trigger Property="Role" Value="TopLevelItem">
+                                <Setter Property="Padding" Value="6,1,6,1"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+                            </Trigger>
+
+                            <!-- Role = SubMenuHeader : this is a child menu item which does not have children -->
+                            <Trigger Property="Role" Value="SubmenuHeader">
+                                <Setter Property="DockPanel.Dock" Value="Top"/>
+                                <Setter Property="Padding" Value="0,2,0,2"/>
+                            </Trigger>
+
+                            <!-- Role = SubMenuItem : this is a child menu item which has children-->
+                            <Trigger Property="Role" Value="SubmenuItem">
+                                <Setter Property="DockPanel.Dock" Value="Top"/>
+                                <Setter Property="Padding" Value="0,2,0,2"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+                            </Trigger>
+                            <Trigger Property="IsSuspendingPopupAnimation" Value="true">
+                                <Setter Property="PopupAnimation" Value="None" TargetName="SubMenuPopup"/>
+                            </Trigger>
+
+                            <!-- If no Icon is present the we collapse the Icon Content -->
+                            <Trigger Property="Icon" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
+                            </Trigger>
+
+                            <!-- The GlyphPanel contains the CheckMark -->
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Visibility" Value="Visible" TargetName="GlyphPanel"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
+                            </Trigger>
+
+                            <!-- Using the system colors for the Menu Highlight and IsEnabled-->
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter Property="Background" Value="{StaticResource HighlightedBackgroundBrush}" TargetName="Border"/>
+                                <Setter Property="Foreground" Value="{StaticResource HighlightedText}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource NormalBorderBrush}" TargetName="Border"/>
+                            </Trigger>
+                            <Trigger Property="IsHighlighted" Value="false">
+                                <Setter Property="Background" Value="{StaticResource MenuBackgroundBrush}" TargetName="Border"/>
+                                <Setter Property="Foreground" Value="{StaticResource SolidMenuFontBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource MenuBackgroundBrush}" TargetName="Border"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="LightGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Storyboard x:Key="profileMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ProfileTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ProfileTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="profileMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ProfileTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ProfileTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="logOutMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LogOutTextblock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LogOutTextblock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="logOutMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LogOutTextblock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LogOutTextblock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="minimizeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MinimizeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MinimizeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="minimizeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MinimizeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MinimizeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="maximizeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MaximizeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MaximizeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="maximizeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MaximizeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MaximizeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="closeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CloseTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CloseTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="closeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CloseTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CloseTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ProfileTextBlock">
+            <BeginStoryboard x:Name="profileMouseEnter" Storyboard="{StaticResource profileMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ProfileTextBlock">
+            <BeginStoryboard x:Name="profileMouseLeave" Storyboard="{StaticResource profileMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="LogOutTextblock">
+            <BeginStoryboard x:Name="logOutMouseEnter" Storyboard="{StaticResource logOutMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="LogOutTextblock">
+            <BeginStoryboard x:Name="logOutMouseLeave" Storyboard="{StaticResource logOutMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="MinimizeTextBlock">
+            <BeginStoryboard x:Name="minimizeMouseEnter" Storyboard="{StaticResource minimizeMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="MinimizeTextBlock">
+            <BeginStoryboard x:Name="minimizeMouseLeave" Storyboard="{StaticResource minimizeMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="MaximizeTextBlock">
+            <BeginStoryboard x:Name="maximizeMouseEnter" Storyboard="{StaticResource maximizeMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="MaximizeTextBlock">
+            <BeginStoryboard x:Name="maximizeMouseLeave" Storyboard="{StaticResource maximizeMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="CloseTextBlock">
+            <BeginStoryboard x:Name="closeMouseEnter" Storyboard="{StaticResource closeMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="CloseTextBlock">
+            <BeginStoryboard x:Name="closeMouseLeave" Storyboard="{StaticResource closeMouseLeave}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <DockPanel LastChildFill="True">
+        <Grid Name="TopContent" Background="#FF918F8F" MouseDown="TitleBar_MouseDown" DockPanel.Dock="Top" Height="95">
+            <!--MINIMIZE BUTTON-->
+            <TextBlock Text="__"  FontSize="17" FontWeight="ExtraBlack"  RenderTransformOrigin="0.5,0.5" TextAlignment="Center" Foreground="#FF977B7B" 
+                       Background="#FFE0DDDD" Padding="0,0,0,0" Margin="0,10,70,0"  Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" />
+
+            <TextBlock x:Name="MinimizeTextBlock" Style="{StaticResource WinControls}" HorizontalAlignment="Right" Margin="0,10,70,0" FontSize="17" Text="__" 
+                       FontWeight="Bold" Padding="0,0,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="25" Width="25" VerticalAlignment="Top" PreviewMouseDown="Minimize_MouseDown">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <!--MAXIMIZE BUTTON-->
+            <TextBlock Text="[ ]"  FontSize="17" FontWeight="Normal"  RenderTransformOrigin="0.5,0.5" TextAlignment="Center" Foreground="#FF977B7B" 
+                       Background="#FFE0DDDD" Padding="0,0,0,0" Margin="0,10,40,0"  Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" />
+
+            <TextBlock x:Name="MaximizeTextBlock" Style="{StaticResource WinControls}" HorizontalAlignment="Right" Margin="0,10,40,0" FontSize="17" Text="[ ]" 
+                       FontWeight="Normal" Padding="0,0,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="25" Width="25" VerticalAlignment="Top" PreviewMouseDown="Maximize_MouseDown">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <!--CLOSE BUTTON-->
+            <TextBlock Text="X"  FontSize="17" FontWeight="Normal"  RenderTransformOrigin="0.5,0.5" TextAlignment="Center" Foreground="#FF977B7B" 
+                       Background="#FFE0DDDD" Padding="0,0,0,0" Margin="0,10,10,0"  Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" />
+
+            <TextBlock x:Name="CloseTextBlock" Style="{StaticResource WinControls}" HorizontalAlignment="Right" Margin="0,10,10,0" FontSize="17" Text="X" 
+                       FontWeight="Normal" Padding="0,0,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="25" Width="25" VerticalAlignment="Top">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding ExitCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <!--<WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="188" Visibility="{Binding UserWrapPanel}">-->
+            <Grid x:Name="UserPanel" Visibility="{Binding UserWrapPanel}">
+                <Label Margin="11,13,0,0" Width="46" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top">
+                    <Label.Background>
+                        <ImageBrush ImageSource="Images/user-default.png"/>
+                    </Label.Background>
+                </Label>
+                <TextBlock x:Name="LoginDetails" FontSize="18" Height="39" Text="{Binding user.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Adobe Gothic Std B" TextAlignment="Left" Padding="0,7,3,0" Margin="68,4,309,0"
+            		    Foreground="White" VerticalAlignment="Top" FontWeight="Bold" />
+
+                <Separator Background="White" Margin="68,32,0,0" HorizontalAlignment="Left" Width="174" Height="11" VerticalAlignment="Top"  />
+                <Line
+                    X1="2" Y1="39"
+                    X2="2" Y2="65"
+                    Stroke="White"
+                    StrokeThickness="1" Margin="168,-1,585,1" />
+                <TextBlock x:Name="LogOutTextblock" Style="{StaticResource ViewProfileControls}" Text="LOG OUT" FontSize="13" Margin="180,41,0,0" Foreground="#FFDEDCDC" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="63">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding LogOutCommand}" MouseAction="LeftClick" />
+                    </TextBlock.InputBindings>
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+
+                <TextBlock x:Name="ProfileTextBlock" Style="{StaticResource ViewProfileControls}" FontSize="13" FontWeight="ExtraBlack"  Margin="66,41,0,0"  Foreground="Black" Text="VIEW PROFILE" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="94">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding ViewProfileCommand}" MouseAction="LeftClick" />
+                    </TextBlock.InputBindings>
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <Grid x:Name="mainGrid" Background="#FF252525" Margin="0,70,0,3">
+                    <Menu x:Name="mainMenu" Grid.ColumnSpan="2" VerticalAlignment="Bottom" >
+                        <MenuItem x:Name="home" Header="Home">
+                            <MenuItem Header="Dashboard" Command="{Binding DashboardCommand}" />
+                            <MenuItem Header="Version" Command="{Binding ExitCommand}" IsEnabled="False" />
+                            <MenuItem Header="Exit" Command="{Binding ExitCommand}" />
+                        </MenuItem>
+                        <MenuItem x:Name="admin" Header="Admin" IsEnabled="{Binding AdminEnabled}">
+                            <MenuItem Header="Orders"  IsEnabled="{Binding OrdersEnabled}">
+                                <MenuItem Header="New Order" Command="{Binding NewProdOrderCommand}"  />
+                                <MenuItem Header="Amend Order" Command="{Binding AmendOrderCommand}" IsEnabled="False" />
+                            </MenuItem>
+                            <MenuItem x:Name="production" Header="Production" IsEnabled="{Binding ProductionEnabled}">
+                                <MenuItem Header="Grading Scheduler" Command="{Binding ProdSchedulerCommand}" />
+                                <MenuItem Header="Slitting Scheduler" Command="{Binding SlittingSchedulerCommand}" />                            
+                            <MenuItem Header="Stock Manintenance" Command="{Binding StockMaintenanceCommand}"  IsEnabled="False" />
+                            </MenuItem>
+                            <MenuItem x:Name="Maintenance" Header="Maintenance" IsEnabled="{Binding MaintenanceEnabled}">
+                                <MenuItem Header="Vehicles">
+                                    <MenuItem Header="New Vehicle Maintenance Work Order" Command="{Binding NewVehicleMaintenanceWorkOrderCommand}"  />
+                                    <MenuItem Header="View/Update Vehicle Work Order" Command="{Binding UpdateVehicleWorkOrderCommand}"  />
+                                    <MenuItem Header="Schedule Vehicle Work Orders" Command="{Binding ScheduleVehicleWorkOrderCommand}"  />
+                                </MenuItem>
+                                <MenuItem Header="Machines">
+                                    <MenuItem Header="Schedule Machine Work Orders" Command="{Binding ScheduleMachineWorkOrderCommand}"  />
+                                    <MenuItem Header="Add Machine" Command="{Binding AddMachineCommand}"  />
+                                    <MenuItem Header="Update Machine" Command="{Binding UpdateMachineCommand}"  />
+                                </MenuItem>
+                            </MenuItem>
+                            <MenuItem x:Name="Stock" Header="Stock" IsEnabled="{Binding StockEnabled}">
+                                <MenuItem Header="Finished Goods" Command="{Binding FinishedGoodsCommand}" IsEnabled="False" />
+                                <MenuItem Header="Block/Log" Command="{Binding BlockLogCommand}"  />
+                                <MenuItem Header="Graded Stock" Command="{Binding ViewGradedStockCommand}" />
+                            </MenuItem>                          
+                        </MenuItem>
+                        <!--<MenuItem x:Name="orders" Header="Orders" IsEnabled="{Binding OrdersEnabled}">
+                            <MenuItem Header="New Order" Command="{Binding NewProdOrderCommand}"  />
+                            <MenuItem Header="Amend Order" Command="{Binding AmendOrderCommand}" IsEnabled="False" />
+                        </MenuItem>-->
+                        <!--<MenuItem x:Name="production" Header="Production" IsEnabled="{Binding ProductionEnabled}">
+                            <MenuItem Header="Grading Scheduler" Command="{Binding ProdSchedulerCommand}" />
+                            --><!--<MenuItem Header="Slit/Peel Scheduler" Command="{Binding SlitPeelSchedulerCommand}" IsEnabled="False" />                            
+                            <MenuItem Header="Stock Manintenance" Command="{Binding StockMaintenanceCommand}"  IsEnabled="False" />--><!--
+                        </MenuItem>-->
+                        <!--<MenuItem x:Name="Maintenance" Header="Maintenance" IsEnabled="{Binding MaintenanceEnabled}">
+                            <MenuItem Header="Vehicles">
+                                <MenuItem Header="New Vehicle Maintenance Work Order" Command="{Binding NewVehicleMaintenanceWorkOrderCommand}"  />
+                                <MenuItem Header="View/Update Vehicle Work Order" Command="{Binding UpdateVehicleWorkOrderCommand}"  />
+                            </MenuItem>
+                            <MenuItem Header="Machines" Command="{Binding BlockLogCommand}" IsEnabled="False"  />
+                        </MenuItem>-->
+                        <MenuItem x:Name="WorkOrders" Header="Work Orders"  >
+                            <MenuItem x:Name="VehicleWorkOrders" Header="Vehicle Work Orders"  >
+                                <MenuItem Header="Vehicle Work Orders" Command="{Binding VehicleWorkOrdersCommand}" />
+                                <MenuItem Header="New Vehicle Repair Work Order" Command="{Binding NewVehicleWorkOrderCommand}"  />
+                                <MenuItem Header="Vehicle Work Order History" Command="{Binding VehicleWorkOrderHistoryCommand}"  />
+                            </MenuItem>
+                            <MenuItem x:Name="MachineWorkOrders" Header="Machine Work Orders"  >
+                                <MenuItem Header="Machine Work Orders" Command="{Binding MachineWorkOrdersCommand}" />
+                                <MenuItem Header="New Machine Repair Work Order" Command="{Binding NewMachineRepairWorkOrderCommand}"  />
+                                <MenuItem Header="Machine Work Order History" Command="{Binding MachineWorkOrderHistoryCommand}"  />
+                            </MenuItem>
+
+                        </MenuItem>
+                        <MenuItem x:Name="WorkStations" Header="Work Stations" IsEnabled="{Binding WorkStationsEnabled}">
+                            <MenuItem Header="Grading" Command="{Binding VehicleWorkOrdersCommand}" >
+                                <MenuItem Header="Grading Orders" Command="{Binding GradingOrderCommand}" />
+                                <MenuItem Header="Grading History" Command="{Binding GradingHistoryCommand}" />
+                            </MenuItem>
+                            <MenuItem Header="Mixing" Command="{Binding NewVehicleWorkOrderCommand}"  >
+                                <MenuItem Header="Mixing Orders" Command="{Binding MixingOrderCommand}" />
+                                <MenuItem Header="Mixing History" Command="{Binding MixingHistoryCommand}" />
+                            </MenuItem>
+                            <MenuItem Header="Slitting" Command="{Binding VehicleWorkOrderHistoryCommand}"  >
+                                <MenuItem Header="Flat Bed Slitting Orders" Command="{Binding FlatBenchSlittingCommand}" />
+                                <MenuItem Header="Carousel Slitting Orders" Command="{Binding CarouselSlittingCommand}" />
+                                <MenuItem Header="Slitting History" Command="{Binding SlittingHistoryCommand}" />
+                            </MenuItem>
+                            <MenuItem Header="Peeling" Command="{Binding VehicleWorkOrderHistoryCommand}"  >
+                                <MenuItem Header="Peeling Orders" Command="{Binding PeelingCommand}" />
+                                <MenuItem Header="Peeling History" Command="{Binding PeelingHistoryCommand}" />
+                            </MenuItem>
+                            <MenuItem Header="Re-Rolling" Command="{Binding VehicleWorkOrderHistoryCommand}"  >
+                                <MenuItem Header="Re-Rolling Orders" Command="{Binding ReRollingCommand}" />
+                                <MenuItem Header="Re-Rolling History" Command="{Binding ReRollingHistoryCommand}" />
+                            </MenuItem>
+                            <MenuItem Header="Curing" Command="{Binding VehicleWorkOrderHistoryCommand}"  >
+                                <MenuItem Header="Curing Orders" Command="{Binding CuringOrdersCommand}" />
+                            </MenuItem>
+                            <MenuItem Header="Weekly Schedule" Command="{Binding WeeklyScheduleCommand}"  >
+                                <!--<MenuItem Header="Weekly Schedule" Command="{Binding CuringOrdersCommand}" />-->
+                            </MenuItem>
+                        </MenuItem>
+                       
+                        <!--<MenuItem x:Name="Stock" Header="Stock" IsEnabled="{Binding StockEnabled}">
+                            <MenuItem Header="Finished Goods" Command="{Binding FinishedGoodsCommand}" IsEnabled="False" />
+                            <MenuItem Header="Block/Log" Command="{Binding BlockLogCommand}"  />
+                            <MenuItem Header="Graded Stock" Command="{Binding ViewGradedStockCommand}" />
+                        </MenuItem>-->
+                        <!--<MenuItem x:Name="mnuGrading" Header="Grading" IsEnabled="True">
+                            <MenuItem Header="Grading Orders" Command="{Binding GradingOrderCommand}" />
+                            <MenuItem Header="Grading History" Command="{Binding GradingHistoryCommand}" />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuMixing" Header="Mixing" IsEnabled="True">
+                            <MenuItem Header="Mixing Orders" Command="{Binding MixingOrderCommand}" />
+                            <MenuItem Header="Mixing History" Command="{Binding MixingHistoryCommand}" />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuCuring" Header="Curing" IsEnabled="True">
+                            <MenuItem Header="Curing Orders" Command="{Binding CuringOrdersCommand}" />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuSlitting" Header="Slitting" IsEnabled="True" >
+                            <MenuItem Header="Flat Bed Slitting Orders" Command="{Binding FlatBenchSlittingCommand}" />
+                            <MenuItem Header="Carousel Slitting Orders" Command="{Binding CarouselSlittingCommand}" />
+                            <MenuItem Header="Slitting History" Command="{Binding SlittingHistoryCommand}" />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuPeeling" Header="Peeling" IsEnabled="True">
+                            <MenuItem Header="Peeling Orders" Command="{Binding PeelingCommand}" />
+                            <MenuItem Header="Peeling History" Command="{Binding PeelingHistoryCommand}" />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuReRolling" Header="Re-Rolling" IsEnabled="True">
+                            <MenuItem Header="Re-Rolling Orders" Command="{Binding ReRollingCommand}" />
+                            <MenuItem Header="Re-Rolling History" Command="{Binding ReRollingHistoryCommand}" />
+                        </MenuItem>-->
+                    </Menu>
+                    <!--<Menu x:Name="mainMenu" Grid.ColumnSpan="2" VerticalAlignment="Bottom" >
+                        <MenuItem x:Name="fileMenu" Header="Production" IsEnabled="{Binding ProductionActive}">
+                            <MenuItem Header="Production Scheduler" Command="{Binding ProdSchedulerCommand}" />
+                            <MenuItem x:Name="fileOpenMenuItem" Header="New Production" Command="{Binding NewProdOrderCommand}"  />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuGrading" Header="Grading" IsEnabled="{Binding GradingActive}">
+                            <MenuItem Header="Grading Orders" Command="{Binding GradingOrderCommand}" />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuMixing" Header="Mixing" IsEnabled="{Binding MixingActive}">
+                            <MenuItem Header="Mixing Orders" Command="{Binding MixingOrderCommand}" />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuSlitting" Header="Slitting" IsEnabled="{Binding SlittingActive}">
+                            <MenuItem Header="Slitting Orders" />
+                        </MenuItem>
+                        <MenuItem x:Name="mnuPeeling" Header="Peeling" IsEnabled="{Binding PeelingActive}">
+                            <MenuItem Header="Peeling Orders" />
+                        </MenuItem>
+                    </Menu>-->
+                    <TextBlock Text="{Binding LiveTIme}" Margin="0,-19,10,0" Foreground="White" FontSize="24" FontWeight="Bold" TextAlignment="Right" HorizontalAlignment="Right" Width="189" />
+                    <TextBlock Text="{Binding LiveDate}" Margin="0,-19,199,0" Foreground="White" FontSize="24" FontWeight="Bold" TextAlignment="Right" HorizontalAlignment="Right" Width="189" />
+
+                </Grid>
+            </Grid>
+
+            <!--  <Grid Margin="0,0,100,0">
+               <Border VerticalAlignment="Bottom" Height="25" BorderThickness="0,0,0,1" Background="#FF918F8F" BorderBrush="#FF918F8F">
+                    <Menu Height="25" VerticalAlignment="top" Background="#FF918F8F" FontSize="14"  >
+                        <MenuItem Header="_Production" Style="{StaticResource MenuStyles}">
+                            <MenuItem Header="Production Scheduler" Command="{Binding ProdSchedulerCommand}" />
+                            <MenuItem Header="New Production" Command="{Binding NewProdOrderCommand}" />
+                        </MenuItem>
+                        <MenuItem Header="_Grading" Style="{StaticResource MenuStyles}">
+                            <MenuItem Header="Grading Orders"/>
+                        </MenuItem>
+                        <MenuItem Header="_Mixing" Style="{StaticResource MenuStyles}">
+                            <MenuItem Header="Mixing Orders"/>
+                        </MenuItem>
+                        <MenuItem Header="_Slitting" Style="{StaticResource MenuStyles}">
+                            <MenuItem Header="Slitting Orders"/>
+                        </MenuItem>
+                        <MenuItem Header="_Peeling" Style="{StaticResource MenuStyles}">
+                            <MenuItem Header="Peeling Orders"/>
+                        </MenuItem>
+                    </Menu>
+                </Border>
+            </Grid>-->
+        </Grid>
+
+        <Grid Margin="0,0,0,0"  DockPanel.Dock="Bottom">
+            <ContentPresenter x:Name="MainContent" Margin="0,-1,0,0" />
+            <Border x:Name="childWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" RenderTransformOrigin="0.5,0.5" Margin="0,-98,0,0" >
+                <ContentControl Content="{Binding XmlContent}"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+            </Border>
+
+        </Grid>
+    </DockPanel>
+</Window>

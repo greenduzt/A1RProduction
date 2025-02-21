@@ -1,0 +1,587 @@
+﻿<UserControl x:Class="A1QSystem.View.Quoting.UpdateQuoteView"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit" 
+           xmlns:commonWPF="clr-namespace:A1QSystem.Core"
+           mc:Ignorable="d"
+	       d:DesignWidth="1000" d:DesignHeight="800">
+    <UserControl.Resources>
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                               Value="{Binding RelativeSource={RelativeSource Self},  Path=(Validation.Errors).CurrentItem.ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Storyboard x:Key="backMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="backMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BackQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="exitMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitMainMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitMainMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="exitMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitMainMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitMainMenuTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="homeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="homeMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="quotingMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="QuotingTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="QuotingTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="quotingMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="QuotingTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="QuotingTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="clearMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ClearTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ClearTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="clearMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ClearTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ClearTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="updateMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="UpdateQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="UpdateQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="updateMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="UpdateQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="UpdateQuoteTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="BackQuoteTextBlock">
+            <BeginStoryboard x:Name="backMouseEnter" Storyboard="{StaticResource backMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="BackQuoteTextBlock">
+            <BeginStoryboard x:Name="backMouseLeve" Storyboard="{StaticResource backMouseLeve}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ExitMainMenuTextBlock">
+            <BeginStoryboard x:Name="exitMouseEnter" Storyboard="{StaticResource exitMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ExitMainMenuTextBlock">
+            <BeginStoryboard x:Name="exitMouseLeve" Storyboard="{StaticResource exitMouseLeve}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="homeMouseEnter" Storyboard="{StaticResource homeMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="homeMouseLeve" Storyboard="{StaticResource homeMouseLeve}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="QuotingTextBlock">
+            <BeginStoryboard x:Name="quotingMouseEnter" Storyboard="{StaticResource quotingMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="QuotingTextBlock">
+            <BeginStoryboard x:Name="quotingMouseLeve" Storyboard="{StaticResource quotingMouseLeve}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ClearTextBlock">
+            <BeginStoryboard x:Name="clearMouseEnter" Storyboard="{StaticResource clearMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ClearTextBlock">
+            <BeginStoryboard x:Name="clearMouseLeve" Storyboard="{StaticResource clearMouseLeve}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="UpdateQuoteTextBlock">
+            <BeginStoryboard x:Name="updateMouseEnter" Storyboard="{StaticResource updateMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="UpdateQuoteTextBlock">
+            <BeginStoryboard x:Name="updateMouseLeve" Storyboard="{StaticResource updateMouseLeve}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="241*"/>
+            <RowDefinition Height="159*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="148*"/>
+            <ColumnDefinition Width="82*"/>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="28*"/>
+            <ColumnDefinition Width="58*"/>
+            <ColumnDefinition Width="274*"/>
+            <ColumnDefinition Width="153*"/>
+            <ColumnDefinition Width="176*"/>
+        </Grid.ColumnDefinitions>
+        <Frame Height="97" Margin="5,118,2,0" VerticalAlignment="Top" Background="#FFE0E0E0" Grid.ColumnSpan="8" Grid.Row="1" />
+
+        <Frame Height="93" Margin="5,22,2,0" VerticalAlignment="Top" Background="#FFE0E0E0" Grid.ColumnSpan="8" Grid.Row="1" />
+
+        <Frame Height="159" Margin="2.855,73,9.977,0" VerticalAlignment="Top" Background="#FFE0E0E0" Grid.ColumnSpan="2" Grid.Column="8" />
+
+        <Frame Height="158" Margin="2.002,74,2.145,0" VerticalAlignment="Top" Background="#FFE0E0E0" Grid.ColumnSpan="3" Grid.Column="5" />
+
+        <Frame Height="159" Margin="6,73,0,0" VerticalAlignment="Top" Background="#FFE0E0E0" Grid.ColumnSpan="4" />
+
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Update Quote" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Arial" Grid.ColumnSpan="10" Height="32" VerticalAlignment="Top"/>
+        <Grid Grid.ColumnSpan="10" Margin="8,7,8,0" Height="28" VerticalAlignment="Top">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="55" FontSize="12" Text="HOME" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="0,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock x:Name="QuotingTextBlock" Style="{StaticResource HoverEffect}" FontSize="12" Text="QUOTING" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="63" Margin="87,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavQuotingCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="62,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="158,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="104" FontSize="13" Text="UPDATE QUOTE" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="22" VerticalAlignment="Top" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="177,0,0,0" />
+
+        </Grid>
+        <!--            <TextBox x:Name="txtSearchQuoteNumber" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding QuoteNoSearch, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="120" RenderTransformOrigin="1.383,4" Validation.ValidationAdornerSite="{Binding ElementName=lblSearchQuoteNumberError}" Background="#FFF0F5FF" Margin="0,0,0,-6" Height="23" VerticalAlignment="Top" />
+-->
+        <Label Content="A1R Operating System V1.4 2015" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,-0.023,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" Grid.ColumnSpan="10" Grid.Row="1" />
+        <Grid Grid.ColumnSpan="10" Margin="0,0,15,34" Grid.Row="1" Height="25" VerticalAlignment="Bottom">
+            <TextBlock TextAlignment="Center" Text="GO BACK" TextWrapping="Wrap" FontSize="12"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Width="92" FontWeight="Bold" Background="#FFE0DDDD" Padding="0,44,0,0" Height="25" VerticalAlignment="Bottom" Margin="0,0,101,0" />
+            <TextBlock x:Name="BackQuoteTextBlock" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="92" FontSize="12" Text="GO BACK" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Padding="0,4,0,0" RenderTransformOrigin="0.5,0.5" Margin="0,0,101,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding BackCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock TextAlignment="Center" Text="EXIT" TextWrapping="Wrap" FontSize="12"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Width="92" Background="#FFE0DDDD" Padding="0,44,0,0" Height="25" VerticalAlignment="Bottom" Margin="0,0,-1,0" />
+            <TextBlock x:Name="ExitMainMenuTextBlock" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="92" FontSize="12" Text="EXIT" FontWeight="Bold" Padding="0,4,0,0" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.35,0.52" MouseLeftButtonDown="ExitProdMenuTextBlock_MouseLeftButtonDown" Margin="0,0,-1,0">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock TextAlignment="Center" Text="CLEAR" TextWrapping="Wrap" FontSize="12"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Width="92" Background="#FFE0DDDD" Padding="0,44,0,0" Height="25" VerticalAlignment="Bottom" Margin="0,0,205,0" />
+            <TextBlock x:Name="ClearTextBlock"  Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="92" FontSize="12" Text="CLEAR" FontWeight="Bold" TextWrapping="Wrap" Padding="0,4,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,0,205,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding ClearFields}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock TextAlignment="Center" Text="UPDATE" TextWrapping="Wrap" FontSize="12" FontWeight="Bold"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Foreground="#FFD6CECE" Width="92" Background="#FFE0DDDD" Padding="0,44,0,0" Height="25" VerticalAlignment="Bottom" Margin="0,0,308,0" />
+            <TextBlock x:Name="UpdateQuoteTextBlock" IsEnabled="{Binding UpdateQuoteActive}" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Padding="0,4,0,0" Width="92" FontWeight="Bold" FontSize="12" Text="UPDATE" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,0,308,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding UpdateCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+        <DataGrid x:Name="dgQuoteDetails" IsEnabled="{Binding QuoteDetailsActive}" BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+        	ItemsSource="{Binding quoteDetails, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            AutoGenerateColumns="False" Grid.Column="0" Margin="5,237,9.977,0" Grid.ColumnSpan="10" Background="#FFE0E0E0">
+
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <!-- Product Quantity -->
+                <DataGridTemplateColumn  Width="45" Header="  Qty" x:Name="dgQuantity">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource ResourceKey=TextBlockStyle}" Text="{Binding Path=Quantity,  
+                                UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <!--Search Code-->
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button ToolTip="Search products" Command="{Binding searchProductCommand}">
+                                <Image Source="/A1QSystem;component/Images/search.png" Width="15" Height="15"></Image>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- Product Code -->
+                <DataGridComboBoxColumn Header="Product Code"
+        			x:Name="ProductCode"                     
+                    SelectedValueBinding="{Binding ProductCode}"                  
+        			DisplayMemberPath="ProductCode"
+        			SelectedValuePath="ProductCode"                       
+                    Width="200">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Products, ElementName=dgQuoteDetails}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Products, ElementName=dgQuoteDetails}" />
+                            <Setter Property="SelectedItem" Value="{Binding CurrentProduct, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter Property="IsEditable" Value="True" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <!-- Product Description -->
+                <DataGridTextColumn Header="Product Description" Width="*"  Binding="{Binding ProductDescription, Mode=TwoWay}" />
+                <!-- Product Price -->
+                <DataGridTemplateColumn Header="Product Price" Width="90" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ProductPrice, StringFormat=$\{0:0.00\}}" HorizontalAlignment="Right" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding ProductPrice, Mode=TwoWay}" TextAlignment="Right" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <!-- Product Unit -->
+                <DataGridTextColumn Binding="{Binding ProductUnit}" Width="66" IsReadOnly="True" Header="    Unit">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="4,0,0,0"/>
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!--Product Discount-->
+                <DataGridTextColumn Binding="{Binding Discount, UpdateSourceTrigger=PropertyChanged}" Width="70" Header="  Disc %">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="0,0,7,0"/>
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!--Total-->
+                <DataGridTextColumn Binding="{Binding Total, StringFormat=\{0:c\}}" Width="90" IsReadOnly="True" Header="      Total">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="0,0,7,0"/>
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Button Margin="3" ToolTip="Remove product" Command="{Binding Path=DataContext.RemoveCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                    <Image Source="/A1QSystem;component/Images/remove.png" Width="15" Height="15"></Image>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Margin="3,21,1,0" Padding="0,6,5,0" TextAlignment="Right" FontSize="14" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="34" VerticalAlignment="Top" Grid.Column="8" Grid.Row="1"><Run Text="List Price Total"/></TextBlock>
+        <TextBlock Margin="2,21,9,0" Padding="0,6,5,0" TextAlignment="Right" FontSize="14" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="34" VerticalAlignment="Top" Grid.Column="9" Grid.Row="1"><Run Text="{Binding ListPriceTotal, StringFormat=\{0:c\}}"/></TextBlock>
+        <TextBlock Margin="3,57,1,0" Padding="0,6,5,0" TextAlignment="Right" FontSize="14" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="34" VerticalAlignment="Top" Grid.Column="8" Grid.Row="1"><Run Text="Freight"/></TextBlock>
+        <TextBlock Margin="2,57,9,0" Padding="0,6,5,0" TextAlignment="Right" FontSize="14" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="34" VerticalAlignment="Top" Grid.Column="9" Grid.Row="1"><Run Text="{Binding FreightTotal, StringFormat=\{0:c\}}"/></TextBlock>
+        <TextBlock Margin="3,93,1,0" Padding="0,6,5,0" TextAlignment="Right" FontSize="14" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="34" VerticalAlignment="Top" Grid.Column="8" Grid.Row="1"><Run Text="Discounted Total"/></TextBlock>
+
+        <TextBlock Validation.ValidationAdornerSite="{Binding ElementName=lblDiscountTotalError}" Text="{Binding DiscountedTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=\{0:c\}}" Name="txtDiscountTotal" Margin="2,93,9,0" Padding="0,6,5,0" TextAlignment="Right" FontSize="14" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="34" VerticalAlignment="Top" Grid.Column="9" Grid.Row="1" />
+        <AdornerDecorator Margin="6,0,9.449,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="10" Height="25" VerticalAlignment="Top" Grid.Row="1">
+            <Label x:Name="lblDiscountTotalError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtDiscountTotal}" Height="20" Margin="-1,2,0,0" Padding="2,0,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="Red" Grid.ColumnSpan="10" Grid.Row="1" />
+        </AdornerDecorator>
+
+        <TextBlock Margin="3,129,1,0" Padding="0,6,5,0" TextAlignment="Right" FontSize="14" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="34" VerticalAlignment="Top" Grid.Column="8" Grid.Row="1"><Run Text="GST"/></TextBlock>
+        <TextBlock Margin="2,129,9,0" Padding="0,6,5,0" TextAlignment="Right" FontSize="14" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="34" VerticalAlignment="Top" Grid.Column="9" Grid.Row="1"><Run Text="{Binding GST, StringFormat=\{0:c\}}"/></TextBlock>
+        <TextBlock Margin="3,165,1,0" Padding="0,10,5,0" TextAlignment="Right" FontSize="18" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="50" VerticalAlignment="Top" Grid.Column="8" Grid.Row="1"><Run Text="Total Amount"/></TextBlock>
+        <TextBlock Margin="2,165,9,0" Padding="0,10,5,0" TextAlignment="Right" FontSize="18" Background="#FFC33333" Foreground="White" FontFamily="Arial" FontWeight="Bold" Height="50" VerticalAlignment="Top" Grid.Column="9" Grid.Row="1"><Run Text="{Binding TotalAmount, StringFormat=\{0:c\}}"/></TextBlock>
+        <!--Freight Name-->
+        <Label Grid.Column="0" Content="Freight Name" Margin="10,29,2,0" Padding="0,5,0,0" Height="26" VerticalAlignment="Top" FontFamily="Verdana" Grid.Row="1" />
+
+        <ComboBox Grid.Column="0" x:Name="cmbFreightName"
+            IsEnabled="{Binding FreightNameActive}"                  
+        	TabIndex="5"  
+        	IsEditable="True"        
+            ItemsSource="{Binding FreightDetails, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
+            DisplayMemberPath="FreightName"       
+            SelectedValuePath="FreightName"      
+            SelectedValue="{Binding SelectedFreight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ValidationAdornerSite="{Binding ElementName=lblFreightNameError}"      
+            Background="White" Foreground="Black"  Margin="9,59,1,0" FontFamily="Verdana" Height="22" VerticalAlignment="Top" Grid.Row="1" BorderThickness="1,0" />
+        <AdornerDecorator Margin="8,82,2,0" Grid.Row="1" Height="27" VerticalAlignment="Top">
+            <Label x:Name="lblFreightNameError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=cmbFreightName}" Padding="4,0,0,0" FontWeight="Bold" Foreground="Red" Grid.Row="1" Height="19" VerticalAlignment="Top" Margin="3,0,0,0" />
+        </AdornerDecorator>
+        <!--Unit-->
+        <Label Content="Unit" Margin="3,30,1,0" Padding="0,5,0,0" FontFamily="Verdana" Grid.Column="1" Grid.Row="1" Height="25" VerticalAlignment="Top" />
+        <TextBox x:Name="txtFreightUnit" IsEnabled="{Binding UnitActive}"  TabIndex="6" Background="White" Foreground="Black" Text="{Binding FreightUnit, UpdateSourceTrigger=PropertyChanged}"  TextAlignment="Left" Margin="1,59,1,0" IsReadOnly="True" Height="22" VerticalAlignment="Top" FontFamily="Verdana" Grid.Column="1" Grid.Row="1" BorderThickness="1,0" />
+        <!--Pallets-->
+        <Label Content="Pallets" Margin="0,29,2,0" Padding="0,5,0,0" FontFamily="Verdana" Grid.Column="2" Grid.Row="1" Height="26" VerticalAlignment="Top" />
+        <TextBox TabIndex="7" commonWPF:TextBoxMaskBehavior.Mask="Integer" IsEnabled="{Binding PalletsActive}" Text="{Binding Pallets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ValidationAdornerSite="{Binding ElementName=lblPalletError}" x:Name="txtFreightQty" Background="White" Foreground="Black" TextAlignment="Right" FontFamily="Verdana" Grid.Column="2" Grid.Row="1" BorderThickness="1,0" Margin="0,59,0,0" Height="22" VerticalAlignment="Top" TextChanged="txtFreightQty_TextChanged" />
+        <AdornerDecorator Margin="0,84,0,0" Grid.Column="2" Grid.Row="1" Height="19" VerticalAlignment="Top">
+            <Label x:Name="lblPalletError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtFreightQty}" Padding="4,0,0,0" FontWeight="Bold" Foreground="Red" Grid.Row="1" Grid.Column="2" Height="19" VerticalAlignment="Top" />
+        </AdornerDecorator>
+        <!--Freight Price-->
+        <Label Content="Freight Price" Margin="1,30,0,0" Padding="0,5,0,0" FontFamily="Verdana" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" Height="26" VerticalAlignment="Top" />
+        <TextBox x:Name="txtFreightPrice"  IsEnabled="{Binding FreightPriceActive}" TabIndex="8" IsReadOnly="{Binding PriceReadOnly}" Background="White" Foreground="Black" Text="{Binding FreightPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ValidationAdornerSite="{Binding ElementName=lblPriceError}"  TextAlignment="Right" Margin="1,59,0,0" Height="22" VerticalAlignment="Top" FontFamily="Verdana" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="1,0" />
+        <AdornerDecorator Margin="3,84,0,0" Grid.ColumnSpan="3" Grid.Column="3" Grid.Row="1" Height="23" VerticalAlignment="Top">
+            <Label x:Name="lblPriceError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtFreightPrice}" Padding="4,0,0,0" FontWeight="Bold" Foreground="Red" Grid.Row="1" Grid.Column="2" Height="19" VerticalAlignment="Top" Margin="0,0,1,0" />
+        </AdornerDecorator>
+        <!--Discount-->
+        <Label Content="Disc %" Margin="1,31,1,0" Padding="0,5,0,0" FontFamily="Verdana" Grid.Column="6" Grid.Row="1" Height="25" VerticalAlignment="Top" />
+        <TextBox x:Name="txtFreightDisc" commonWPF:TextBoxMaskBehavior.Mask="Integer"
+                                         commonWPF:TextBoxMaskBehavior.MinimumValue="0"
+                                         commonWPF:TextBoxMaskBehavior.MaximumValue="100" IsEnabled="{Binding DiscountActive}" Text="{Binding FreightDis, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" Height="22" Margin="1,60,1,0" TextAlignment="Right" VerticalAlignment="Top" Background="White" Foreground="Black"  FontFamily="Verdana" Grid.Column="6" Grid.Row="1" BorderThickness="1,0" TextChanged="txtFreightDisc_TextChanged"  />
+        <!--Freight Description-->
+        <Label Content="Freight Description" Height="26" VerticalAlignment="Top" Margin="1,32,0,0" Padding="0,5,0,0" FontFamily="Verdana" Grid.Column="7" Grid.Row="1" />
+        <TextBox x:Name="txtDescription" IsEnabled="{Binding FreightDescActive}" TabIndex="5" Background="White" Foreground="Black"  Text="{Binding FreightDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="1,59,5,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" MaxHeight="60" FontFamily="Verdana" Grid.Column="7" Grid.Row="1" Height="52" VerticalAlignment="Top" BorderThickness="1,0"  />
+        <!--Instructions-->
+        <Label Grid.Row="1" Grid.Column="0" Content="Instructions" Padding="0,5,0,0" FontFamily="Verdana" Margin="9,117,25,0" Grid.ColumnSpan="6" Height="24" VerticalAlignment="Top"/>
+        <TextBox Grid.Row="1" IsEnabled="{Binding InstructionsActive}" Text="{Binding Instructions}" Grid.ColumnSpan="4" MaxHeight="78" x:Name="txtComments"  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Background="White" Foreground="Black" Margin="8,141,0,0" FontFamily="Verdana" Height="69" VerticalAlignment="Top" />
+        <!--Internal Comments-->
+        <TextBox x:Name="txtIntCoomm" IsEnabled="{Binding IntCommActive}" Text="{Binding InternalComments}" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3" MaxHeight="78" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Background="White" Foreground="Black" Margin="2,141,5,0" FontFamily="Verdana" Height="69" VerticalAlignment="Top" />
+        <Label x:Name="lblIntComm" Grid.Row="1" Grid.Column="5" Content="Internal Comments" Margin="2,117,1,0" Grid.ColumnSpan="3" FontFamily="Verdana" Height="24" VerticalAlignment="Top" Padding="0,5,0,0" />
+
+        <!--Quote Number-->
+        <Label Grid.Column="8" Content="Quote No" Height="25" VerticalAlignment="Top" Margin="8.855,76,0,0" Foreground="Black" Background="Transparent" FontFamily="Verdana" HorizontalAlignment="Left" Width="91"/>
+        <TextBox x:Name="txtInvoiceNo" IsEnabled="{Binding QuoteNoSearchedActive}" Text="{Binding QuoteNo}" Grid.Column="8" TextAlignment="Right" IsReadOnly="True"  Background="White" Foreground="Black" Height="22" VerticalAlignment="Top" Margin="111.855,76,12.977,0" FontFamily="Verdana" Grid.ColumnSpan="2" Padding="1,0" />
+        <!--Date-->
+        <Label Grid.Column="8" Content="Date" Height="29" VerticalAlignment="Top" Margin="8.855,101,0,0" Foreground="Black" Background="Transparent" FontFamily="Verdana" HorizontalAlignment="Left" Width="91" />
+        <TextBox x:Name="lblDate" IsEnabled="{Binding DateActive}" Text="{Binding QuoteDate}" Grid.Column="8" Margin="111.855,103,12.977,0"  Background="White" TextAlignment="Right" IsReadOnly="True" Foreground="Black" FontFamily="Verdana" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2" Padding="1,0" />
+        <!--Sales Person-->
+        <Label Grid.Column="8" Content="Sales Person" Margin="9,129,0,0" Foreground="Black" Background="Transparent" FontFamily="Verdana" HorizontalAlignment="Left" Width="91" Height="24" VerticalAlignment="Top"/>
+        <TextBox Grid.Column="8" IsEnabled="{Binding SalesPersonActive}" x:Name="lblSalesPerson" Text="{Binding UserName}"  Background="White" Foreground="Black" Margin="111.855,130,12.977,0" Height="22" VerticalAlignment="Top" TextAlignment="Right" IsReadOnly="True" FontFamily="Verdana" Grid.ColumnSpan="2" Padding="1,0" />
+        <Grid Grid.ColumnSpan="3" Grid.Column="5" Margin="2,75,19,0" Height="51" VerticalAlignment="Top">
+            <Label  Content="Customer" FontFamily="Verdana" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="67"  />
+
+            <ComboBox x:Name="cmbCustomers" 
+        		IsEnabled="{Binding CustomerActive}"      
+        		TabIndex="1"  
+        		IsEditable="True"      
+        		ItemsSource="{Binding CustomerList, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+        		DisplayMemberPath="CompanyName"  
+        		SelectedValuePath="CompanyName"     
+        		SelectedValue="{Binding SelectedCustomer, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"      
+        		Validation.ValidationAdornerSite="{Binding ElementName=lblCustomerError}"      
+        		Background="White" Foreground="Black" FontFamily="Verdana" Margin="71,3,10.854,0" Height="22" VerticalAlignment="Top" />
+            <AdornerDecorator Margin="71,24,10.853,12">
+                <Label x:Name="lblCustomerError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=cmbCustomers}" Height="17" Margin="1,1,1,-3" VerticalAlignment="Top" Padding="4,0,0,0" FontWeight="Bold" Foreground="Red" />
+            </AdornerDecorator>
+            <TextBox x:Name="txtCusAddress" TextAlignment="Right" Height="15" Margin="74,24,11.853,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontStyle="Italic" IsReadOnly="True" FontSize="10" Background="{x:Null}" Foreground="Black" BorderBrush="{x:Null}" FontFamily="Verdana" Padding="0,0,0,0"   >
+                <MultiBinding StringFormat="{}{0},{1},{2} {3}">
+                    <Binding ElementName="cmbCustomers" Path="SelectedItem.Address"   />
+                    <Binding ElementName="cmbCustomers" Path="SelectedItem.City" />
+                    <Binding ElementName="cmbCustomers" Path="SelectedItem.State" />
+                    <Binding ElementName="cmbCustomers" Path="SelectedItem.PostCode" />
+
+                </MultiBinding>
+            </TextBox>
+
+        </Grid>
+        <Grid Grid.ColumnSpan="3" Grid.Column="5" Margin="1,126,19,0" Height="97" VerticalAlignment="Top">
+            <Label Content="Ship to" Margin="3,9,0,0" Height="25" VerticalAlignment="Top" FontFamily="Verdana" HorizontalAlignment="Left" Width="63" />
+
+            <TextBox x:Name="txtShipTo" IsEnabled="{Binding ShipToActive}" Validation.ValidationAdornerSite="{Binding ElementName=lblShipToError}" Text="{Binding ShipTo, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  TabIndex="3" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Background="White" Foreground="Black" FontFamily="Verdana" Height="66" VerticalAlignment="Top" Margin="71,11,9.853,0" />
+            <AdornerDecorator Margin="71,77,9.853,0">
+                <Label x:Name="lblShipToError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtShipTo}" Height="17" Margin="1,0" VerticalAlignment="Top" Padding="4,0,0,0" FontWeight="Bold" Foreground="Red" />
+            </AdornerDecorator>
+            <CheckBox x:Name="chkShipTo" FontSize="9" IsEnabled="{Binding ShipToTickActive}" Content="Tick to add the default customer address" Height="14" Margin="71,-4,23.853,0" VerticalAlignment="Top" IsChecked="{Binding ISChecked}" />
+        </Grid>
+        <!--Update Button-->
+        <!--Clear Button-->
+        <!--Project Name-->
+        <Label Grid.Column="8"  Content="Project Name" Height="27" VerticalAlignment="Top" Margin="8.855,158,0,0" FontFamily="Verdana" HorizontalAlignment="Left" Width="91"  />
+        <!--Search By Project Name-->
+        <Label Content="Quote No" HorizontalAlignment="Left" Height="26" Margin="6,98,0,0" VerticalAlignment="Top" Width="73" FontFamily="Verdana" />
+        <controls:AutoCompleteBox 
+        	x:Name="txtSearchQuoteNumber" Background="White" Margin="115,98,7,0" Height="22" VerticalAlignment="Top"     
+        	ItemsSource="{Binding QuoteNos, UpdateSourceTrigger=PropertyChanged}"
+        	FilterMode="ContainsOrdinal" SelectedItem="{Binding SelectedQuoteNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  
+        	Validation.ValidationAdornerSite="{Binding ElementName=lblSearchQuoteNumberError}" Grid.ColumnSpan="4" KeyUp="txtSearchQuoteNumber_KeyUp" />
+        <AdornerDecorator Margin="10,200,64,259" Grid.ColumnSpan="4">
+            <Label x:Name="lblSearchQuoteNumberError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtSearchQuoteNumber}" Height="17" VerticalAlignment="Top" Padding="4,0,0,0" Margin="0,1,0,-1" FontWeight="Normal" Foreground="Red" Grid.ColumnSpan="4" />
+        </AdornerDecorator>
+        <Grid Grid.ColumnSpan="4" Margin="10,199,7,0" Height="25" VerticalAlignment="Top">
+
+            <Button Content="SEARCH" Command="{Binding SearchQuoteCommand}" HorizontalAlignment="Right" Width="52" RenderTransformOrigin="2.813,4.455" FontFamily="Verdana" FontSize="11" Height="25" VerticalAlignment="Top"/>
+            <AdornerDecorator Margin="0,1,57,0" Height="23" VerticalAlignment="Top">
+                <Label x:Name="lblSearchCustomerError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtSearchCustomer}" Height="17" VerticalAlignment="Top" Padding="4,0,0,0" FontWeight="Normal" Foreground="Red" Grid.ColumnSpan="4" Margin="0,1,0,-1" />
+            </AdornerDecorator>
+        </Grid>
+        <controls:AutoCompleteBox 
+        	x:Name="txtSearchProjectName" Background="White" Margin="115,136,7,0" Height="22" VerticalAlignment="Top" Padding="0"    
+        	ItemsSource="{Binding ProjectNames, UpdateSourceTrigger=PropertyChanged}"
+        	FilterMode="ContainsOrdinal" SelectedItem="{Binding SelectedProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  
+        	Validation.ValidationAdornerSite="{Binding ElementName=lblSearchProjectNameError}" Grid.ColumnSpan="4" KeyUp="txtSearchProjectName_KeyUp"  />
+        <AdornerDecorator Margin="10,200,64,259" Grid.ColumnSpan="4">
+            <Label x:Name="lblSearchProjectNameError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtSearchProjectName}" Height="17" VerticalAlignment="Top" Padding="4,0,0,0" FontWeight="Normal" Foreground="Red" Grid.ColumnSpan="4" Margin="0,1,0,-1" />
+        </AdornerDecorator>
+        <Label Content="Or" Height="20" Margin="117,156,8,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Verdana" Grid.ColumnSpan="4" Padding="2" />
+        <!--Load Customer Names-->
+        <controls:AutoCompleteBox 
+        	x:Name="txtSearchCustomer" Background="White" Margin="115,176,7,0" Height="22" VerticalAlignment="Top" Padding="0"    
+        	ItemsSource="{Binding CusProjectNames, UpdateSourceTrigger=PropertyChanged}"
+        	FilterMode="ContainsOrdinal" SelectedItem="{Binding SelectedSearchedCustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  
+        	Validation.ValidationAdornerSite="{Binding ElementName=lblSearchCustomerError}" Grid.ColumnSpan="4" KeyUp="txtSearchCustomer_KeyUp"  />
+        <Label Content="Customer Name" HorizontalAlignment="Left" Height="26" Margin="5,174,0,0" VerticalAlignment="Top" Width="110" FontFamily="Verdana"/>
+        <Label Content="Enter Quote No/Project Name or Customer Name to search" FontSize="11" FontWeight="Bold" Height="26" Margin="6,73,25,0" VerticalAlignment="Top" FontFamily="Verdana" Grid.ColumnSpan="6" />
+
+        <TextBox x:Name="txtProjectName" IsEnabled="{Binding ProNameActive}" Text="{Binding ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ValidationAdornerSite="{Binding ElementName=lblSelectedProjectNameError}" TextAlignment="Right" TabIndex="2" Margin="111.855,156,12.977,0" Background="White" Foreground="Black" TextWrapping="Wrap" Height="22" VerticalAlignment="Top" FontFamily="Verdana" Padding="1,0" Grid.ColumnSpan="2" Grid.Column="8"/>
+        <AdornerDecorator Margin="116.249,179,12.786,0" Grid.ColumnSpan="2" Grid.Column="8" Height="23" VerticalAlignment="Top">
+            <Label x:Name="lblSelectedProjectNameError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtProjectName}" Padding="4,0,0,0" FontWeight="Bold" Foreground="Red" Grid.Row="1" Grid.Column="2" Height="19" VerticalAlignment="Top" Margin="0,0,1,0" />
+        </AdornerDecorator>
+
+        <Label Content="Project Name" HorizontalAlignment="Left" Height="26" Margin="6,135,0,0" VerticalAlignment="Top" Width="105" FontFamily="Verdana"/>
+        <Label Content="Or" Height="16" Padding="2" Margin="117,120,8,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Verdana" Grid.ColumnSpan="4"/>
+        <!--Add Customer-->
+        <Button x:Name="btnAddCustomer" IsEnabled="{Binding BtnAddCustomerActive}" Command="{Binding ShowChildWindowCommand}" Content="+" HorizontalAlignment="Right" Height="13" Margin="0,79,5.145,0" VerticalAlignment="Top" Width="23" FontWeight="Bold" FontSize="16" Padding="0,-8,0,0" Grid.Column="7"  />
+        <!--Add Freight Window-->
+        <Button x:Name="btnAddFreight" IsEnabled="{Binding BtnAddFreightActive}" Command="{Binding ShowAddFreightCommand}" Content="+" HorizontalAlignment="Right" Height="13" Margin="0,36,1,0" VerticalAlignment="Top" Width="23" FontWeight="Bold" FontSize="16" Padding="0,-8,0,0" Grid.Row="1"  />
+        <!--<Border x:Name="childWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" Margin="0,0,0.786,29" Grid.ColumnSpan="10" Grid.RowSpan="2" >
+            <ContentControl Content="{Binding XmlContent}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Border>-->
+        <!--Customer WWindow-->
+
+        <!-- Navigation Bar -->
+
+
+    </Grid>
+</UserControl>

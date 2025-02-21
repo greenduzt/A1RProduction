@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="A1QSystem.View.Orders.OrderProductionEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:A1QSystem.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="700" MaxWidth="900">
+    <Grid Background="#FFF0F0F0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="132*"/>
+            <ColumnDefinition Width="109*"/>
+            <ColumnDefinition Width="109*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="163*"/>
+            <RowDefinition Height="537*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,10,0,0" TextWrapping="Wrap" Text="Edit Order Production Details" TextAlignment="Center" FontWeight="Bold" FontSize="18" FontFamily="Verdana" Height="32" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+        <Label Content="Order Production No" Height="29" Margin="10,61,131,0" VerticalAlignment="Top"/>
+        <TextBox Height="29" Margin="138,61,7,0" TextWrapping="Wrap" Text="{Binding OrderProductionNo}" VerticalAlignment="Top" IsReadOnly="True" />
+
+        <Label Content="Order No" Height="29" Margin="16,61,132,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBox Height="29" Margin="91,61,8,0" TextWrapping="Wrap" Text="{Binding OrderNo}" VerticalAlignment="Top" IsReadOnly="True" Grid.Column="1" />
+
+        <Label Content="Shift Order To" Height="29" Margin="10,105,131,0" VerticalAlignment="Top"/>
+        
+        <DatePicker x:Name="OrderChangeDate" HorizontalAlignment="Left" Margin="138,108,0,0" VerticalAlignment="Top" Width="119" 
+                    DisplayDateStart="{Binding OrderProDateStart}" DisplayDateEnd="{Binding OrderProDateEnd}"                        
+                    SelectedDate="{Binding SelectedOrderDate}"
+                    Loaded="datePicker_Loaded"
+                    Text="{Binding Path=Bs
+                          , Mode=OneWay
+                          , UpdateSourceTrigger=PropertyChanged
+                          , ValidatesOnDataErrors=True
+                          , TargetNullValue=''}"/>
+
+        <DataGrid x:Name="dgData" CanUserAddRows="True" AutoGenerateColumns="False"
+                         CanUserDeleteRows="True" ItemsSource="{Binding orderProduction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,59,10,168" RowHeight="30" Grid.Row="1" Grid.ColumnSpan="3">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Code" Binding="{Binding ProductCode}"/>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductDescription}"/>
+                <DataGridTextColumn Header="Qty" Binding="{Binding OrderQty, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Unit" Binding="{Binding Unit}"/>
+                <DataGridTextColumn Header="Production Date" Binding="{Binding ProductionDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="btnCloseOrderDetails" Command="{Binding CloseCommand}" Content="CLOSE" HorizontalAlignment="Right" Height="25" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="62" FontFamily="Calibri" FontSize="14" RenderTransformOrigin="0.419,-0.72" Grid.Row="1" Grid.Column="2"  />
+        <Button x:Name="btnUpdate" Command="{Binding UpdateCommand}" Content="UPDATE" HorizontalAlignment="Right" Height="25" Margin="0,0,77,10" VerticalAlignment="Bottom" Width="62" FontFamily="Calibri" FontSize="14" RenderTransformOrigin="0.419,-0.72" Grid.Row="1" Grid.Column="2"  />
+
+
+    </Grid>
+</UserControl>

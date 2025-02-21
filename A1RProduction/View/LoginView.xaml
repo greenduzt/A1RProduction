@@ -1,0 +1,141 @@
+﻿<UserControl xmlns:local="clr-namespace:A1QSystem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:TextBoxFocus="clr-namespace:A1QSystem.Core"
+	         mc:Ignorable="d"	         
+             x:Class="A1QSystem.LoginView"
+	         d:DesignWidth="1050" d:DesignHeight="800">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="exitMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="exitMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExitTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="loginMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LoginTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LoginTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="loginMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LoginTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LoginTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ExitTextBlock">
+            <BeginStoryboard x:Name="exitMouseEnter" Storyboard="{StaticResource exitMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ExitTextBlock">
+            <BeginStoryboard x:Name="exitMouseLeve" Storyboard="{StaticResource exitMouseLeve}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="LoginTextBlock">
+            <BeginStoryboard x:Name="loginMouseEnter" Storyboard="{StaticResource loginMouseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="LoginTextBlock">
+            <BeginStoryboard x:Name="loginMouseLeve" Storyboard="{StaticResource loginMouseLeve}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="443*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="2,70,0,50" Grid.Column="1">
+            <Border Margin="120,135,121,0" BorderBrush="#FFACACAC" BorderThickness="0" CornerRadius="0" Background="#FFF3F3F3" HorizontalAlignment="Center" Width="294" Height="353" VerticalAlignment="Top">
+                <Border.Effect>
+                    <DropShadowEffect Color="#FFDAD5D5" Direction="270"/>
+                </Border.Effect>
+                <StackPanel Orientation="Vertical" Margin="5" Visibility="Visible">
+                    <Label Height="92" VerticalAlignment="Top" Margin="95,30,97,0" HorizontalAlignment="Center" Width="92">
+                        <Label.Background>
+                            <ImageBrush ImageSource="/A1QSystem;component/Images/user_redder_grey.png"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Content="User Name" HorizontalAlignment="Center" Height="18" Margin="24,20,28,0" VerticalAlignment="Top" Width="232" Padding="0" FontFamily="Verdana" Foreground="#FF7C7979" />
+
+                    <TextBox TextBoxFocus:FocusExtension.IsFocused="{Binding IsUserNameFocused}" x:Name="txtUserName" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" TabIndex="1" FontFamily="Verdana" Height="35" VerticalAlignment="Top" Margin="24,0,25,0" Padding="0,7,0,0" 
+                	    HorizontalAlignment="Center" Width="235" ToolTip="Enter user name given by A1 Rubber" />
+                    <Label Content="Password" HorizontalAlignment="Center" Height="19" Margin="24,10,28,0" VerticalAlignment="Top" Width="232" Padding="0" FontFamily="Verdana" Foreground="#FF7C7979" />
+
+                    <PasswordBox x:Name="txtPassword" local:PasswordBoxMVVMProperties.EncryptedPassword="{Binding PasswordSecureString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 PasswordChanged="txtPassword_PasswordChanged" TabIndex="2" FontFamily="Verdana" Height="35" Width="234" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="25,0,25,0" />
+                    <TextBlock Margin="0,3,0,0" Height="20" VerticalAlignment="Top" Text="{Binding ErrorMessage}" FontWeight="Bold" Foreground="Red" Background="#FFF3F3F3" HorizontalAlignment="Center" 
+                	    ToolTip="Enter password given by A1 Rubber" Width="227"/>
+                    <Grid>
+                        <TextBlock TextAlignment="Center" KeyboardNavigation.TabIndex="3" Text="LOGIN" TextWrapping="Wrap" FontSize="12"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Width="50" Background="#FFE0DDDD" Padding="0,44,0,0" Margin="0,0,87,0" Height="25" VerticalAlignment="Bottom" />
+                        <TextBlock x:Name="LoginTextBlock" KeyboardNavigation.TabIndex="3" IsEnabled="{Binding LoginActive}" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="50" FontSize="12" Text="LOGIN" FontWeight="Bold" Padding="0,4,0,0" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,0,87,0">
+                            <TextBlock.InputBindings>
+                                <MouseBinding Command="{Binding UserLoginCommand}" MouseAction="LeftClick" />
+                            </TextBlock.InputBindings>
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+
+                        <TextBlock TextAlignment="Center" KeyboardNavigation.TabIndex="4" Text="EXIT" TextWrapping="Wrap" FontSize="12"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"  Foreground="#FFD6CECE" Width="50" Background="#FFE0DDDD" Padding="0,44,0,0" Margin="0,0,25,0" Height="25" VerticalAlignment="Bottom" />
+                        <TextBlock x:Name="ExitTextBlock" KeyboardNavigation.TabIndex="4" Style="{StaticResource HoverEffect}" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="50" FontSize="12" Text="EXIT" FontWeight="Bold" Padding="0,4,0,0" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,0,25,0">
+                            <TextBlock.InputBindings>
+                                <!--<MouseBinding Command="{x:Static CloseCommand:CloseWindow.CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" MouseAction="LeftClick" />-->
+                                <MouseBinding Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" MouseAction="LeftClick" />
+
+                            </TextBlock.InputBindings>
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Label Content="A1 Rubber Production V3.5" Height="76" Margin="134,24,134,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Lucida Sans" FontSize="32" Foreground="#FF7C7979"/>
+        </Grid>
+
+    </Grid>
+
+
+
+</UserControl>

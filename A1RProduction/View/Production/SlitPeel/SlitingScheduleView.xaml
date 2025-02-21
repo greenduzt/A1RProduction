@@ -1,0 +1,805 @@
+﻿<UserControl x:Class="A1QSystem.View.Production.SlitPeel.SlitingScheduleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"         
+             d:DesignWidth="1050" d:DesignHeight="800">
+    <UserControl.Resources>
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander x:Name="exp" Margin="0,0,0,5" Padding="0,10,0,10" IsExpanded="True" Background="#FFECDDAD" Foreground="Black" FontWeight="Bold" Grid.Column="0" >
+                            <Expander.Header>
+                                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+                                    <TextBlock VerticalAlignment="Top" Width="530">
+                                        <TextBlock TextAlignment="Center"  Width="530" FontFamily="Verdana" FontSize="26" TextWrapping="Wrap">
+                                            <Run Text="{Binding Items[0].ShiftName}" />
+                                            <Run Text="Shift" />                                           
+                                        </TextBlock>      
+                                        
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander.Header>
+                            <ItemsPresenter />
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RowStyle" TargetType="DataGridRow">
+            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="selectRowDetails"/>
+            <Setter Property="Background" Value="{Binding RowBackgroundColour,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="MinHeight" Value="150" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Storyboard x:Key="homeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="homeMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="WorkStationsMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="WorkStationsTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="WorkStationsTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="WorkStationsMouseLeve">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="WorkStationsTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="WorkStationsTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="homeMouseEnter" Storyboard="{StaticResource homeMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="homeMouseLeve" Storyboard="{StaticResource homeMouseLeve}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="WorkStationsTextBlock">
+            <BeginStoryboard x:Name="WorkStationsMouseEnter" Storyboard="{StaticResource WorkStationsMouseEnter}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="WorkStationsTextBlock">
+            <BeginStoryboard x:Name="WorkStationsMouseLeve" Storyboard="{StaticResource WorkStationsMouseLeve}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid>
+        <TextBlock Background="#FF938F8F" Foreground="White" Margin="0,33,0,0" TextWrapping="Wrap" Text="Slitting Schedule" TextAlignment="Center" FontWeight="Bold" FontSize="30" FontFamily="Arial" Height="37" VerticalAlignment="Top"/>
+        <Label Content="A1R Operating System V1.4 2015" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,-1,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" />
+
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="1,70,0,71" Background="#FFE9E9F1">
+            <Grid  Width="3020">
+                <!--DAY 1-->
+                <TextBlock Text="{Binding Day1}" Margin="2,8,0,0" VerticalAlignment="Top" Grid.Column="0" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" Height="31" HorizontalAlignment="Left" Width="600" />
+                <TabControl Name="TabDay1" Height="30" Margin="2,34,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabSelectedIndex1}" HorizontalAlignment="Left" Width="600" FontSize="16">
+                    <TabItem Header="All Shifts" Margin="-2,-1,2,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Day Shift" Margin="-1,-1,1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                    </TabItem>
+                    <TabItem Header="Afternoon Shift" Margin="0,-1,0,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Night Shift" Margin="1,-1,-1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+                <DataGrid x:Name="dgData" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding CollDay1}" Margin="2,66,0,0" HorizontalAlignment="Left" Width="600" RowStyle="{StaticResource RowStyle}">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" >
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <DataGridRowsPresenter/>
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle> 
+                    </DataGrid.GroupStyle>
+                    <DataGrid.RowDetailsTemplate>
+                        
+                        <DataTemplate>
+                            <Grid Margin="5,5,5,20">                                
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="125"  />
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="145" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Sales No" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"   Text="{Binding SalesOrder}" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Customer" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding Customer.CompanyName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Freight Name" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding FreightName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Freight Arrival" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding FreightArrTime}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+
+                                <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Height="70" ToolTip="Print Order" FontSize="24" Command="{Binding PrintCommand}" Content="PRINT ORDER" Foreground="Black" />
+                                <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Height="70" ToolTip="Click this button if you have completed all the tiles for that block" FontSize="24" Command="{Binding CompletedCommand}"
+                                        Content="COMPLETED" Foreground="Black" />
+                                
+                            </Grid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+
+                    <!--RAW PRODUCT CODE-->
+                    <DataGrid.Columns>
+                        <!--<DataGridTextColumn Binding="{Binding RawProduct.RawProductCode}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Code" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Padding" Value="1,10,3,3" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>-->
+
+                        <!--DESCRIPTION-->
+                        <DataGridTextColumn Binding="{Binding Product.ProductDescription}" Width="*">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Padding" Value="0,10,0,3" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--BLOCKS REQUIRED -->
+                        <DataGridTextColumn Header=" Blocks&#x0a;   Req" Binding="{Binding SlitPeel.OriginalBlockLogs}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--QTY TO MAKE-->
+                        <DataGridTextColumn Header=" QTY&#x0a;Make" Binding="{Binding SlitPeel.QtyToMake}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--TYPE-->
+                        <DataGridTextColumn Header="Type" Binding="{Binding Product.ProductUnit}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--DAY 2-->
+                <TextBlock Text="{Binding Day2}" Margin="605,8,0,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="600" Height="31" />
+                <TabControl Name="TabDay2" Height="30" Margin="606,34,0,0" FontSize="16" VerticalAlignment="Top" SelectedIndex="{Binding TabSelectedIndex2}" HorizontalAlignment="Left" Width="600">
+                    <TabItem Header="All Shifts" Margin="-2,-1,2,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Day Shift" Margin="-1,-1,1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                    </TabItem>
+                    <TabItem Header="Afternoon Shift" Margin="0,-1,0,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Night Shift" Margin="1,-1,-1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+                <DataGrid x:Name="dgData2" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding CollDay2}" Margin="605,66,0,0" HorizontalAlignment="Left" Width="600" RowStyle="{StaticResource RowStyle}">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" >
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <DataGridRowsPresenter/>
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5,5,5,20">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="125"  />
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="145" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Sales No" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"   Text="{Binding SalesOrder}" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Customer" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding Customer.CompanyName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Freight Name" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding FreightName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Freight Arrival" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding FreightArrTime}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+
+                                <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Height="70" ToolTip="Print Order" FontSize="24" Command="{Binding PrintCommand}" Content="PRINT ORDER" Foreground="Black" />
+                                <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Height="70" ToolTip="Click this button if you have completed all the tiles for that block" FontSize="24" Command="{Binding CompletedCommand}"
+                                        Content="COMPLETED" Foreground="Black" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+
+                    <!--RAW PRODUCT CODE-->
+                    <DataGrid.Columns>
+                        <!--<DataGridTextColumn Binding="{Binding RawProduct.RawProductCode}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Code" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Padding" Value="1,10,3,3" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>-->
+
+                        <!--DESCRIPTION-->
+                        <DataGridTextColumn Binding="{Binding Product.ProductDescription}" Width="*">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Padding" Value="0,10,0,3" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--BLOCKS REQUIRED -->
+                        <DataGridTextColumn Header=" Blocks&#x0a;   Req" Binding="{Binding SlitPeel.OriginalBlockLogs}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--QTY TO MAKE-->
+                        <DataGridTextColumn Header=" QTY&#x0a;Make" Binding="{Binding SlitPeel.QtyToMake}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--TYPE-->
+                        <DataGridTextColumn Header="Type" Binding="{Binding Product.ProductUnit}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--DAY 3-->
+                <TextBlock Text="{Binding Day3}" Margin="1209,8,0,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" Height="31" Width="600" HorizontalAlignment="Left" />
+                <TabControl Name="TabDay3" Height="30" Margin="1207,34,0,0" VerticalAlignment="Top" FontSize="16" SelectedIndex="{Binding TabSelectedIndex3}" HorizontalAlignment="Left" Width="600">
+                    <TabItem Header="All Shifts" Margin="-2,-1,2,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Day Shift" Margin="-1,-1,1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                    </TabItem>
+                    <TabItem Header="Afternoon Shift" Margin="0,-1,0,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Night Shift" Margin="1,-1,-1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+                <DataGrid x:Name="dgData3" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding CollDay3}" Margin="1207,66,0,0" HorizontalAlignment="Left" Width="600" RowStyle="{StaticResource RowStyle}">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" >
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <DataGridRowsPresenter/>
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5,5,5,20">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="125"  />
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="145" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Sales No" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"   Text="{Binding SalesOrder}" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Customer" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding Customer.CompanyName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Freight Name" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding FreightName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Freight Arrival" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding FreightArrTime}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+
+                                <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Height="70" ToolTip="Print Order" FontSize="24" Command="{Binding PrintCommand}" Content="PRINT ORDER" Foreground="Black" />
+                                <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Height="70" ToolTip="Click this button if you have completed all the tiles for that block" FontSize="24" Command="{Binding CompletedCommand}"
+                                        Content="COMPLETED" Foreground="Black" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+
+                    <!--RAW PRODUCT CODE-->
+                    <DataGrid.Columns>
+                        <!--DESCRIPTION-->
+                        <DataGridTextColumn Binding="{Binding Product.ProductDescription}" Width="*">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Padding" Value="0,10,0,3" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--BLOCKS REQUIRED -->
+                        <DataGridTextColumn Header=" Blocks&#x0a;   Req" Binding="{Binding SlitPeel.OriginalBlockLogs}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--QTY TO MAKE-->
+                        <DataGridTextColumn Header=" QTY&#x0a;Make" Binding="{Binding SlitPeel.QtyToMake}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--TYPE-->
+                        <DataGridTextColumn Header="Type" Binding="{Binding Product.ProductUnit}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--DAY 4-->
+                <TextBlock Text="{Binding Day4}" Margin="1814,8,576,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" Height="31" Width="600" />
+                <TabControl Name="TabDay4" Height="30" Margin="1809,34,0,0" FontSize="16" VerticalAlignment="Top" SelectedIndex="{Binding TabSelectedIndex4}" HorizontalAlignment="Left" Width="600">
+                    <TabItem Header="All Shifts" Margin="-2,-1,2,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Day Shift" Margin="-1,-1,1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                    </TabItem>
+                    <TabItem Header="Afternoon Shift" Margin="0,-1,0,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Night Shift" Margin="1,-1,-1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+                <DataGrid x:Name="dgData4" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding CollDay4}" Margin="1809,66,0,0" HorizontalAlignment="Left" Width="600" RowStyle="{StaticResource RowStyle}">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" >
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <DataGridRowsPresenter/>
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5,5,5,20">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="125"  />
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="145" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Sales No" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"   Text="{Binding SalesOrder}" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Customer" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding Customer.CompanyName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Freight Name" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding FreightName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Freight Arrival" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding FreightArrTime}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+
+                                <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Height="70" ToolTip="Print Order" FontSize="24" Command="{Binding PrintCommand}" Content="PRINT ORDER" Foreground="Black" />
+                                <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Height="70" ToolTip="Click this button if you have completed all the tiles for that block" FontSize="24" Command="{Binding CompletedCommand}"
+                                        Content="COMPLETED" Foreground="Black" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+
+                    <!--RAW PRODUCT CODE-->
+                    <DataGrid.Columns>
+                        <!--<DataGridTextColumn Binding="{Binding RawProduct.RawProductCode}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Code" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Padding" Value="1,10,3,3" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>-->
+
+                        <!--DESCRIPTION-->
+                        <DataGridTextColumn Binding="{Binding Product.ProductDescription}" Width="*">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Padding" Value="0,10,0,3" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--BLOCKS REQUIRED -->
+                        <DataGridTextColumn Header=" Blocks&#x0a;   Req" Binding="{Binding SlitPeel.OriginalBlockLogs}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--QTY TO MAKE-->
+                        <DataGridTextColumn Header=" QTY&#x0a;Make" Binding="{Binding SlitPeel.QtyToMake}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--TYPE-->
+                        <DataGridTextColumn Header="Type" Binding="{Binding Product.ProductUnit}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--DAY 5-->
+                <TextBlock Text="{Binding Day5}" Margin="2411,8,-21,0" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" FontSize="18" FontWeight="Bold" Height="32" Width="600" HorizontalAlignment="Left" />
+                <TabControl Name="TabDay5" Height="30" Margin="2411,34,-21,0" VerticalAlignment="Top" SelectedIndex="{Binding TabSelectedIndex5}" HorizontalAlignment="Left" Width="600" FontSize="16">
+                    <TabItem Header="All Shifts" Margin="-2,-1,2,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Day Shift" Margin="-1,-1,1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5" Margin="0,-1,0,1"/>
+                    </TabItem>
+                    <TabItem Header="Afternoon Shift" Margin="0,-1,0,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="Night Shift" Margin="1,-1,-1,-2" Width="122">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+                <DataGrid x:Name="dgData5" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" RowDetailsVisibilityMode="Visible" FontSize="16"
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True" CanUserDeleteRows="False" ItemsSource="{Binding CollDay5}" Margin="2411,66,-21,0" HorizontalAlignment="Left" Width="600" RowStyle="{StaticResource RowStyle}">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" >
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <DataGridRowsPresenter/>
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5,5,5,20">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="125"  />
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="145" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Sales No" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"   Text="{Binding SalesOrder}" Foreground="Black" Margin="0,0,20,5" FontSize="16" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Customer" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" />
+                                <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding Customer.CompanyName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Freight Name" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding FreightName}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Freight Arrival" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="-" Foreground="Black" FontSize="18" Visibility="{Binding FreightDateTimeVisibility}" />
+                                <TextBlock Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding FreightArrTime}" Foreground="Black" Margin="0,0,20,5" FontSize="18" TextAlignment="Left" Visibility="{Binding FreightDateTimeVisibility}" />
+
+                                <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Height="70" ToolTip="Print Order" FontSize="24" Command="{Binding PrintCommand}" Content="PRINT ORDER" Foreground="Black" />
+                                <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Height="70" ToolTip="Click this button if you have completed all the tiles for that block" FontSize="24" Command="{Binding CompletedCommand}"
+                                        Content="COMPLETED" Foreground="Black" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+
+                    <!--RAW PRODUCT CODE-->
+                    <DataGrid.Columns>                    
+
+                        <!--DESCRIPTION-->
+                        <DataGridTextColumn Binding="{Binding Product.ProductDescription}" Width="*">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Description" Width="95" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Padding" Value="0,10,0,3" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--BLOCKS REQUIRED -->
+                        <DataGridTextColumn Header=" Blocks&#x0a;   Req" Binding="{Binding SlitPeel.OriginalBlockLogs}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--QTY TO MAKE-->
+                        <DataGridTextColumn Header=" QTY&#x0a;Make" Binding="{Binding SlitPeel.QtyToMake}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!--TYPE-->
+                        <DataGridTextColumn Header="Type" Binding="{Binding Product.ProductUnit}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Padding" Value="0,10,2,0" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ScrollViewer>
+        <Grid Margin="8,7,8,0" Height="26" VerticalAlignment="Top">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="55" FontSize="12" Text="HOME" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="0,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="62,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="133" FontSize="13" Text="SLITTING SCHEDULE" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="22" VerticalAlignment="Top" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="221,0,0,0" />
+            <TextBlock x:Name="WorkStationsTextBlock" Style="{StaticResource HoverEffect}" FontSize="12" Text="WORKSTATIONS" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" Margin="88,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding WorkStationsCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="199,1,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+        </Grid>
+        <!--<Border x:Name="childWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" Margin="0,0,-1,29" RenderTransformOrigin="0.5,0.5" >
+            <ContentControl Content="{Binding XmlContent}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Border>-->
+    </Grid>
+</UserControl>

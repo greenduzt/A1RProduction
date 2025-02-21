@@ -1,0 +1,273 @@
+﻿<UserControl x:Class="A1QSystem.View.Production.Mixing.ViewIBCChangeOverDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+           d:DesignWidth="1050" d:DesignHeight="800">
+    <UserControl.Resources>
+        <Storyboard x:Key="AdminDashboardMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="AdminDashboardMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="HomeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HomeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander x:Name="exp" IsExpanded="True" Background="#FFECDDAD" Foreground="Black" FontWeight="Bold" Grid.Column="0" >
+                            <Expander.Header>
+                                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+                                    <TextBlock VerticalAlignment="Top" Width="230" Padding="0,6,0,0"><!--   <TextBlock Text=" Shift" TextAlignment="Left"  FontFamily="Arial" FontSize="14"  TextWrapping="Wrap" Width="95"  />
+                                      <LineBreak />
+                                        <TextBlock Text="Required Date : " Margin="0,-1,0,0" FontFamily="Arial" FontSize="12" TextAlignment="Left" TextWrapping="Wrap" Width="95"  />
+                                        <TextBlock Text=" : " FontSize="12" Margin="0,-1,0,0" /> 
+                                        <TextBlock Text="{Binding Items[0].OrderDetails.PendingOrder.OrderRequiredDate}" Margin="0,-1,0,0" FontFamily="Arial" FontSize="12" TextAlignment="Left" TextWrapping="Wrap"  />
+                                        <LineBreak/> 
+                                        <TextBlock Text="Customer Name" Margin="0,-1,0,0" FontFamily="Arial" FontSize="12" TextAlignment="Left" TextWrapping="Wrap" Width="95" />
+                                        <TextBlock Text=" : " FontSize="12" Margin="0,-1,0,0" />         
+                                        <TextBlock Text="{Binding Items[0].OrderDetails.Customer.CompanyName}" Margin="0,-1,0,0" FontFamily="Arial" FontSize="12" TextAlignment="Left" TextWrapping="Wrap"  />
+                                        <LineBreak/> 
+                                        <TextBlock Text="Shift" Margin="0,0,0,0" FontFamily="Arial" FontSize="12" TextAlignment="Left" TextWrapping="Wrap" Width="95" />
+                                        <TextBlock Text=" : " FontSize="12" Margin="0,-1,0,0" /> 
+                                        <TextBlock Text="{Binding Items[0].ShiftName}" Margin="0,-1,0,0" FontFamily="Arial" FontSize="12" TextAlignment="Left" TextWrapping="Wrap"  />--><InlineUIContainer>
+        									<TextBlock TextAlignment="Left"  Width="330" FontFamily="Verdana" FontSize="16" TextWrapping="Wrap"  Foreground="#FF5F5B5B"><Run Text="{Binding Items[0].ShiftName}"  /><Run Text=" "/><Run Text="Shift" /></TextBlock> 
+        								</InlineUIContainer></TextBlock>
+                                    <!--   <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" TextWrapping="Wrap" Padding="0,4,0,4">
+                                        <Button Content="Shift Order" Width="80" MaxHeight="20"  FontSize="10" Command="{Binding Path=Items[0].ShiftOrderCommand}"  />
+                                        <Button Content="Accept" Width="40" MaxHeight="20"  FontSize="10" Command="{Binding Path=Items[0].AcceptCommand}" />
+                                    </TextBlock>-->
+                                </StackPanel>
+                            </Expander.Header>
+                            <ItemsPresenter />
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <!--<Setter Property="Background" Value="white" />-->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Black"/>
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+        					BorderThickness="1"
+        					Padding="4,2" 
+        					BorderBrush="LightGray" 
+        					CornerRadius="3" 
+        					Background="{TemplateBinding Background}"/>
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Border.BorderBrush" Value="Red" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>-->
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="AdminDashboardTextBlock">
+            <BeginStoryboard x:Name="AdminDashboardMouseEnter" Storyboard="{StaticResource AdminDashboardMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="AdminDashboardTextBlock">
+            <BeginStoryboard x:Name="AdminDashboardMouseLeave" Storyboard="{StaticResource AdminDashboardMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseEnter" Storyboard="{StaticResource HomeMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseLeave" Storyboard="{StaticResource HomeMouseLeave}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="IBC Change Over Details" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Arial" Height="32" VerticalAlignment="Top"/>
+        <Label Content="{Binding Version}" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,0,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" />
+        <Grid Height="26" VerticalAlignment="Top" Margin="8,7,0,0">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="83" FontSize="12" Text="DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="0,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="93,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="AdminDashboardTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="130" FontSize="12" Text="ADMIN DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Top" Margin="123,2,0,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding AdminDashboardCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="17" Margin="270,0,0,0">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="164" FontSize="13" Text="IBC Change Over Details" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="22" VerticalAlignment="Top" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="292,1,0,0" />
+        </Grid>
+        <DataGrid x:Name="dgData" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+        	CanUserDeleteRows="False" ItemsSource="{Binding IBCChangeOver}" Margin="105,107,105,38" RowDetailsVisibilityMode="Visible" RowStyle="{StaticResource RowStyle}" FontSize="16" FontWeight="Bold" FontFamily="Arial" >
+            <DataGrid.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" >
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <DataGridRowsPresenter/>
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+
+            <DataGrid.Columns>
+                <!--Date-->
+                <DataGridTextColumn Header="IBC Changed Date" Binding="{Binding DateTime}" Width="200" >
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                            <Setter Property="FontSize" Value="17" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="0,4,2,0" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!--Batch No-->
+                <DataGridTextColumn Header="Batch No" Binding="{Binding BatchNo}" MinWidth="150" >
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                            <Setter Property="FontSize" Value="17" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="0,4,2,0" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!--Binder Type-->
+                <DataGridTextColumn Header="Binder Type" Binding="{Binding BinderType}" MinWidth="100" >
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                            <Setter Property="FontSize" Value="17" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="0,4,2,0" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<GroupBox HorizontalAlignment="Left" Height="93" Margin="105,75,0,0" VerticalAlignment="Top" Width="840" Background="#FF938F8F"   >
+            
+            
+        </GroupBox>-->
+        <!--<RadioButton  Checked="{Binding IsDateSearch}" HorizontalAlignment="Left" Height="21" Margin="294,93,0,0" VerticalAlignment="Top" Width="18"/>
+        <RadioButton Checked="{Binding IsViewAllDates}"  HorizontalAlignment="Left" Height="21" Margin="294,136,0,0" VerticalAlignment="Top" Width="18"/>-->
+
+        <!--<DatePicker HorizontalAlignment="Left" DisplayDateEnd="{Binding CurrentDate}"  
+        	Padding="0,3,0,0"
+        	FontFamily="Arial"
+        	FontSize="14"
+        	SelectedDate="{Binding SelectedDate}"
+        	Margin="312,89,0,0" 
+        	VerticalAlignment="Top" 
+        	TabIndex="8"
+        	Width="113" Height="24">
+            <DatePicker.Resources>
+                <Style TargetType="{x:Type DatePickerTextBox}">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </DatePicker.Resources>
+
+        </DatePicker>-->
+        <!--<Label  Content="Select date to search" Margin="113,85,0,0" FontSize="18" FontFamily="Arial" FontWeight="Medium" HorizontalAlignment="Left" Width="189" Height="29" VerticalAlignment="Top" Foreground="White"  />
+        <Button  Command="{Binding SearchCommand}" HorizontalAlignment="Left" Height="35" Margin="427,86,0,0" ToolTip="Click to search mixing history" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.136,0.708" Style="{StaticResource ButtonStyle}" >
+            <Button.Background>
+                <ImageBrush ImageSource="/A1QSystem;component/Images/search_red.png" />
+            </Button.Background>
+        </Button>
+        <Label  Content="or" Margin="192,107,0,0" FontSize="18" FontFamily="Arial" FontWeight="Medium" HorizontalAlignment="Left" Width="110" Height="30" VerticalAlignment="Top" Foreground="White"  />
+        <Label  Content="View all dates" Margin="144,127,0,0" FontSize="18" FontFamily="Arial" FontWeight="Medium" HorizontalAlignment="Left" Width="158" Height="29" VerticalAlignment="Top" Foreground="White"  />-->
+
+    </Grid>
+</UserControl>

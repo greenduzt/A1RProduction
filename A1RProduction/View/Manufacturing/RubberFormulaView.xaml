@@ -1,0 +1,177 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	         xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit" x:Class="A1QSystem.View.Manufacturing.RubberFormulaView" 
+	         mc:Ignorable="d"
+	         d:DesignWidth="1050" d:DesignHeight="800">
+    <UserControl.Resources>
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+						Value="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+
+        </Grid.ColumnDefinitions>
+        <TextBlock Height="37" Margin="0,119,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Background="#FFECECEC" Grid.ColumnSpan="2"/>
+        <TextBlock Height="93" Margin="0,562,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Background="#FFECECEC" Grid.ColumnSpan="2"/>
+        <TextBlock Height="397" Margin="3,161,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Background="#FFECECEC" Grid.Column="1"/>
+        <TextBlock Height="397" Margin="0,161,3,0" TextWrapping="Wrap"  VerticalAlignment="Top" Background="#FFECECEC"/>
+
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Product Formula" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Verdana" Height="32" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+
+        <Label Width="162" VerticalAlignment="Top" Margin="0,81,320,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Search by Product Name"/>
+        <!--Search by Product Name-->
+        <Controls:AutoCompleteBox 
+	        x:Name="txtSearchProductName" Background="White" Margin="0,81,72,0" Height="22" VerticalAlignment="Top" Padding="0"    
+        	ItemsSource="{Binding ProductNames, UpdateSourceTrigger=PropertyChanged}"
+        	FilterMode="ContainsOrdinal" SelectedItem="{Binding SelectedProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=False}" HorizontalAlignment="Right" Width="250"  />
+        <!--Mould Type-->
+        <Label Width="113" VerticalAlignment="Top" Margin="0,125,369,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Mould Type"/>
+        <TextBox x:Name="txtMouldType" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" Text="{Binding MouldType}" VerticalAlignment="Top" Width="250" Margin="0,128,72,0"/>
+        <!--Bins-->
+        <Label VerticalAlignment="Top" Margin="8,125,404,0" Height="26" FontFamily="Verdana" Content="No of Bins" Grid.Column="1"/>
+        <TextBox x:Name="txtNoOfBins" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding NoOfBins}" VerticalAlignment="Top" Width="67" Margin="168,128,0,0" Grid.Column="1"/>
+        <Label Content="Rubber Grading" VerticalAlignment="Top" RenderTransformOrigin="1.605,9.192" Margin="0,161,244,0" FontSize="14" FontWeight="Bold" Height="29" HorizontalAlignment="Right" Width="238"  />
+        <!--12Mesh-->
+        <Label Width="160" VerticalAlignment="Top" Margin="0,227,322,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Grading Size 12mesh"/>
+        <TextBox x:Name="txt12Mesh" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" Text="{Binding Mesh12}" VerticalAlignment="Top" Width="67" Margin="0,227,255,0" TextAlignment="Right" />
+        <!--4Mesh-->
+        <Label Width="160" VerticalAlignment="Top" Margin="0,202,322,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Grading Size 4mesh"/>
+        <TextBox x:Name="txt4Mesh" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" Text="{Binding Mesh4}" VerticalAlignment="Top" Width="67" Margin="0,202,255,0" TextAlignment="Right" />
+        <!--Search-->
+        <Button Content="SEARCH" HorizontalAlignment="Right" VerticalAlignment="Top" Width="58" Margin="0,81,9,0" Command="{Binding SearchProductCommand}" Height="22"/>
+        <!--16/30mesh-->
+        <Label Width="160" VerticalAlignment="Top" Margin="0,277,322,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Grading Size 16/30mesh"/>
+        <TextBox x:Name="txt16To30mesh" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" Text="{Binding Mesh16To30}" VerticalAlignment="Top" Width="67" Margin="0,277,255,0" TextAlignment="Right" />
+        <!--30mesh-->
+        <Label Width="160" VerticalAlignment="Top" Margin="0,302,322,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Grading Size 30mesh"/>
+        <TextBox x:Name="txt30mesh" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" Text="{Binding Mesh30}" VerticalAlignment="Top" Width="67" Margin="0,302,255,0" TextAlignment="Right" />
+        <!--12mg-->
+        <Label Width="160" VerticalAlignment="Top" Margin="0,327,322,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Grading Size 12mg"/>
+        <TextBox x:Name="txt12mg" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" Text="{Binding Mesh12mg}" VerticalAlignment="Top" Width="67" Margin="0,327,255,0" TextAlignment="Right" />
+        <!--Regrind-->
+        <Label Width="160" VerticalAlignment="Top" Margin="0,352,322,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Grading Size Regrind"/>
+        <TextBox x:Name="txt1Regrind" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" Text="{Binding MeshRegrind}" VerticalAlignment="Top" Width="67" Margin="0,352,255,0" TextAlignment="Right" />
+        <!--Bin Weight-->
+        <!--Moisture-->
+
+        <Label Content="Mixing Formula" VerticalAlignment="Top" RenderTransformOrigin="1.605,9.192" Margin="2,161,274,0" FontSize="14" FontWeight="Bold" Height="29" Grid.Column="1"  />
+        <!--Binder-->
+        <Label VerticalAlignment="Top" Margin="3,377,309,0" Height="26" FontFamily="Verdana" Content="Binder" Grid.Column="1"/>
+        <TextBox x:Name="txtBinder" Height="23" TextWrapping="Wrap" Text="{Binding Binder}" VerticalAlignment="Top" Margin="168,378,0,0" TextAlignment="Right" Grid.Column="1" HorizontalAlignment="Left" Width="67"/>
+        <!--Minutes-->
+        <Label VerticalAlignment="Top" Margin="3,401,309,0" Height="26" FontFamily="Verdana" Content="Mixing Minutes" Grid.Column="1"/>
+        <TextBox x:Name="txtMixingMinutes" Height="23" TextWrapping="Wrap" Text="{Binding MixingMinutes}" VerticalAlignment="Top" Margin="168,402,0,0" TextAlignment="Right" Grid.Column="1" HorizontalAlignment="Left" Width="67" />
+        <!--Instructions-->
+        <TextBox Height="85" Margin="0,565,9,0" TextWrapping="Wrap" Text="{Binding SpecialInstructions}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="313"/>
+        <Label VerticalAlignment="Top" Margin="0,565,274,0" Height="27" FontFamily="Verdana" Content="Special Instructions" HorizontalAlignment="Right" Width="213"/>
+        <Label VerticalAlignment="Top" Margin="0,580,274,0" Height="27" FontFamily="Verdana" Content="before the start of the job" FontSize="12" FontStyle="Italic" HorizontalAlignment="Right" Width="213" />
+
+        <!--Colour Datagrid-->
+        <DataGrid x:Name="dgColourDetails" IsEnabled="True" BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+        	ItemsSource="{Binding ProductColourDetails, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        	AutoGenerateColumns="False" Grid.Column="1" Margin="8,190,0,0" Background="#FFE0E0E0" Height="182" VerticalAlignment="Top" MaxWidth="650" HorizontalAlignment="Left" Width="473" >
+
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <!-- Ingredient -->
+                <DataGridComboBoxColumn Header="Ingredient"
+            		x:Name="ColourName"                     
+            		SelectedValueBinding="{Binding ColourName}"                  
+            		DisplayMemberPath="ColourName"
+            		SelectedValuePath="ColourName"                       
+            		Width="*">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.ColourList, ElementName=dgColourDetails}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.ColourList, ElementName=dgColourDetails}" />
+                            <Setter Property="SelectedItem" Value="{Binding CurrentProduct, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter Property="IsEditable" Value="True" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <!-- 1-4mm -->
+                <DataGridTextColumn Header="1-4mm" Width="80"  Binding="{Binding BagSize1, Mode=TwoWay}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Padding" Value="0,0,3,0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!-- 0.5-1.5mm -->
+                <DataGridTextColumn Header="0.5-1.5mm" Width="80"  Binding="{Binding BagSize2, Mode=TwoWay}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Padding" Value="0,0,3,0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!-- Other -->
+                <DataGridTextColumn Header="  Other" Width="60"  Binding="{Binding Other, Mode=TwoWay}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Padding" Value="0,0,3,0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!-- Weight -->
+                <DataGridTextColumn Header="    Kg" Width="60"  Binding="{Binding BagWeight, Mode=TwoWay}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Padding" Value="0,0,3,0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Button Margin="3" ToolTip="Remove product" Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                    <Image Source="/A1QSystem;component/Images/remove.png" Width="15" Height="15"/>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Width="160" VerticalAlignment="Top" Margin="0,252,322,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Grading Size 16mesh"/>
+        <TextBox x:Name="txt16Mesh" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" Text="{Binding Mesh16}" VerticalAlignment="Top" Width="67" Margin="0,252,255,0" TextAlignment="Right" />
+        <!--Colour Mixing Instructions-->
+        <TextBox Height="85" Margin="168,469,0,0" TextWrapping="Wrap" Text="{Binding ColourInstructions}" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Width="313" />
+        <Label VerticalAlignment="Top" Margin="3,469,324,0" Height="27" FontFamily="Verdana" Content="Mixing Instructions" Grid.Column="1"/>
+        <!--Grading Instructions-->
+        <Label Width="36" VerticalAlignment="Top" Margin="0,202,223,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Kg"/>
+        <Label Width="36" VerticalAlignment="Top" Margin="0,227,223,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Kg"/>
+        <Label Width="36" VerticalAlignment="Top" Margin="0,250,223,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Kg"/>
+        <Label Width="36" VerticalAlignment="Top" Margin="0,275,223,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Kg"/>
+        <Label Width="36" VerticalAlignment="Top" Margin="0,300,223,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Kg"/>
+        <Label Width="36" VerticalAlignment="Top" Margin="0,325,223,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Kg"/>
+        <Label Width="36" VerticalAlignment="Top" Margin="0,350,223,0" Height="26" HorizontalAlignment="Right" FontFamily="Verdana" Content="Kg"/>
+        <Label Width="36" VerticalAlignment="Top" Margin="231,378,0,0" Height="26" HorizontalAlignment="Left" FontFamily="Verdana" Content="Kg" Grid.Column="1"/>
+
+        <Button Name="btnPrint" Content="PRINT" Command="{Binding PrintCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Grid.Column="1" Margin="465,628,0,0"/>
+        <Button x:Name="btnClear" Content="CLEAR" Command="{Binding ClearCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Grid.Column="1" Margin="410,628,0,0"/>
+
+    </Grid>
+</UserControl>

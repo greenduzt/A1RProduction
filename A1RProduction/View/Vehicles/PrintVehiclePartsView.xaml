@@ -1,0 +1,285 @@
+﻿<UserControl x:Class="A1QSystem.View.Vehicles.PrintVehiclePartsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="1050" d:DesignHeight="800">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="HomeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HomeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="White" />
+            <!--<Setter Property="IsEnabled" Value="{Binding IsProcessing}" />-->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D1D1D1"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseEnter" Storyboard="{StaticResource HomeMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseLeave" Storyboard="{StaticResource HomeMouseLeave}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Print Vehicle Parts" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Arial" Height="32" VerticalAlignment="Top"/>
+        <Grid Margin="8,7,8,0" Height="26" VerticalAlignment="Top">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="83" FontSize="12" Text="DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,6">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Label HorizontalAlignment="Left" Width="17" Margin="93,0,0,4">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="146" FontSize="13" Text="PRINT VEHICLE PARTS" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="115,1,0,3" />
+        </Grid>
+        <Label Content="{Binding Version}" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,-1,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" />
+        <Border BorderBrush="#FFC5D0EE" Margin="130,101,130,0"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Height="40" VerticalAlignment="Top" Background="#e1e9f7" >
+            <Grid Margin="-2,8,-2,-6">
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Search Vehicle"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="108" FontFamily="Arial" Margin="3,2,0,0" />
+                <ComboBox x:Name="cmbCustomers_Copy" 
+            		TabIndex="5"  
+            		IsEditable="False"      
+            		ItemsSource="{Binding Vehicles, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+            		DisplayMemberPath="VehicleString"  
+            		SelectedValuePath="ID"     
+            		SelectedValue="{Binding SelectedVehicle, UpdateSourceTrigger=PropertyChanged}"      
+            		Background="White" Foreground="Black" FontFamily="Verdana" Margin="116,2,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="320" />
+                <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Select Work Order No"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="152" FontFamily="Arial" Margin="439,2,0,0" />
+                <ComboBox x:Name="cmbCustomers_Copy1" 
+                	TabIndex="5"  
+                	IsEditable="False"     
+                    ItemsSource="{Binding WorkOrderNo, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"              
+                    SelectedItem="{Binding SelectedWorkOrderNo, UpdateSourceTrigger=PropertyChanged}"      
+                	Background="White" Foreground="Black" FontFamily="Verdana" Margin="588,2,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" />
+                <Button Content="SEARCH" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="25" HorizontalContentAlignment="Left"  Margin="660,0,0,0" Command="{Binding SearchCommand}" ToolTip="Search vehicle part" IsEnabled="{Binding SearchEnabled}" >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding SearchButtonBackground}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF515151"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="PRINT" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="25" HorizontalContentAlignment="Left"  Margin="722,0,-7,0" Command="{Binding PrintCommand}" ToolTip="Print vehicle parts" IsEnabled="{Binding PrintEnabled}" >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding PrintButtonBackground}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF515151"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <!--<TextBox Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Margin="145,-1,0,0" FontSize="16" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="414" FontFamily="Arial" />
+
+                <TextBlock VerticalAlignment="Top" Padding="0,0,0,0" Text="Search Vehicle"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Center" FontSize="16" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="126" FontFamily="Arial" />-->
+
+            </Grid>
+        </Border>
+        <Border BorderBrush="#FFC5D0EE" Margin="130,155,130,67"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" >
+
+
+
+
+
+
+
+
+            <!--<Grid Grid.IsSharedSizeScope="True" Name="treeGrid">
+                <Grid.RowDefinitions>
+                    
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid.Resources>                    
+                    <local:LevelConverter x:Key="levelConverter" />
+
+                   
+                    <HierarchicalDataTemplate ItemsSource="{Binding Items}"          DataType="{x:Type local:DirectoryRecord}">
+                        <Grid ShowGridLines="False">                          
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="rowHeaderColumn"/>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition SharedSizeGroup="column1"/>
+                                <ColumnDefinition SharedSizeGroup="column2"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"   Text="{Binding Info.Name}"></TextBlock>
+                            <Rectangle Grid.Column="1">
+                                <Rectangle.Width>
+                                    <MultiBinding Converter="{StaticResource levelConverter}">
+                                        <Binding Path="Level"></Binding>
+                                        <Binding ElementName="treeViewItemToMeasure"
+                                        Path="ActualWidth"></Binding>
+                                    </MultiBinding>
+                                </Rectangle.Width>
+                            </Rectangle>
+                            <TextBlock Grid.Column="2" Text="{Binding Info.LastAccessTime}"></TextBlock>
+                            <TextBlock Grid.Column="3" Text="{Binding Files.Count}"></TextBlock>
+                        </Grid>
+                    </HierarchicalDataTemplate>
+                </Grid.Resources>               
+
+                <TreeView BorderThickness="0"   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <Grid ShowGridLines="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="rowHeaderColumn"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition SharedSizeGroup="column1"/>
+                                    <ColumnDefinition SharedSizeGroup="column2"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                  Text="Name"></TextBlock>
+                                <TreeViewItem Grid.Column="1">
+                                    <TreeViewItem.Header>
+                                        <TreeViewItem Name="treeViewItemToMeasure"  Padding="0"></TreeViewItem>
+                                    </TreeViewItem.Header>                                    
+                                    <TreeViewItem.Width>
+                                        <MultiBinding Converter="{StaticResource levelConverter}">
+                                            <Binding Path="Level"></Binding>
+                                            <Binding ElementName="treeViewItemToMeasure"  Path="ActualWidth"></Binding>
+                                        </MultiBinding>
+                                    </TreeViewItem.Width>
+                                </TreeViewItem>
+                                <TextBlock Grid.Column="2"
+                                  Text="LastAccessTime"></TextBlock>
+                                <TextBlock Grid.Column="3"
+                                  Text="File Count"></TextBlock>
+                            </Grid>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeView>
+                <TreeView Grid.Row="1"   BorderThickness="0"  ItemsSource="{Binding}">                    
+                </TreeView>
+            </Grid>-->
+
+            <DataGrid x:Name="dgQuoteDetails"  BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" 
+        		ItemsSource="{Binding VehiclePartDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        		AutoGenerateColumns="False" Grid.Column="0" Margin="2,2,2,2" Grid.ColumnSpan="2" Background="#e1e9f7" CanUserAddRows="False"   TabIndex="14"  >
+
+                <!--<DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+                    <local:BindingProxy x:Key="proxy" Data="{Binding}"/>
+                </DataGrid.Resources>-->
+
+                <DataGrid.RowStyle>
+                    <StaticResource ResourceKey="RowStyle"/>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn Header="Part ID" Binding="{Binding VehicleParts.StrSequenceNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="IsEnabled" Value="False" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+
+                    <DataGridTextColumn Header="Part Code/Description" Binding="{Binding VehicleParts.PartCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <!--<Border x:Name="childWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" RenderTransformOrigin="0.5,0.5" Margin="0,-58,0,0" >
+            <ContentControl Content="{Binding XmlContent}"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Border>-->
+    </Grid>
+</UserControl>

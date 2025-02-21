@@ -1,0 +1,423 @@
+﻿<UserControl x:Class="A1QSystem.View.VehicleWorkOrders.ScheduleVehicleWorkOrdersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+             mc:Ignorable="d" 
+             d:DesignWidth="1050" d:DesignHeight="800">
+
+    <!--xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"          
+             xmlns:Behaviors="clr-namespace:A1QSystem.Core"-->
+
+    <UserControl.Resources>
+        <Storyboard x:Key="HomeMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HomeMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HomeTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="VehiclesMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="VehiclesTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="VehiclesTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="VehiclesMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="VehiclesTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="VehiclesTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="AdminDashboardMouseEnter">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="AdminDashboardMouseLeave">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AdminDashboardTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="White" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D1D1D1"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseEnter" Storyboard="{StaticResource HomeMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="HomeTextBlock">
+            <BeginStoryboard x:Name="HomeMouseLeave" Storyboard="{StaticResource HomeMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="VehiclesTextBlock">
+            <BeginStoryboard x:Name="VehiclesMouseEnter" Storyboard="{StaticResource VehiclesMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="VehiclesTextBlock">
+            <BeginStoryboard x:Name="VehiclesMouseLeave" Storyboard="{StaticResource VehiclesMouseLeave}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="AdminDashboardTextBlock">
+            <BeginStoryboard x:Name="AdminDashboardMouseEnter" Storyboard="{StaticResource AdminDashboardMouseEnter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="AdminDashboardTextBlock">
+            <BeginStoryboard x:Name="AdminDashboardMouseLeave" Storyboard="{StaticResource AdminDashboardMouseLeave}"/>
+        </EventTrigger>
+
+
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="36*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,37,0,0" TextWrapping="Wrap" Text="Schedule Vehicle Work Orders" TextAlignment="Center" FontWeight="Bold" FontSize="20" FontFamily="Arial" Height="32" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+        <Label Content="{Binding Version}" Padding="7,3,0,0" FontSize="10" FontWeight="Bold" Margin="0,0,0,7" Foreground="White" Height="22" VerticalAlignment="Bottom" Grid.Column="0" Background="#FF6A6868" Grid.ColumnSpan="3" />
+        <Grid Height="26" VerticalAlignment="Top" Margin="8,7,8,0" Grid.ColumnSpan="3">
+            <TextBlock x:Name="HomeTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="83" FontSize="12" Text="DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,6">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavHomeCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Label HorizontalAlignment="Left" Width="17" Margin="93,0,0,4">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="AdminDashboardTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="130" FontSize="12" Text="ADMIN DASHBOARD" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="123,2,0,6">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding AdminDashboardCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label HorizontalAlignment="Left" Width="17" Margin="273,2,0,2">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="VehiclesTextBlock" Style="{StaticResource HoverEffect}" HorizontalAlignment="Left" Width="60" FontSize="12" Text="VEHICLES" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="297,2,0,6">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding VehiclesCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label HorizontalAlignment="Left" Width="17" Margin="363,2,0,2">
+                <Label.Background>
+                    <ImageBrush ImageSource="/A1QSystem;component/Images/NavArrow.png"/>
+                </Label.Background>
+            </Label>
+            <TextBlock x:Name="NewQuoteTextBlock" Padding="1,1.5,0,1"  HorizontalAlignment="Left" Width="234" FontSize="13" Text="SCHEDULE VEHICLE WORK ORDERS" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Background="#FFC33333" Foreground="White" FontWeight="Bold" Margin="382,1,0,3" />
+        </Grid>
+        <Grid Margin="21,80,18,97" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="#FFC5D0EE"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" Background="#e1e9f7" Grid.ColumnSpan="2" >
+
+
+            </Border>
+            <!--<TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" TextAlignment="Right" Text="{Binding DaysBetweenVehicles,Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="65" Margin="178,70,0,0">
+                <i:Interaction.Behaviors>
+                    <Behaviors:TextBoxInputBehavior InputMode="DigitInput" JustPositivDecimalInput="True" />
+                </i:Interaction.Behaviors>
+            </TextBox>-->
+            <!--<Label Content="Days" HorizontalAlignment="Left" Height="21" Margin="243,70,0,0" VerticalAlignment="Top" Width="58" Padding="2" />-->
+            <ComboBox x:Name="cmbCustomers_Copy" 
+        		TabIndex="2"  
+        		IsEditable="False"      
+        		ItemsSource="{Binding VehicleCategory, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+        		DisplayMemberPath="VehicleType"  
+        		SelectedValuePath="ID"     
+        		SelectedValue="{Binding SelectedVehicleType, UpdateSourceTrigger=PropertyChanged}"      
+        		Background="White" Foreground="Black" FontFamily="Verdana" Margin="178,66,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="108" />
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Select Vehicle Type"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="12,66,0,0" />
+            <DatePicker HorizontalAlignment="Left"                  DisplayDateStart="{Binding CurrentDate}" 
+        		SelectedDate="{Binding VehicleWorkOrderSchedule.StartDate}"
+        		Margin="178,10,0,0" 
+        		VerticalAlignment="Top" 
+        		TabIndex="1"
+        		Width="108" Height="24" />
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Start Date"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" FontFamily="Arial" Margin="12,10,0,0" HorizontalAlignment="Left" Width="129" />
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Select Vehicles"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="12,130,0,0" />
+            <CheckBox Content="Tick All" TabIndex="3" IsChecked="{Binding TickAll}" Height="18" VerticalAlignment="Top" Margin="0,113,9,0" HorizontalAlignment="Right" Width="59"/>
+
+            <DataGrid x:Name="dgQuoteDetails"  BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" HorizontalScrollBarVisibility="Disabled" FontFamily="Verdana" ItemsSource="{Binding VehicleWorkOrderSchedule.ScheduledVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        		AutoGenerateColumns="False" Margin="178,130,9,40" Background="#e1e9f7" CanUserAddRows="False"   TabIndex="14" >
+
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+                </DataGrid.Resources>
+                <DataGrid.RowStyle>
+                    <StaticResource ResourceKey="RowStyle"/>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+
+                    <!--Code-->
+
+                    <DataGridTextColumn Header="Code" Binding="{Binding VehicleCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--Serial Number-->
+
+                    <DataGridTextColumn Header="Serial No" Binding="{Binding SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--Brand-->
+
+                    <DataGridTextColumn Header="Brand" Binding="{Binding VehicleBrand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--Description-->
+
+                    <DataGridTextColumn Header="Work Description" Binding="{Binding VehicleDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--Check-->
+
+                    <DataGridTemplateColumn Width="Auto" Header="Tick Vehicle">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" FontSize="12" Margin="0,6,0,0" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Frequency"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" FontFamily="Arial" Margin="14,90,0,0" HorizontalAlignment="Left" Width="127" />
+            <CheckBox Content="6 months" x:Name="rdbSInspection1_Copy" IsChecked="{Binding SixMonthChecked}" Height="15" Margin="254,93,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="73" />
+            <CheckBox Content="2 years" x:Name="rdbSInspection1_Copy1"  IsChecked="{Binding TwoYearsChecked}" Height="15" Margin="393,93,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="59" Visibility="{Binding RadioVisibility}" />
+            <CheckBox Content="1 year" x:Name="rdbSInspection1_Copy4"  IsChecked="{Binding OneYearChecked}" Height="15" Margin="331,93,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="62" Visibility="{Binding RadioVisibility}" />
+            <CheckBox Content="1 month" x:Name="rdbSInspection1_Copy7" IsChecked="{Binding OneMonthChecked}" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70" Margin="178,93,0,0" />
+            <TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Location"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" HorizontalAlignment="Left" Width="129" FontFamily="Arial" Margin="14,39,0,0" />
+            <ComboBox x:Name="cmbCustomers_Copy1" 
+            	TabIndex="2"  
+            	IsEditable="False"      
+            	ItemsSource="{Binding StockLocation, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+            	DisplayMemberPath="StockName"  
+            	SelectedValuePath="ID"     
+            	SelectedValue="{Binding SelectedLocationID, UpdateSourceTrigger=PropertyChanged}"      
+            	Background="White" Foreground="Black" FontFamily="Verdana" Margin="178,39,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="108" />
+            <!--<TextBlock VerticalAlignment="Top" Padding="0,2,0,0" Text="Days Between Vehicles"  TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" FontSize="14" Height="24" FontWeight="SemiBold" FontFamily="Arial" Margin="13,72,0,0" HorizontalAlignment="Left" Width="158" />-->
+
+        </Grid>
+        <Button Content="CREATE" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,18,67" Command="{Binding CreateWorkOrderCommand}" 
+        		ToolTip="Crate order" Height="25" VerticalAlignment="Bottom" Grid.Column="1" IsEnabled="{Binding SubmitEnabled}" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="{Binding SubmitBackground}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="CLEAR" HorizontalAlignment="Right" Width="73" HorizontalContentAlignment="Left"  Margin="0,0,94,67" Command="{Binding ClearCommand}" 
+        		ToolTip="Clear data" Height="25" VerticalAlignment="Bottom" Grid.Column="1" IsEnabled="{Binding ClearEnabled}" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="{Binding ClearBackground}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button HorizontalAlignment="Left" Width="139" HorizontalContentAlignment="Left"  Margin="310,118,0,0" Command="{Binding ViewMaintenanceCommand}" 
+        	ToolTip="View/Update vehicle maintenance descriptions" Height="47" VerticalAlignment="Top" Grid.Column="1" IsEnabled="{Binding MainDisEnabled}" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="{Binding MainDesBackground}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock>VIEW MAINTENANCE <LineBreak/>    DESCRIPTIONS</TextBlock>
+        </Button>
+        <!--<Border x:Name="childWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" RenderTransformOrigin="0.5,0.5" Margin="0,-58,0,7" Grid.ColumnSpan="3" >
+            <ContentControl Content="{Binding XmlContent}"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Border>-->
+        <!--<Button Content="CREATE"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Command="{Binding CreateWorkOrderCommand}" IsEnabled="{Binding CreateBtnEnabled}" />-->
+        <!--<Button Content="CLEAR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="70,0,0,0" Command="{Binding ClearCommand}" />-->
+
+
+    </Grid>
+</UserControl>

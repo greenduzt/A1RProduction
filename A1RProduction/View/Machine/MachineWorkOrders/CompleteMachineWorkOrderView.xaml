@@ -1,0 +1,253 @@
+﻿<UserControl x:Class="A1QSystem.View.Machine.MachineWorkOrders.CompleteMachineWorkOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="900" MinHeight="900" d:DesignWidth="900" MaxWidth="900">
+    <Grid Background="White">
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,10,0,0" TextWrapping="Wrap" Text="Complete Work Order" TextAlignment="Center" FontWeight="Bold" FontSize="14" FontFamily="Verdana" Height="26" VerticalAlignment="Top" />
+        <Label Content="Mechanic Name" HorizontalAlignment="Left" Height="30" Margin="10,70,0,0" VerticalAlignment="Top" Width="112"/>
+        <ComboBox ItemsSource="{Binding UserPositions}" 
+        	DisplayMemberPath="FullName"
+        	SelectedValuePath="FullName" 
+        	SelectedValue="{Binding SelectedMechanic, Mode=TwoWay}" Margin="152,70,0,0" HorizontalAlignment="Left" Width="338" Height="26" VerticalAlignment="Top" />
+        <Label Content="*" Foreground="red" FontSize="16" FontWeight="Bold" Margin="493,64,0,0" VerticalAlignment="Top" Padding="0" Height="13" HorizontalAlignment="Left" Width="9"/>
+        <Label Content="Machine ID" HorizontalAlignment="Left" Height="30" Margin="10,41,0,0" VerticalAlignment="Top" Width="112"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="152,42,0,0" TextWrapping="Wrap" Text="{Binding MachineWorkOrder.Machine.MachineID}" VerticalAlignment="Top" Width="74" Padding="0,3,0,0" IsReadOnly="True" />
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="350,42,0,0" TextWrapping="Wrap" Text="{Binding MachineWorkOrder.Machine.MachineName}" VerticalAlignment="Top" Width="269" Padding="0,3,0,0" IsReadOnly="True" />
+        <Label Content="Machine Name" HorizontalAlignment="Left" Height="30" Margin="260,41,0,0" VerticalAlignment="Top" Width="90"/>
+        <Label Content="Type" HorizontalAlignment="Left" Height="30" Margin="643,41,0,0" VerticalAlignment="Top" Width="37"/>
+        <TextBox Height="26" Margin="680,42,10,0" TextWrapping="Wrap" Text="{Binding MachineWorkOrder.Machine.MachineType}" VerticalAlignment="Top" Padding="0,3,0,0" IsReadOnly="True" />
+        <Button Content="SUBMIT" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="73" Height="25" HorizontalContentAlignment="Left" Margin="0,0,9,6" Command="{Binding CompleteCommand}"  ToolTip="Complete this work order">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Label Content="RO - Repair Order" HorizontalAlignment="Left" Margin="10,0,0,3" Width="392" Height="30" VerticalAlignment="Bottom"/>
+        <Button Content="CLOSE" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="73" Height="25" HorizontalContentAlignment="Left" Margin="0,0,82,6" Command="{Binding CloseCommand}"  ToolTip="Close form">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF787C7A"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF515151"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Border BorderBrush="#FFC5D0EE" Margin="10,262,9,172"  BorderThickness="2,2,2,2" CornerRadius="4,4,4,4" >
+            <TreeView x:Name="workItemsTree"  Margin="1,1,1,1" ItemsSource="{Binding MachineWorkDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="True" />
+                        <!--<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />-->
+                        <Setter Property="FontWeight" Value="Normal" />
+                        <Setter Property="FontSize" Value="14" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding MachineRepairDescription}">
+                        <!--Teams-->
+                        <DockPanel Width="840" Visibility="{Binding RootVisibility}">
+                            <TextBlock Text="{Binding MachineMaintenanceInfo.MachineCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding MachineMaintenanceInfo.MachineDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="715" />
+                            <CheckBox  Padding="5" FontSize="12" Margin="30,6,0,0" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="{Binding CompletedVisibility}"
+        						IsChecked="{Binding ItemDone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                                <TextBlock Text="Done" Margin="0,-7,0,0" />
+                            </CheckBox>
+                            <TextBlock Text="RO Created" Visibility="{Binding RepairOrderVisibility}" TextAlignment="Right" />
+                        </DockPanel>
+                        <!--Repair Items-->
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding MachineParts}">
+                                <DockPanel Width="800">
+                                    <TextBlock Width="700">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat=" {0} - {1}">
+                                                <Binding Path="StrSequenceNumber"/>
+                                                <Binding Path="RepairDescription"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <CheckBox  Padding="5" FontSize="12" Margin="30,6,0,0" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="{Binding RepairCompletedVisibility}"
+        								IsChecked="{Binding IsCompleted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                                        <TextBlock Text="Done" Margin="0,-7,0,0" />
+                                    </CheckBox>
+                                </DockPanel>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat=" {0} - {1}">
+                                                    <Binding Path="StrSequenceNumber"/>
+                                                    <Binding Path="PartCode"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                            </HierarchicalDataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Border>
+        <CheckBox Content="Tick All Done" IsChecked="{Binding TickAll}"  HorizontalAlignment="Right" Height="18" Margin="0,243,12,0" Command="{Binding TickAllCommand}"
+                  VerticalAlignment="Top" Width="89"/>
+        <CheckBox Content="Did not complete" IsChecked="{Binding DidNotCompleteChecked}"  HorizontalAlignment="Left" Height="18" Margin="10,739,0,0" 
+                  VerticalAlignment="Top" Width="141" Command="{Binding DidNotCompleteCommand}" />
+        <Label Content="Upload Files" HorizontalAlignment="Left" Height="24" Margin="10,122,0,0" Padding="5,7,0,0" VerticalAlignment="Top" Width="112"/>
+        <TextBox Height="26" Margin="152,98,0,0" Width="338" TextWrapping="Wrap" Text="{Binding ExternalMechanicName}" Visibility="{Binding ExternalMechanicNameVisibility}" VerticalAlignment="Top" Padding="0,3,0,0" HorizontalAlignment="Left" />
+        <Label Content="External Mechanic Name"  Visibility="{Binding ExternalMechanicNameVisibility}" HorizontalAlignment="Left" Height="30" Margin="10,97,0,0" VerticalAlignment="Top" Width="141"/>
+        <TextBox Height="108" Margin="12,762,12,0" TextWrapping="Wrap" Text="{Binding Reason}" Visibility="{Binding ReasonVisibility}" VerticalAlignment="Top" 
+                 Padding="0,3,0,0" FontSize="14" />
+
+        <DataGrid x:Name="dgQuoteDetails"  BorderBrush="#FFE0E0E0" HorizontalGridLinesBrush="#FF9C9C9C" VerticalGridLinesBrush="#FF9C9C9C" 
+                  HorizontalScrollBarVisibility="Auto" FontFamily="Verdana" Height="90"
+        ItemsSource="{Binding FileUploadedList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"   HeadersVisibility="All"
+        AutoGenerateColumns="False" Grid.Column="0" Margin="10,146,10,0" Background="#FFE0E0E0" CanUserAddRows="False"   TabIndex="14" VerticalAlignment="Top" >
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#FF8F8F8F"/>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <!-- File Description -->
+                <DataGridTextColumn Header="Description" Width="Auto" IsReadOnly="False" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                            <Setter Property="FontSize" Value="13" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="5" />
+                            <Setter Property="TextAlignment" Value="Left" />
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="FontSize" Value="13" />
+                            <Setter Property="FontWeight" Value="Medium" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- File Name -->
+                <DataGridTextColumn Header="" Width="Auto" IsReadOnly="True" 
+                                    Binding="{Binding FileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                            <Setter Property="FontSize" Value="13" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="5" />
+                            <Setter Property="TextAlignment" Value="Left" />
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="FontSize" Value="13" />
+                            <Setter Property="FontWeight" Value="Medium" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!--Upload file-->
+                <DataGridTemplateColumn Header="Upload File">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                            <Setter Property="FontSize" Value="13" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="UPLOAD" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="23" HorizontalContentAlignment="Left" Margin="0,0,0,0" 
+                            Command="{Binding DataContext.UploadDocumentCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" 
+                            ToolTip="Upload file">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#666666"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="11"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" CornerRadius="4,4,4,4">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#4c4c4c"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- REMOVE -->
+                <DataGridTemplateColumn Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Button Margin="3" ToolTip="Remove item" Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  CommandParameter="{Binding}"  >
+                                    <Image Source="/Images/remove.png" Width="15" Height="15" />
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button  TabIndex="5" ToolTip="Add New Row" Content="Add New Row" Command="{Binding AddNewRowCommand}" HorizontalAlignment="Right" Margin="0,124,10,0" 
+            VerticalAlignment="Top"  Width="63" Height="15" FontSize="9" Padding="0,0,0,0" />
+
+
+    </Grid>
+</UserControl>

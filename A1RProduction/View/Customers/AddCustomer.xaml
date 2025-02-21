@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="A1QSystem.View.Customers.AddCustomer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="437.1" Width="497" >
+    <Grid Background="#FFE2E2E2" Margin="0,0,0,-35">
+        <Rectangle Fill="#FFF4F4F5" Height="402" Margin="0,60,0,0" Stroke="AliceBlue" VerticalAlignment="Top"/>
+        <Label Content="Company Name" HorizontalAlignment="Left" Height="30" Margin="10,86,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="First Name" HorizontalAlignment="Left" Height="30" Margin="10,122,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="Last Name" HorizontalAlignment="Left" Height="30" Margin="10,156,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="Telephone" HorizontalAlignment="Left" Height="30" Margin="10,191,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="Mobile" HorizontalAlignment="Left" Height="30" Margin="10,221,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="Email" HorizontalAlignment="Left" Height="30" Margin="10,254,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="Address" HorizontalAlignment="Left" Height="30" Margin="10,289,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="City" HorizontalAlignment="Left" Height="30" Margin="10,319,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="State" HorizontalAlignment="Left" Height="30" Margin="10,354,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+        <Label Content="Postcode" HorizontalAlignment="Left" Height="30" Margin="10,389,0,0" VerticalAlignment="Top" Width="124" FontFamily="Verdana"/>
+
+        <TextBox Name="txtAddCusCompName" Text="{Binding CompanyName,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="30" Margin="123,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" FontFamily="Verdana" Validation.ValidationAdornerSite="{Binding ElementName=lblCompNameError}" />
+        <Label Name="lblCompNameError" Content="{Binding ElementName=txtAddCusCompName,Path=(Validation.Errors).CurrentItem.ErrorContent}" HorizontalAlignment="Left" Height="26" Margin="332,90,0,0" VerticalAlignment="Top" Width="155" Padding="4,4,0,0" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.612,-2.269" />
+
+        <TextBox Name="txtAddCusFName" Text="{Binding FirstName,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="30" Margin="123,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"  FontFamily="Verdana" Validation.ValidationAdornerSite="{Binding ElementName=lblFirstNameError}" />
+        <Label x:Name="lblFirstNameError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtAddCusFName}" HorizontalAlignment="Left" Height="26" Margin="332,121,0,0" VerticalAlignment="Top" Width="155" Padding="4,4,0,0" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.612,-2.269" />
+
+        <TextBox Name="txtAddCusLName" Text="{Binding LastName,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="30" Margin="123,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"  FontFamily="Verdana" Validation.ValidationAdornerSite="{Binding ElementName=lblLastNameError}" />
+        <Label x:Name="lblLastNameError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtAddCusLName}" HorizontalAlignment="Left" Height="26" Margin="332,154,0,0" VerticalAlignment="Top" Width="155" Padding="4,4,0,0" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.612,-2.269" />
+
+        <TextBox Name="txtAddCusTele" Text="{Binding Telephone,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="30" Margin="123,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97"  MaxLength="12" FontFamily="Verdana" Validation.ValidationAdornerSite="{Binding ElementName=lblTelephoneError}" />
+        <Label x:Name="lblTelephoneError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtAddCusTele}" HorizontalAlignment="Left" Height="26" Margin="332,191,0,0" VerticalAlignment="Top" Width="155" Padding="4,4,0,0" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.612,-2.269" />
+
+        <TextBox Name="txtAddCusMobile" Text="{Binding Mobile,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="30" Margin="123,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97" MaxLength="12"  FontFamily="Verdana" Validation.ValidationAdornerSite="{Binding ElementName=lblMobileError}" />
+        <Label x:Name="lblMobileError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtAddCusMobile}" HorizontalAlignment="Left" Height="26" Margin="332,222,0,0" VerticalAlignment="Top" Width="155" Padding="4,4,0,0" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.612,-2.269" />
+
+        <TextBox Name="txtAddCusEmail" Text="{Binding Email,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="30" Margin="123,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"  FontFamily="Verdana" Validation.ValidationAdornerSite="{Binding ElementName=lblEmailError}" />
+        <Label x:Name="lblEmailError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtAddCusEmail}" HorizontalAlignment="Left" Height="26" Margin="332,257,0,0" VerticalAlignment="Top" Width="155" Padding="4,4,0,0" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.612,-2.269" />
+
+        <TextBox Name="txtAddCusAddress" Text="{Binding Address}" HorizontalAlignment="Left" Height="30" Margin="123,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"  FontFamily="Verdana"/>
+        <TextBox Name="txtAddCusCity" Text="{Binding City}" HorizontalAlignment="Left" Height="30" Margin="123,319,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"  FontFamily="Verdana"/>
+        <ComboBox Name="cmbAddCusState" Text="{Binding State}" HorizontalAlignment="Left" Height="30" Margin="123,354,0,0" VerticalAlignment="Top" Width="97"  >
+            <ComboBoxItem Name="ACT">ACT</ComboBoxItem>
+            <ComboBoxItem Name="NSW">NSW</ComboBoxItem>
+            <ComboBoxItem Name="NT">NT</ComboBoxItem>
+            <ComboBoxItem Name="QLD">QLD</ComboBoxItem>
+            <ComboBoxItem Name="SA">SA</ComboBoxItem>
+            <ComboBoxItem Name="TAS">TAS</ComboBoxItem>
+            <ComboBoxItem Name="VIC">VIC</ComboBoxItem>
+            <ComboBoxItem Name="WA">WA</ComboBoxItem>
+        </ComboBox>
+        <TextBox Name="txtAddCusPostcode" Text="{Binding PostCode,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="30" Margin="123,389,0,0" MaxLength="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="97"  FontFamily="Verdana"  Validation.ValidationAdornerSite="{Binding ElementName=lblPostcodeError}" />
+        <Label x:Name="lblPostcodeError" Content="{Binding (Validation.Errors).CurrentItem.ErrorContent, ElementName=txtAddCusPostcode}" HorizontalAlignment="Left" Height="26" Margin="332,389,0,0" VerticalAlignment="Top" Width="155" Padding="4,4,0,0" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.612,-2.269" />
+        
+        <TextBlock Background="#FF938F8F" Foreground="White" Padding="0,3,0,0" Margin="0,10,0,0" TextWrapping="Wrap" Text="Add Customer" TextAlignment="Center" FontWeight="Bold" FontSize="18" FontFamily="Verdana" Height="32" VerticalAlignment="Top"/>
+        <Button x:Name="btnAddFreigth" Content="ADD" HorizontalAlignment="Left" Height="25" Margin="281,428,0,0" VerticalAlignment="Top" Width="62" Command="{Binding OkCommand}" FontFamily="Calibri" FontSize="14"  />
+        <Button x:Name="btnCancelFreight" Command="{Binding CloseCommand}" Content="CLOSE" HorizontalAlignment="Left" Height="25" Margin="415,428,0,0" VerticalAlignment="Top" Width="62" FontFamily="Calibri" FontSize="14" RenderTransformOrigin="0.419,-0.72"  />
+        <Button x:Name="btnAddFreigth_Copy" Content="CLEAR" HorizontalAlignment="Left" Height="25" Margin="348,428,0,0" VerticalAlignment="Top" Width="62" Command="{Binding ClearCommand}" FontFamily="Calibri" FontSize="14" RenderTransformOrigin="1.113,0.56" />
+
+    </Grid>
+</UserControl>

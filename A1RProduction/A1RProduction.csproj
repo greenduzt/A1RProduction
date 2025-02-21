@@ -1,0 +1,1761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BBBC06AD-6DE9-4B71-8B30-950D94EB671D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>A1QSystem</RootNamespace>
+    <AssemblyName>A1QSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>C:\Users\simonw\Desktop\A1Rubber\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>105</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>6FADCD380FAF5B388C361E04C9448859E24580E2</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>A1QSystem_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>A1RubberOS.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CircularGauge">
+      <HintPath>.\CircularGauge.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\..\..\..\..\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Windows.Simulator.Client, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Windows.Simulator.Client.14.0.23205\lib\net45\Microsoft.Windows.Simulator.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Core, Version=7.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.7.0.4\lib\net48\Microsoft.WindowsAPICodePack.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices, Version=7.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.7.0.4\lib\net48\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Sensors, Version=7.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.7.0.4\lib\net48\Microsoft.WindowsAPICodePack.Sensors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=7.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.7.0.4\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=7.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.7.0.4\lib\net48\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>.\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>.\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering">
+      <HintPath>.\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MsgBox">
+      <HintPath>..\..\..\..\..\MsgBox.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>.\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>.\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.7.0.4\lib\net48\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UserNotification">
+      <HintPath>..\..\..\..\..\UserNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.7.0.4\lib\net48\WindowsFormsIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="WPF.MDI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MDITest]\MDITest]\bin\Debug\WPF.MDI.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\DeleteIVehicleRepairItemCommand.cs" />
+    <Compile Include="Commands\DeleteMachineDes.cs" />
+    <Compile Include="Commands\DeleteMachineRepairItem.cs" />
+    <Compile Include="Commands\DeleteNewVehicleRepairItem.cs" />
+    <Compile Include="Commands\LogOutCommandHandler.cs" />
+    <Compile Include="Commands\Converter\FreightConverter.cs" />
+    <Compile Include="Commands\Converter\SumConverter.cs" />
+    <Compile Include="Commands\Converter\TotMixCompConverter.cs" />
+    <Compile Include="Core\BindingProxy .cs" />
+    <Compile Include="Core\BlackOutDatesAdapter.cs" />
+    <Compile Include="Core\BusinessDaysGenerator.cs" />
+    <Compile Include="Core\CapacityChecker.cs" />
+    <Compile Include="Core\ChildWindow.cs" />
+    <Compile Include="Core\ChildWindowManager.cs" />
+    <Compile Include="Core\CurrentCapacityList.cs" />
+    <Compile Include="Commands\DeleteVehicleMaintenanceDes.cs" />
+    <Compile Include="Core\Enumerations\Enumerations.cs" />
+    <Compile Include="Core\FileUploadComparer.cs" />
+    <Compile Include="Core\FileUploadFileNameComparer.cs" />
+    <Compile Include="Core\FocusExtension.cs" />
+    <Compile Include="Core\GradingManager.cs" />
+    <Compile Include="Core\IgnoreNewItemPlaceHolderConverter.cs" />
+    <Compile Include="Core\GradingItemEqualityComparer.cs" />
+    <Compile Include="Core\IView.cs" />
+    <Compile Include="Core\IViewModel.cs" />
+    <Compile Include="Core\KGToBlocksCreator.cs" />
+    <Compile Include="Core\MachineWorkOrderNextServiceDate.cs" />
+    <Compile Include="Core\MixingCapacityAllocation.cs" />
+    <Compile Include="Core\MixingCapacityList.cs" />
+    <Compile Include="Core\MixingItemEqualityComparer.cs" />
+    <Compile Include="Core\MixingManager.cs" />
+    <Compile Include="Core\NewLineOnTabBehavior.cs" />
+    <Compile Include="Core\NTPServer.cs" />
+    <Compile Include="Core\ObservableObject.cs" />
+    <Compile Include="Core\OrderDetailsComparer.cs" />
+    <Compile Include="Core\OrderManager.cs" />
+    <Compile Include="Core\OutlinedTextBlock.cs" />
+    <Compile Include="Core\PeelingManager.cs" />
+    <Compile Include="Core\PendingOrderManager.cs" />
+    <Compile Include="Core\PrintingManager.cs" />
+    <Compile Include="Core\Production.cs" />
+    <Compile Include="Core\ProductionManager.cs" />
+    <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Core\ReRollingManager.cs" />
+    <Compile Include="Core\SequencingService.cs" />
+    <Compile Include="Core\ShiftIProcessor.cs" />
+    <Compile Include="Core\ShiftItemEqualityComparer.cs" />
+    <Compile Include="Core\ShiftManager.cs" />
+    <Compile Include="Core\SlitPeelCapacityAllocation.cs" />
+    <Compile Include="Core\SlittingManager.cs" />
+    <Compile Include="Core\StockManager.cs" />
+    <Compile Include="Core\TextBoxInputBehavior.cs" />
+    <Compile Include="Core\TextBoxMaskBehavior.cs" />
+    <Compile Include="Core\VehicleWorkOrderManager.cs" />
+    <Compile Include="Core\ViewBase.cs" />
+    <Compile Include="Core\ViewModelBase.cs" />
+    <Compile Include="Core\WebBrowserUtility.cs" />
+    <Compile Include="DB\GradingMixingNotifier.cs" />
+    <Compile Include="DB\GradingOrdersNotifier.cs" />
+    <Compile Include="DB\GradingWeeklyScheduleNotifier.cs" />
+    <Compile Include="DB\MachineMaintenanceOrdersNotifier.cs" />
+    <Compile Include="DB\MixingOrdersNotifier.cs" />
+    <Compile Include="DB\MixingProductionSchedulerNotifier.cs" />
+    <Compile Include="DB\MixingWeeklyScheduleNotifier.cs" />
+    <Compile Include="DB\PeelingOrdersNotifier.cs" />
+    <Compile Include="DB\ProductionTimeTableNotifier.cs" />
+    <Compile Include="DB\QuoteToOrderNotifier.cs" />
+    <Compile Include="DB\ProductionSchedularNotifier.cs" />
+    <Compile Include="DB\ReadingRawStockNotifier.cs" />
+    <Compile Include="DB\ReRollingOrdersNotifier.cs" />
+    <Compile Include="DB\SlitPeelProductionSchedulerNotifier.cs" />
+    <Compile Include="DB\SlittingOrdersNotifier.cs" />
+    <Compile Include="DB\SlittingProductionNotifier.cs" />
+    <Compile Include="DB\VehicleWorkOrdersNotifier.cs" />
+    <Compile Include="Interfaces\IOrder.cs" />
+    <Compile Include="Interfaces\ISequencedObject.cs" />
+    <Compile Include="Model\CalculationModel.cs" />
+    <Compile Include="Model\Capacity\CapacityInfo.cs" />
+    <Compile Include="Model\Capacity\CurrentCapacity.cs" />
+    <Compile Include="Model\Capacity\GradingDefaultCapacity.cs" />
+    <Compile Include="Model\Capacity\MixingDefaultCapacity.cs" />
+    <Compile Include="Model\Capacity\PeelingDefaultCapacity.cs" />
+    <Compile Include="Model\Capacity\ProductCapacity.cs" />
+    <Compile Include="Model\Capacity\ReRollingDefaultCapacity.cs" />
+    <Compile Include="Model\Capacity\SlittingDefaultCapacity.cs" />
+    <Compile Include="Model\Categories\Category.cs" />
+    <Compile Include="Model\Comments\Comment.cs" />
+    <Compile Include="Model\DeliveryDetails\Delivery.cs" />
+    <Compile Include="Model\Formula\FormulaDetails.cs" />
+    <Compile Include="Model\Formula\FormulaOptions.cs" />
+    <Compile Include="Model\Formula\Formulas.cs" />
+    <Compile Include="Model\GradedRubber.cs" />
+    <Compile Include="Model\Machine\MachineGroup.cs" />
+    <Compile Include="Model\Machine\MachineMaintenanceFrequency.cs" />
+    <Compile Include="Model\Machine\MachineMaintenanceInfo.cs" />
+    <Compile Include="Model\Machine\MachinePartDescription.cs" />
+    <Compile Include="Model\Machine\MachineParts.cs" />
+    <Compile Include="Model\Machine\MachineProvider.cs" />
+    <Compile Include="Model\Machine\MachineRepairDescription.cs" />
+    <Compile Include="Model\Machine\MachineRepairWorkOrder.cs" />
+    <Compile Include="Model\Machine\MachineSpecialRequiremants.cs" />
+    <Compile Include="Model\Machine\MachineWorkDescription.cs" />
+    <Compile Include="Model\Machine\MachineWorkOrder.cs" />
+    <Compile Include="Model\Machine\MachineWorkOrderHistory.cs" />
+    <Compile Include="Model\Machine\MachineWorkOrderPrintAll.cs" />
+    <Compile Include="Model\Maintenance\MiscellaneousWorkOrder.cs" />
+    <Compile Include="Model\Meta\MetaData.cs" />
+    <Compile Include="Model\Orders\BusinessDays.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Expense.cs" />
+    <Compile Include="Model\FormulaGeneration\FormulaColourTableHeaders.cs" />
+    <Compile Include="Model\FormulaGeneration\FormulaItems.cs" />
+    <Compile Include="Model\FormulaGeneration\TreeItem.cs" />
+    <Compile Include="Model\FreightDetails.cs" />
+    <Compile Include="Model\Freight.cs" />
+    <Compile Include="Model\GridItem.cs" />
+    <Compile Include="Interfaces\ISwitchable.cs" />
+    <Compile Include="Model\LoginCommand.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="CommonBase.cs" />
+    <Compile Include="DB\DataSources.cs" />
+    <Compile Include="DB\DBAccess.cs" />
+    <Compile Include="DB\DBConfiguration.cs" />
+    <Compile Include="Interfaces\ICloseable.cs" />
+    <Compile Include="Model\Machines.cs" />
+    <Compile Include="Model\MachineSelectedEmployees.cs" />
+    <Compile Include="Model\ManufacturingProduct.cs" />
+    <Compile Include="Model\MeshTypes.cs" />
+    <Compile Include="Model\Orders\MasterOrder.cs" />
+    <Compile Include="Model\Orders\Order.cs" />
+    <Compile Include="Model\Orders\OrderResult.cs" />
+    <Compile Include="Model\Orders\OrderSchedule.cs" />
+    <Compile Include="Model\Orders\OrderSchedulingDetails.cs" />
+    <Compile Include="Model\Orders\OrderProgressDetails.cs" />
+    <Compile Include="Model\Orders\OrderTypes.cs" />
+    <Compile Include="Model\Orders\PendingOrder.cs" />
+    <Compile Include="Model\Orders\PendingSlitPeel.cs" />
+    <Compile Include="Model\Orders\PickingOrder.cs" />
+    <Compile Include="Model\Orders\Status\GradingStatus.cs" />
+    <Compile Include="Model\Orders\Status\OrderStatus.cs" />
+    <Compile Include="Model\Other\FileUpload.cs" />
+    <Compile Include="Model\Other\SystemParameters.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\ProductColourDetails.cs" />
+    <Compile Include="Model\ProductColours.cs" />
+    <Compile Include="Model\ProductionLine.cs" />
+    <Compile Include="Model\Production\Grading\GradedStockHistory.cs" />
+    <Compile Include="Model\Production\Grading\GradingCompleted.cs" />
+    <Compile Include="Model\Production\Grading\GradingOrder.cs" />
+    <Compile Include="Model\Production\Grading\GradingPending.cs" />
+    <Compile Include="Model\Production\Grading\GradingProduction.cs" />
+    <Compile Include="Model\Production\Grading\GradingProductionDetails.cs" />
+    <Compile Include="Model\Production\Grading\GradingScheduling.cs" />
+    <Compile Include="Model\Production\Grading\GradingStatus.cs" />
+    <Compile Include="Model\Production\Grading\GradingWeeklySchedule.cs" />
+    <Compile Include="Model\Production\Grading\RubberGrades.cs" />
+    <Compile Include="Model\Production\Grading\SimilarBlockLogs.cs" />
+    <Compile Include="Model\Production\Mixing\BinderType.cs" />
+    <Compile Include="Model\Production\Mixing\IBCChangeOver.cs" />
+    <Compile Include="Model\Production\Mixing\MixingCapacity.cs" />
+    <Compile Include="Model\Production\Mixing\MixingOrder.cs" />
+    <Compile Include="Model\Production\Mixing\MixingProductionDetails.cs" />
+    <Compile Include="Model\Production\Mixing\MixingStatus.cs" />
+    <Compile Include="Model\Production\Mixing\MixingWeeklySchedule.cs" />
+    <Compile Include="Model\Production\OffSpecShredding.cs" />
+    <Compile Include="Model\Production\OrderProduction.cs" />
+    <Compile Include="Model\Production\OrderProductionDetails.cs" />
+    <Compile Include="Model\Production\Peeling\PeelingHistory.cs" />
+    <Compile Include="Model\Production\Peeling\PeelingOrder.cs" />
+    <Compile Include="Model\Production\ProductionDetails.cs" />
+    <Compile Include="Model\Production\ProductionHistory.cs" />
+    <Compile Include="Model\Production\ProductionKgs.cs" />
+    <Compile Include="Model\Production\ProductionOrderInfo.cs" />
+    <Compile Include="Model\Production\ProductionSchedulingDetails.cs" />
+    <Compile Include="Model\Production\ProductionStatus.cs" />
+    <Compile Include="Model\Production\ProductionTimeTable.cs" />
+    <Compile Include="Model\Production\ProductionTotals.cs" />
+    <Compile Include="Model\Production\ReRoll\OffSpec.cs" />
+    <Compile Include="Model\Production\ReRoll\ReRollingHistory.cs" />
+    <Compile Include="Model\Production\ReRoll\ReRollingOrder.cs" />
+    <Compile Include="Model\Production\ReRoll\ShortRoll.cs" />
+    <Compile Include="Model\Production\SlitingPeeling\PeelingProductionDetails.cs" />
+    <Compile Include="Model\Production\SlitingPeeling\SlitPeel.cs" />
+    <Compile Include="Model\Production\SlitingPeeling\SlitPeelDetails.cs" />
+    <Compile Include="Model\Production\SlitingPeeling\SlitPeelProduction.cs" />
+    <Compile Include="Model\Production\SlitingPeeling\SlitPeelSchedule.cs" />
+    <Compile Include="Model\Production\SlitingPeeling\SlittingProductionDetails.cs" />
+    <Compile Include="Model\Production\Slitting\OffSpecDetails.cs" />
+    <Compile Include="Model\Production\Slitting\SlittingHistory.cs" />
+    <Compile Include="Model\Production\Slitting\SlittingOrder.cs" />
+    <Compile Include="Model\Production\Slitting\SlittingOrdersBackUp.cs" />
+    <Compile Include="Model\Production\WeeklySchedule.cs" />
+    <Compile Include="Model\Products\MixingOnly.cs" />
+    <Compile Include="Model\Products\PeelingReRolling.cs" />
+    <Compile Include="Model\Products\ProductDetails.cs" />
+    <Compile Include="Model\Products\ProductMeterage.cs" />
+    <Compile Include="Model\Products\ProductType.cs" />
+    <Compile Include="Model\Products\RawProduct.cs" />
+    <Compile Include="Model\Products\RawProductMachine.cs" />
+    <Compile Include="Model\Products\RawProductsActive.cs" />
+    <Compile Include="Model\Products\RawStockReserve.cs" />
+    <Compile Include="Model\Products\Rolls\BulkRoll.cs" />
+    <Compile Include="Model\Products\Rolls\CustomRoll.cs" />
+    <Compile Include="Model\Products\Rolls\CustomRollLength.cs" />
+    <Compile Include="Model\Products\Rolls\Roll.cs" />
+    <Compile Include="Model\Products\Rolls\StandardRoll.cs" />
+    <Compile Include="Model\Products\Tiles\Tile.cs" />
+    <Compile Include="Model\PublicHoliday.cs" />
+    <Compile Include="Model\Quote.cs" />
+    <Compile Include="Model\QuoteDetails.cs" />
+    <Compile Include="Model\RawMaterials\Curing.cs" />
+    <Compile Include="Model\Orders\OrderDetails.cs" />
+    <Compile Include="Model\RawMaterials\RawProductionDetails.cs" />
+    <Compile Include="Model\RubberProduction.cs" />
+    <Compile Include="Model\Sales\QuoteToOrder.cs" />
+    <Compile Include="Model\Shifts\Shift.cs" />
+    <Compile Include="Model\Shreding\Shred.cs" />
+    <Compile Include="Model\Shreding\ShreddingHistory.cs" />
+    <Compile Include="Model\Shreding\ShredStock.cs" />
+    <Compile Include="Model\Stock\GradedStock.cs" />
+    <Compile Include="Model\Stock\GradedStockReserve.cs" />
+    <Compile Include="Model\Stock\RawStock.cs" />
+    <Compile Include="Model\Stock\Stock.cs" />
+    <Compile Include="Model\Stock\StockAvailability.cs" />
+    <Compile Include="Model\Stock\StockDetails.cs" />
+    <Compile Include="Model\Stock\StockBalanceDetails.cs" />
+    <Compile Include="Model\Stock\StockMaintenanceDetails.cs" />
+    <Compile Include="Model\Transaction\Transaction.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserPrivilages.cs" />
+    <Compile Include="Model\Users\UserPosition.cs" />
+    <Compile Include="Model\Vehicles\VehicleMaintenanceDescriptionsCompleted.cs" />
+    <Compile Include="Model\Vehicles\MaintenanceType.cs" />
+    <Compile Include="Model\Vehicles\ScheduledVehicleDetails.cs" />
+    <Compile Include="Model\Vehicles\VehicleCategory.cs" />
+    <Compile Include="Model\Vehicles\ScheduledVehicle.cs" />
+    <Compile Include="Model\Vehicles\VehicleMaintenanceInfo.cs" />
+    <Compile Include="Model\Vehicles\Vehicle.cs" />
+    <Compile Include="Model\Vehicles\VehicleInspectionType.cs" />
+    <Compile Include="Model\Vehicles\VehicleMaintenanceSequence.cs" />
+    <Compile Include="Model\Vehicles\VehiclePartDescription.cs" />
+    <Compile Include="Model\Vehicles\VehicleParts.cs" />
+    <Compile Include="Model\Vehicles\VehicleRepairDescription.cs" />
+    <Compile Include="Model\Vehicles\VehicleRepairWorkOrder.cs" />
+    <Compile Include="Model\Vehicles\VehicleWorkDescription.cs" />
+    <Compile Include="Model\Vehicles\VehicleWorkOrder.cs" />
+    <Compile Include="Model\Vehicles\VehicleWorkOrderDetailsHistory.cs" />
+    <Compile Include="Model\Vehicles\VehicleWorkOrderHistory.cs" />
+    <Compile Include="Model\Vehicles\VehicleWorkOrderSchedule.cs" />
+    <Compile Include="PageSwitcher.xaml.cs">
+      <DependentUpon>PageSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PDFGeneration\GradingCompletedMixingStatusPDF.cs" />
+    <Compile Include="PDFGeneration\GradingPendingPDF.cs" />
+    <Compile Include="PDFGeneration\MachineWorkOrderHistoryPDF.cs" />
+    <Compile Include="PDFGeneration\MachineWorkOrderPDF.cs" />
+    <Compile Include="PDFGeneration\OffspecReportPDF.cs" />
+    <Compile Include="PDFGeneration\PartPDF.cs" />
+    <Compile Include="PDFGeneration\PrintAllMachineWorkOrdersPDF.cs" />
+    <Compile Include="PDFGeneration\PrintAllPeelingOrdersPDF.cs" />
+    <Compile Include="PDFGeneration\PrintAllReRollingOrdersPDF.cs" />
+    <Compile Include="PDFGeneration\PrintAllSlittingOrdersPDF.cs" />
+    <Compile Include="PDFGeneration\PrintAllVehicleWorkOrdersPDF.cs" />
+    <Compile Include="PDFGeneration\PrintFormulaPDF.cs" />
+    <Compile Include="PDFGeneration\PrintLabelsPDF.cs" />
+    <Compile Include="PDFGeneration\PrintMachinePartPDF.cs" />
+    <Compile Include="PDFGeneration\PrintMixingUnCompletedListPDF.cs" />
+    <Compile Include="PDFGeneration\PrintPeelingOrder.cs" />
+    <Compile Include="PDFGeneration\PrintPeelingSlipPDF.cs" />
+    <Compile Include="PDFGeneration\PrintProductionPDF.cs" />
+    <Compile Include="PDFGeneration\PrintSlittingOrder.cs" />
+    <Compile Include="PDFGeneration\PrintWeeklySchedulePDF.cs" />
+    <Compile Include="PDFGeneration\RepairVehicleWorkOrderPDF.cs" />
+    <Compile Include="PDFGeneration\UpdateQuotePDF.cs" />
+    <Compile Include="PDFGeneration\VehicleWorkOrderHistoryPDF.cs" />
+    <Compile Include="PDFGeneration\VehicleWorkOrderPDF.cs" />
+    <Compile Include="ProductItem.cs" />
+    <Compile Include="Switcher.cs" />
+    <Compile Include="ViewModel\AddCustomerViewModel.cs" />
+    <Compile Include="ViewModel\Comments\CommentsViewModel.cs" />
+    <Compile Include="ViewModel\CuringProducts\CuringViewModel.cs" />
+    <Compile Include="ViewModel\Customers\CustomerDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Dashboard\WorkStationsViewModel.cs" />
+    <Compile Include="ViewModel\Formula\ShowFormulaViewModel.cs" />
+    <Compile Include="ViewModel\Graded Stock\UpdateGradedStockViewModel.cs" />
+    <Compile Include="ViewModel\Graded Stock\ViewGradedStockViewModel.cs" />
+    <Compile Include="ViewModel\Loading\LoadingScreenViewModel.cs" />
+    <Compile Include="ViewModel\Machine\AddNewMachineViewModel.cs" />
+    <Compile Include="ViewModel\Machine\AddNewProviderViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineHistory\FileUploadViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineHistory\MachineWorkOrderHistoryItemsViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineHistory\MachineWorkOrderHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineHistory\OpenUploadedFilesViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineMaintenanceDescriptionViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachinePart\PrintMachinePartsViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachinesMenuViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineWorkOrders\CompleteMachineWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineWorkOrders\MachineWorkOrderItemsViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineWorkOrders\MachineWorkOrdersViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineWorkOrders\NewMachineRepairWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\Machine\MachineWorkOrders\ScehduleMachineWorkOrdersViewModel.cs" />
+    <Compile Include="ViewModel\Machine\SetMechanicGroupComplettionViewModel.cs" />
+    <Compile Include="ViewModel\Machine\SetMechanicViewModel.cs" />
+    <Compile Include="ViewModel\Machine\UpdateMachineViewModel.cs" />
+    <Compile Include="ViewModel\Maintenance\ForkLiftMaintenanceViewModel.cs" />
+    <Compile Include="ViewModel\Maintenance\ForkLiftMenuViewModel.cs" />
+    <Compile Include="ViewModel\Maintenance\MaintenanceMenuViewModel.cs" />
+    <Compile Include="ViewModel\Maintenance\MiscellaneousWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\Maintenance\VehicleMaintenanceViewModel.cs" />
+    <Compile Include="ViewModel\Manufacturing\FormulaGeneration\RubberFormulaTreeViewModel.cs" />
+    <Compile Include="ViewModel\Manufacturing\RubberFormulaViewModel.cs" />
+    <Compile Include="ViewModel\Orders\AddProductionOrderViewModel.cs" />
+    <Compile Include="ViewModel\Orders\AmendOrderViewModel.cs" />
+    <Compile Include="ViewModel\Orders\ConvertOrderViewModel.cs" />
+    <Compile Include="ViewModel\Orders\OrderProductionEditViewModel.cs" />
+    <Compile Include="ViewModel\Orders\OrderResultViewModel.cs" />
+    <Compile Include="ViewModel\Orders\OrdersMainMenuViewModel.cs" />
+    <Compile Include="ViewModel\Orders\PickingOrdersViewModel.cs" />
+    <Compile Include="ViewModel\Orders\ShiftProductionViewModel.cs" />
+    <Compile Include="ViewModel\Orders\Status\OrderStatusViewModel.cs" />
+    <Compile Include="ViewModel\PageSwitcher\TopContentViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Grading\AddToGradedStockViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Grading\AddToRegrindStockViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Grading\GradingHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Grading\GradingScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Productions\MixingUncompletedListViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Mixing\IBCChangeViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Mixing\MixingHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Mixing\MixingProductionSchedulerViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Mixing\MixingScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Mixing\WeeklyScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Mixing\ViewIBCChangeOverDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Peeling\PeelingConfirmationViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Peeling\PeelingHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Peeling\PeelingOrdersViewModel.cs" />
+    <Compile Include="ViewModel\Productions\ProductionMaintenanceViewModel.cs" />
+    <Compile Include="ViewModel\Productions\ProductionSchedulerViewModel.cs" />
+    <Compile Include="ViewModel\Productions\ReRolling\PrintLabelViewModel.cs" />
+    <Compile Include="ViewModel\Productions\ReRolling\ReRollingConfirmationViewModel.cs" />
+    <Compile Include="ViewModel\Productions\ReRolling\ReRollingHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Productions\ReRolling\ReRollingOrdersViewModel.cs" />
+    <Compile Include="ViewModel\Productions\SlitPeel\ShiftSlitPeelViewModel.cs" />
+    <Compile Include="ViewModel\Productions\SlitPeel\SlitPeelProductionSchedulerViewModel.cs" />
+    <Compile Include="ViewModel\Productions\SlitPeel\SlittingScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Slitting\CarouselSlittingViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Slitting\FlatBenchSlitterViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Slitting\OffSpecReportDatePickerViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Slitting\ShiftSlittingOrderViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Slitting\SlittingConfirmationViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Slitting\SlittingHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Slitting\SlittingMenuViewModel.cs" />
+    <Compile Include="ViewModel\Productions\Slitting\SlittingSchedulerViewModel.cs" />
+    <Compile Include="ViewModel\Productions\WeeklyScheduleFull\WeeklyScheduleFullViewModel.cs" />
+    <Compile Include="ViewModel\Products\AddProductViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Customers\CustomersMenuViewModel.cs" />
+    <Compile Include="ViewModel\Customers\AddCustomerMainViewModel.cs" />
+    <Compile Include="ViewModel\Customers\UpdateDeleteCustomerViewModel.cs" />
+    <Compile Include="ViewModel\Productions\DailyProductionViewModel.cs" />
+    <Compile Include="ViewModel\Freight\AddFreightViewModel.cs" />
+    <Compile Include="ViewModel\MachineViewModel.cs" />
+    <Compile Include="ViewModel\Dashboard\MainMenuViewModel.cs" />
+    <Compile Include="ViewModel\ProductionMenuViewModel.cs" />
+    <Compile Include="ViewModel\Products\ProductsMenuViewModel.cs" />
+    <Compile Include="ViewModel\Products\UpdateProductViewModel.cs" />
+    <Compile Include="ViewModel\Quotes\NewQuoteViewModel.cs" />
+    <Compile Include="ViewModel\QuoteViewModel.cs" />
+    <Compile Include="ViewModel\QuotingMainMenuViewModel.cs" />
+    <Compile Include="ViewModel\Sales\EditQuoteDetailsPopUpViewModel.cs" />
+    <Compile Include="ViewModel\Sales\QuoteToSaleApprovalPopUpViewModel.cs" />
+    <Compile Include="ViewModel\Sales\QuoteToSaleViewModel.cs" />
+    <Compile Include="ViewModel\Sales\SalesMenuViewModel.cs" />
+    <Compile Include="ViewModel\Sales\SalesOrder.cs" />
+    <Compile Include="ViewModel\SearchProductByNameViewModel.cs" />
+    <Compile Include="ViewModel\Quotes\UpdateQuoteViewModel.cs" />
+    <Compile Include="ViewModelBase1.cs" />
+    <Compile Include="ViewModel\Stock\BlockLogStock\EditStockMaintenanceViewModel.cs" />
+    <Compile Include="ViewModel\Stock\BlockLogStock\BlockLogStockViewModel.cs" />
+    <Compile Include="ViewModel\Stock\StockLocation.cs" />
+    <Compile Include="ViewModel\Stock\StockMenuViewModel.cs" />
+    <Compile Include="ViewModel\AdminDashboard\AdminDashboardViewModel.cs" />
+    <Compile Include="ViewModel\Vehicles\AddNewVehicleViewModel.cs" />
+    <Compile Include="ViewModel\Vehicles\NewVehicleRepairWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\Vehicles\PrintVehiclePartsViewModel.cs" />
+    <Compile Include="ViewModel\Vehicles\UpdateVehicleViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\AddVehicleWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\History\VehicleWorkOrderHistoryItemsViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\InnerVehicleRepairWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\NewRoutineVehicleWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\NewVehicleWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\ScheduleVehicleWorkOrdersViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\UpdateVehicleWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\VehiclesMenuViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\History\VehicleWorkOrderHistoryViewModel.cs" />
+    <Compile Include="ViewModel\VehicleWorkOrders\VehicleMaintenanceDescriptionsViewModel.cs" />
+    <Compile Include="ViewModel\ViewProductionViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\CompleteRepairVehicleWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\CompleteVehicleWorkOrderViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\MaintenanceAcceptanceViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\MaintenanceDescriptionsViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\OdometerAccepatnceViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\RepairDescriptionsViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\VehicleWorkOrdersViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\ViewVehicleWorkOrderItemsViewModel.cs" />
+    <Compile Include="ViewModel\WorkOrders\WorkOrdersMenuViewModel.cs" />
+    <Compile Include="View\AddUserView.xaml.cs">
+      <DependentUpon>AddUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChildWindowView.cs" />
+    <Compile Include="View\Comments\CommentsView.xaml.cs">
+      <DependentUpon>CommentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CuringProducts\CuringView.xaml.cs">
+      <DependentUpon>CuringView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Customers\AddCustomer.xaml.cs">
+      <DependentUpon>AddCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Customers\AddCustomerMainView.xaml.cs">
+      <DependentUpon>AddCustomerMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Customers\CustomerDetailsView.xaml.cs">
+      <DependentUpon>CustomerDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Customers\CustomersMenuView.xaml.cs">
+      <DependentUpon>CustomersMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Customers\UpdateDeleteCustomer.xaml.cs">
+      <DependentUpon>UpdateDeleteCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dashboard\WorkStationsView.xaml.cs">
+      <DependentUpon>WorkStationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Formula\ShowFormulaView.xaml.cs">
+      <DependentUpon>ShowFormulaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FreightDetailsView.xaml.cs">
+      <DependentUpon>FreightDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Freight\AddFreight.xaml.cs">
+      <DependentUpon>AddFreight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Graded Stock\UpdateGradedStockView.xaml.cs">
+      <DependentUpon>UpdateGradedStockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Graded Stock\ViewGradedStockView.xaml.cs">
+      <DependentUpon>ViewGradedStockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Loading\Block.xaml.cs">
+      <DependentUpon>Block.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Loading\LoadingAnimation.xaml.cs">
+      <DependentUpon>LoadingAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Loading\LoadingScreen.xaml.cs">
+      <DependentUpon>LoadingScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Login\LoginViewModel.cs" />
+    <Compile Include="Core\PasswordBoxMVVMProperties.cs" />
+    <Compile Include="Core\PasswordHashing.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Core\SecureStringManipulation.cs" />
+    <Compile Include="View\Dashboard\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\AddNewMachineView.xaml.cs">
+      <DependentUpon>AddNewMachineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\AddProviderView.xaml.cs">
+      <DependentUpon>AddProviderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineHistory\FileUploadView.xaml.cs">
+      <DependentUpon>FileUploadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineHistory\MachineWorkOrderHistoryItemsView.xaml.cs">
+      <DependentUpon>MachineWorkOrderHistoryItemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineHistory\MachineWorkOrderHistoryView.xaml.cs">
+      <DependentUpon>MachineWorkOrderHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineHistory\OpenUploadedFilesView.xaml.cs">
+      <DependentUpon>OpenUploadedFilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineMaintenanceDescriptionView.xaml.cs">
+      <DependentUpon>MachineMaintenanceDescriptionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachinePart\PrintMachinePartsView.xaml.cs">
+      <DependentUpon>PrintMachinePartsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachinesMenuView.xaml.cs">
+      <DependentUpon>MachinesMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineWorkOrders\CompleteMachineWorkOrderView.xaml.cs">
+      <DependentUpon>CompleteMachineWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineWorkOrders\MachineWorkOrderItemsView.xaml.cs">
+      <DependentUpon>MachineWorkOrderItemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineWorkOrders\MachineWorkOrdersView.xaml.cs">
+      <DependentUpon>MachineWorkOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineWorkOrders\NewMachineRepairWorkOrderView.xaml.cs">
+      <DependentUpon>NewMachineRepairWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\MachineWorkOrders\ScehduleMachineWorkOrdersView.xaml.cs">
+      <DependentUpon>ScehduleMachineWorkOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\SetMechanicGroupComplettionView.xaml.cs">
+      <DependentUpon>SetMechanicGroupComplettionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\SetMechanicView.xaml.cs">
+      <DependentUpon>SetMechanicView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Machine\UpdateMachineView.xaml.cs">
+      <DependentUpon>UpdateMachineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Maintenance\ForkLiftMenuView.xaml.cs">
+      <DependentUpon>ForkLiftMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Maintenance\MiscellaneousWorkOrderView.xaml.cs">
+      <DependentUpon>MiscellaneousWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Maintenance\VehicleMaintenanceMenuView.xaml.cs">
+      <DependentUpon>VehicleMaintenanceMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Maintenance\MaintenanceMenuView.xaml.cs">
+      <DependentUpon>MaintenanceMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manufacturing\RubberFormulaView.xaml.cs">
+      <DependentUpon>RubberFormulaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manufacturing\RubberFormula\RubberFormulaTreeView.xaml.cs">
+      <DependentUpon>RubberFormulaTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\AddProductionOrderView.xaml.cs">
+      <DependentUpon>AddProductionOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\AmendOrderView.xaml.cs">
+      <DependentUpon>AmendOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\ConvertOrderView.xaml.cs">
+      <DependentUpon>ConvertOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\GradingAllocation.xaml.cs">
+      <DependentUpon>GradingAllocation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\OrderProductionEditView.xaml.cs">
+      <DependentUpon>OrderProductionEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\OrderResultView.xaml.cs">
+      <DependentUpon>OrderResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\OrdersMainMenuView.xaml.cs">
+      <DependentUpon>OrdersMainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\PickingOrderView.xaml.cs">
+      <DependentUpon>PickingOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\SearchRawProductView.xaml.cs">
+      <DependentUpon>SearchRawProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\ShiftProductionView.xaml.cs">
+      <DependentUpon>ShiftProductionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders\Status\OrderStatusView.xaml.cs">
+      <DependentUpon>OrderStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\DailyProductionView.xaml.cs">
+      <DependentUpon>DailyProductionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\DayShiftView.xaml.cs">
+      <DependentUpon>DayShiftView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Grading\AddToGradedStockView.xaml.cs">
+      <DependentUpon>AddToGradedStockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Grading\AddToRegrindStockView.xaml.cs">
+      <DependentUpon>AddToRegrindStockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Grading\GradingHistoryView.xaml.cs">
+      <DependentUpon>GradingHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Grading\GradingScheduleView.xaml.cs">
+      <DependentUpon>GradingScheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\MachineLargeMixerView.xaml.cs">
+      <DependentUpon>MachineLargeMixerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\MixingUncompletedListView.xaml.cs">
+      <DependentUpon>MixingUncompletedListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Mixing\IBCChangeView.xaml.cs">
+      <DependentUpon>IBCChangeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Mixing\MixingHistoryView.xaml.cs">
+      <DependentUpon>MixingHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Mixing\MixingProductionSchedulerView.xaml.cs">
+      <DependentUpon>MixingProductionSchedulerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Mixing\MixingScheduleView.xaml.cs">
+      <DependentUpon>MixingScheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Mixing\WeeklyScheduleView.xaml.cs">
+      <DependentUpon>WeeklyScheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Mixing\ViewIBCChangeOverDetailsView.xaml.cs">
+      <DependentUpon>ViewIBCChangeOverDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Peeling\PeelingConfirmationView.xaml.cs">
+      <DependentUpon>PeelingConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Peeling\PeelingHistoryView.xaml.cs">
+      <DependentUpon>PeelingHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Peeling\PeelingOrdersView.xaml.cs">
+      <DependentUpon>PeelingOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\ProductionMaintenanceView.xaml.cs">
+      <DependentUpon>ProductionMaintenanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\ProductionMenuView.xaml.cs">
+      <DependentUpon>ProductionMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\ProductionSchedulerView.xaml.cs">
+      <DependentUpon>ProductionSchedulerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\ProductionView.xaml.cs">
+      <DependentUpon>ProductionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\ReRolling\PrintLabelView.xaml.cs">
+      <DependentUpon>PrintLabelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\ReRolling\ReRollingConfirmationView.xaml.cs">
+      <DependentUpon>ReRollingConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\ReRolling\ReRollingHistoryView.xaml.cs">
+      <DependentUpon>ReRollingHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\ReRolling\ReRollingOrdersView.xaml.cs">
+      <DependentUpon>ReRollingOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\SlitPeel\ShiftSlitPeelView.xaml.cs">
+      <DependentUpon>ShiftSlitPeelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\SlitPeel\SlitingScheduleView.xaml.cs">
+      <DependentUpon>SlitingScheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\SlitPeel\SlitPeelProductionSchedulerView.xaml.cs">
+      <DependentUpon>SlitPeelProductionSchedulerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Slitting\CarouselSlitterView.xaml.cs">
+      <DependentUpon>CarouselSlitterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Slitting\FlatBenchSlitterView.xaml.cs">
+      <DependentUpon>FlatBenchSlitterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Slitting\OffSpecReportDatePickerView.xaml.cs">
+      <DependentUpon>OffSpecReportDatePickerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Slitting\ShiftSlittingOrderView.xaml.cs">
+      <DependentUpon>ShiftSlittingOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Slitting\SlittingConfirmationView.xaml.cs">
+      <DependentUpon>SlittingConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Slitting\SlittingHistoryView.xaml.cs">
+      <DependentUpon>SlittingHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Slitting\SlittingMenuView.xaml.cs">
+      <DependentUpon>SlittingMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\Slitting\SlittingSchedulerView.xaml.cs">
+      <DependentUpon>SlittingSchedulerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Production\WeeklyScheduleFull\WeeklyScheduleFullView.xaml.cs">
+      <DependentUpon>WeeklyScheduleFullView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Products\ProductsMenu.xaml.cs">
+      <DependentUpon>ProductsMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Products\AddProductView.xaml.cs">
+      <DependentUpon>AddProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Products\UpdateProductView.xaml.cs">
+      <DependentUpon>UpdateProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProgressDialog.xaml.cs">
+      <DependentUpon>ProgressDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quoting\NewQuoteView.xaml.cs">
+      <DependentUpon>NewQuoteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quoting\QuotingMainMenu.xaml.cs">
+      <DependentUpon>QuotingMainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quoting\SearchProductByName.xaml.cs">
+      <DependentUpon>SearchProductByName.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quoting\UpdateQuoteView.xaml.cs">
+      <DependentUpon>UpdateQuoteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sales\EditQuoteDetailsPopUpView.xaml.cs">
+      <DependentUpon>EditQuoteDetailsPopUpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sales\QuoteToSaleView.xaml.cs">
+      <DependentUpon>QuoteToSaleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sales\QuoteToSaleApprovalPopUpView.xaml.cs">
+      <DependentUpon>QuoteToSaleApprovalPopUpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sales\SalesMenuView.xaml.cs">
+      <DependentUpon>SalesMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SendEmailView.xaml.cs">
+      <DependentUpon>SendEmailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Stock\BlockLogStock\EditStockMaintenance.xaml.cs">
+      <DependentUpon>EditStockMaintenance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Stock\BlockLogStock\BlockLogStockView.xaml.cs">
+      <DependentUpon>BlockLogStockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Stock\StockMenuView.xaml.cs">
+      <DependentUpon>StockMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminDashboard\AdminDashboardView.xaml.cs">
+      <DependentUpon>AdminDashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Vehicles\AddNewVehicleView.xaml.cs">
+      <DependentUpon>AddNewVehicleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Vehicles\NewVehicleRepairWorkOrderView.xaml.cs">
+      <DependentUpon>NewVehicleRepairWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Vehicles\PrintVehiclePartsView.xaml.cs">
+      <DependentUpon>PrintVehiclePartsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Vehicles\UpdateVehicleView.xaml.cs">
+      <DependentUpon>UpdateVehicleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\AddVehicleWorkOrderView.xaml.cs">
+      <DependentUpon>AddVehicleWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\History\VehicleWorkOrderHistoryItemsView.xaml.cs">
+      <DependentUpon>VehicleWorkOrderHistoryItemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\InnerVehicleRepairWorkOrderView.xaml.cs">
+      <DependentUpon>InnerVehicleRepairWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\NewRoutineVehicleWorkOrderView.xaml.cs">
+      <DependentUpon>NewRoutineVehicleWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\NewVehicleWorkOrderView.xaml.cs">
+      <DependentUpon>NewVehicleWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\ScheduleVehicleWorkOrdersView.xaml.cs">
+      <DependentUpon>ScheduleVehicleWorkOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\UpdateVehicleWorkOrderView.xaml.cs">
+      <DependentUpon>UpdateVehicleWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\VehiclesMenuView.xaml.cs">
+      <DependentUpon>VehiclesMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\History\VehicleWorkOrderHistoryView.xaml.cs">
+      <DependentUpon>VehicleWorkOrderHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleWorkOrders\VehicleMaintenanceDescriptionsView.xaml.cs">
+      <DependentUpon>VehicleMaintenanceDescriptionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\CompleteRepairVehicleWorkOrderView.xaml.cs">
+      <DependentUpon>CompleteRepairVehicleWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\CompleteVehicleWorkOrderView.xaml.cs">
+      <DependentUpon>CompleteVehicleWorkOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\MaintenanceAcceptanceView.xaml.cs">
+      <DependentUpon>MaintenanceAcceptanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\MaintenanceDescriptionsView.xaml.cs">
+      <DependentUpon>MaintenanceDescriptionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\OdometerAccepatnceView.xaml.cs">
+      <DependentUpon>OdometerAccepatnceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\RepairDescriptionsView.xaml.cs">
+      <DependentUpon>RepairDescriptionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\VehicleWorkOrdersView.xaml.cs">
+      <DependentUpon>VehicleWorkOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\ViewVehicleWorkOrderItemsView.xaml.cs">
+      <DependentUpon>ViewVehicleWorkOrderItemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkOrders\WorkOrdersMenuView.xaml.cs">
+      <DependentUpon>WorkOrdersMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkOrderPDF.cs" />
+    <Page Include="PageSwitcher.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Comments\CommentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CuringProducts\CuringView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Customers\AddCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Customers\AddCustomerMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Customers\CustomerDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Customers\CustomersMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Customers\UpdateDeleteCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dashboard\WorkStationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Formula\ShowFormulaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FreightDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Freight\AddFreight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Graded Stock\UpdateGradedStockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Graded Stock\ViewGradedStockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Loading\Block.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Loading\LoadingAnimation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Loading\LoadingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\Dashboard\MainMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Machine\AddNewMachineView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\AddProviderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineHistory\FileUploadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineHistory\MachineWorkOrderHistoryItemsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineHistory\MachineWorkOrderHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineHistory\OpenUploadedFilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineMaintenanceDescriptionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachinePart\PrintMachinePartsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachinesMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineWorkOrders\CompleteMachineWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineWorkOrders\MachineWorkOrderItemsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineWorkOrders\MachineWorkOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineWorkOrders\NewMachineRepairWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\MachineWorkOrders\ScehduleMachineWorkOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\SetMechanicGroupComplettionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\SetMechanicView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Machine\UpdateMachineView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Maintenance\ForkLiftMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Maintenance\MiscellaneousWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Maintenance\VehicleMaintenanceMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Maintenance\MaintenanceMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manufacturing\RubberFormulaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manufacturing\RubberFormula\RubberFormulaTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\AddProductionOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\AmendOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\ConvertOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\GradingAllocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\OrderProductionEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\OrderResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\OrdersMainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\PickingOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\SearchRawProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\ShiftProductionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders\Status\OrderStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\DailyProductionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\DayShiftView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Grading\AddToGradedStockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Grading\AddToRegrindStockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Grading\GradingHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Grading\GradingScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\MachineLargeMixerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\MixingUncompletedListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Mixing\IBCChangeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Mixing\MixingHistoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Production\Mixing\MixingProductionSchedulerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Mixing\MixingScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Mixing\WeeklyScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Mixing\ViewIBCChangeOverDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Peeling\PeelingConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Peeling\PeelingHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Peeling\PeelingOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\ProductionMaintenanceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\ProductionMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Production\ProductionSchedulerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\ProductionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\ReRolling\PrintLabelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\ReRolling\ReRollingConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\ReRolling\ReRollingHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\ReRolling\ReRollingOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\SlitPeel\ShiftSlitPeelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\SlitPeel\SlitingScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\SlitPeel\SlitPeelProductionSchedulerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Slitting\CarouselSlitterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Slitting\FlatBenchSlitterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Slitting\OffSpecReportDatePickerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Slitting\ShiftSlittingOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Slitting\SlittingConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Slitting\SlittingHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Slitting\SlittingMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\Slitting\SlittingSchedulerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Production\WeeklyScheduleFull\WeeklyScheduleFullView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Products\ProductsMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Products\AddProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Products\UpdateProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProgressDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quoting\NewQuoteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quoting\QuotingMainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quoting\SearchProductByName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quoting\UpdateQuoteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Register.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sales\EditQuoteDetailsPopUpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sales\QuoteToSaleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sales\QuoteToSaleApprovalPopUpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sales\SalesMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SendEmailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Stock\BlockLogStock\EditStockMaintenance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Stock\BlockLogStock\BlockLogStockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Stock\StockMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminDashboard\AdminDashboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Vehicles\AddNewVehicleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Vehicles\NewVehicleRepairWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Vehicles\PrintVehiclePartsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Vehicles\UpdateVehicleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\AddVehicleWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\History\VehicleWorkOrderHistoryItemsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\InnerVehicleRepairWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\NewRoutineVehicleWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\NewVehicleWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\ScheduleVehicleWorkOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\UpdateVehicleWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\VehiclesMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\History\VehicleWorkOrderHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleWorkOrders\VehicleMaintenanceDescriptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\CompleteRepairVehicleWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\CompleteVehicleWorkOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\MaintenanceAcceptanceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\MaintenanceDescriptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\OdometerAccepatnceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\RepairDescriptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\VehicleWorkOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\ViewVehicleWorkOrderItemsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkOrders\WorkOrdersMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="A1Graph.dgml" />
+    <None Include="A1QSystem_1_TemporaryKey.pfx" />
+    <None Include="A1QSystem_TemporaryKey.pfx" />
+    <None Include="A1RSystemClassDiagram.cd" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Quotes\" />
+    <Folder Include="ViewModel\Stock\ProductStock\" />
+    <Folder Include="View\Orders\SalesOrders\" />
+    <Folder Include="View\Stock\ProductStock\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="A1Qsmall.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\a1rubber_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FLM-Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\power_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\A1R-Console-logo-1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\NavArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\A1RubberOS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="A1RubberOS.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bounceline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\a1rubber_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user-default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user_pink_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user_red_grey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user_redder_grey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\A1QBMP.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\A1QLogo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\A1Qsmall.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\exclam.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loading.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\print_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\update_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\exclamation.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

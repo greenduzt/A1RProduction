@@ -1,0 +1,5 @@
+---------------------------A1RConsole_V1.8.7----------------------------04-08-2020------------------------Chamara Walaliyadde
+1. Fixed error of product dissapearing in grading screen. (Displaying as Mixing and fixed).
+2. Grading Screen - When switching between formulas, clicking the same formula twice would dobule up the quantity and fixed.
+3. Grading Screen - When all the quantities are completed a zero will left in both GradingScheduling and CurrentCapacity tables. Now, the the record will be deleted in both tables
+4. MixingHistory - When cancel a completed mix it would create the productiontimetable id fosr both mixing and grading. Fixed
